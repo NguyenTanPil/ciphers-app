@@ -12,4 +12,8 @@ export const Wrap = styled.div`
   padding-bottom: 48px;
   padding-top: 48px;
   width: 80%;
+
+  @media only screen and (min-width: 1200px) {
+    justify-content: space-between;
+  }
 `;

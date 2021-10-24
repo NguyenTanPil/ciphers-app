@@ -3,18 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 0.2rem 0.5rem 0 rgb(0 0 0 / 16%),
+    0 0.2rem 1rem 0 rgb(0 0 0 / 12%);
   box-sizing: border-box;
   height: ${(props) => (props.textarea ? '30rem' : 'auto')};
   max-width: 50rem;
-  margin: 1rem auto;
-  overflow: hidden;
+  margin-top: 1rem;
   padding: 0 0.75rem;
   position: relative;
   width: 100%;
 
   @media only screen and (min-width: 1200px) {
-    width: 30%;
+    width: 31.5%;
   }
 `;
 

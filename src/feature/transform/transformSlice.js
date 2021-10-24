@@ -3,6 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   plaintext: '',
   ciphertext: '',
+  caseStrategy: [
+    { value: 'maintain case', active: true },
+    { value: 'upper case', active: false },
+    { value: 'lower case', active: false },
+  ],
+  foreignChars: 'include',
   key: 7,
 };
 
@@ -13,12 +19,16 @@ export const transformSlice = createSlice({
     getData(state, action) {
       state.plaintext = action.payload.plaintext;
       state.ciphertext = action.payload.ciphertext;
+      state.caseStrategy = action.payload.caseStrategy;
+      state.foreignChars = action.payload.foreignChars;
       state.key = action.payload.key;
     },
     resetData(state) {
-      state.plaintext = '';
-      state.ciphertext = '';
-      state.key = 7;
+      state.plaintext = initialState.plaintext;
+      state.ciphertext = initialState.ciphertext;
+      state.caseStrategy = initialState.caseStrategy;
+      state.foreignChars = initialState.foreignChars;
+      state.key = initialState.key;
     },
     increaseKey(state) {
       state.key += 1;
