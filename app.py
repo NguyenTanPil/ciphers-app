@@ -1,13 +1,15 @@
 from flask import Flask, json, request
-from flask_cors import CORS
+from flask.helpers import send_from_directory
+from flask_cors import CORS, cross_origin
 from ciphers.ceasar import Caesar
 from ciphers.affine import Affine
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
-# CORS(app)
+CORS(app)
 
 # ceasar
 @app.route('/api/ceasar/encode', methods=['POST'])
+@cross_origin()
 def ceasar_encode():
   data = json.loads(request.data)
   ceasar = Caesar()
@@ -17,6 +19,7 @@ def ceasar_encode():
   }
 
 @app.route('/api/ceasar/decode', methods=['POST'])
+@cross_origin()
 def ceasar_decode():
   data = json.loads(request.data)
   ceasar = Caesar()
@@ -27,6 +30,7 @@ def ceasar_decode():
 
 # affine
 @app.route('/api/affine/encode', methods=['POST'])
+@cross_origin()
 def affine_encode():
   data = json.loads(request.data)
   affine = Affine(data['key'])
@@ -36,6 +40,7 @@ def affine_encode():
   }
 
 @app.route('/api/affine/decode', methods=['POST'])
+@cross_origin()
 def affine_decode():
   data = json.loads(request.data)
   affine = Affine(data['key'])
@@ -45,8 +50,9 @@ def affine_decode():
   }
 
 @app.route('/')
+@cross_origin()
 def serve():
-  return app.send_static_file('index.html')
+  return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
   app.run()
