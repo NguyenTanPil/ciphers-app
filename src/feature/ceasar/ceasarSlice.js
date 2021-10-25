@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  plaintext: '',
-  ciphertext: '',
+  plaintext: 'CipherVip',
+  ciphertext: 'JpwolyCpw',
   caseStrategy: [
     { value: 'maintain case', active: true },
     { value: 'upper case', active: false },
@@ -12,8 +12,8 @@ const initialState = {
   key: 7,
 };
 
-export const transformSlice = createSlice({
-  name: 'transform',
+export const ceasarSlice = createSlice({
+  name: 'ceasar',
   initialState,
   reducers: {
     getData(state, action) {
@@ -40,8 +40,8 @@ export const transformSlice = createSlice({
 });
 
 export const { getData, resetData, increaseKey, decreaseKey } =
-  transformSlice.actions;
+  ceasarSlice.actions;
 
-export const selectTransform = (state) => state.transform;
+export const selectCeasar = (state) => state.ceasar;
 
-export default transformSlice.reducer;
+export default ceasarSlice.reducer;

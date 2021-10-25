@@ -1,39 +1,35 @@
 import { Container, Content, OutputText, Title } from './CardStyles';
-import { useSelector } from 'react-redux';
-import { selectTransform } from '../../feature/transform/transformSlice';
 
-const CardOutput = ({ title, titleAlign }) => {
-  const data = useSelector(selectTransform);
-
-  const getCurrentCase = () => {
-    return data.caseStrategy.filter((item) => item.active)[0].value;
-  };
-
+const CardOutput = ({
+  title,
+  titleAlign,
+  currentCase,
+  foreignChars,
+  ciphertext,
+}) => {
   const formatOutput = () => {
-    const currentCase = getCurrentCase();
-
-    if (data.foreignChars === 'ignore' && currentCase === 'upper case') {
-      return data.ciphertext.replace(/\s/g, '').toUpperCase();
+    if (foreignChars === 'ignore' && currentCase === 'upper case') {
+      return ciphertext.replace(/\s/g, '').toUpperCase();
     }
 
-    if (data.foreignChars === 'ignore' && currentCase === 'lower case') {
-      return data.ciphertext.replace(/\s/g, '').toLowerCase();
+    if (foreignChars === 'ignore' && currentCase === 'lower case') {
+      return ciphertext.replace(/\s/g, '').toLowerCase();
     }
 
-    if (data.foreignChars === 'ignore' && currentCase === 'maintain case') {
-      return data.ciphertext.replace(/\s/g, '');
+    if (foreignChars === 'ignore' && currentCase === 'maintain case') {
+      return ciphertext.replace(/\s/g, '');
     }
 
-    if (data.foreignChars === 'include' && currentCase === 'upper case') {
-      return data.ciphertext.toUpperCase();
+    if (foreignChars === 'include' && currentCase === 'upper case') {
+      return ciphertext.toUpperCase();
     }
 
-    if (data.foreignChars === 'include' && currentCase === 'lower case') {
-      return data.ciphertext.toLowerCase();
+    if (foreignChars === 'include' && currentCase === 'lower case') {
+      return ciphertext.toLowerCase();
     }
 
-    if (data.foreignChars === 'include' && currentCase === 'maintain case') {
-      return data.ciphertext;
+    if (foreignChars === 'include' && currentCase === 'maintain case') {
+      return ciphertext;
     }
   };
 

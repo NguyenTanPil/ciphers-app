@@ -1,7 +1,8 @@
 import './index.css';
 import Header from './components/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Home';
+import Ceasar from './feature/ceasar';
+import Affine from './feature/affine';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Ceasar} />
+          <Route path="/affine" component={Affine} />
         </Switch>
       </Router>
     </div>

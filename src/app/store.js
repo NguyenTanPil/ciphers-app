@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import transform from '../feature/transform/transformSlice';
+import ceasar from '../feature/ceasar/ceasarSlice';
+import affine from '../feature/affine/affineSlice';
 
 export default configureStore({
   reducer: {
-    transform: transform,
+    ceasar: ceasar,
+    affine: affine,
   },
 });

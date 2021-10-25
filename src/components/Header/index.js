@@ -7,13 +7,13 @@ const Header = () => {
         <Logo to="/">CipherVip</Logo>
         <NavList>
           <NavItem>
-            <NavLink to="/">Sass</NavLink>
+            <NavLink to="/">ceasar</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/">components</NavLink>
+            <NavLink to="/affine">affine</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/">javascript</NavLink>
+            <NavLink to="/">Vigenere</NavLink>
           </NavItem>
         </NavList>
       </Wrapper>
