@@ -10,6 +10,7 @@ const initialState = {
   ],
   foreignChars: 'include',
   key: 7,
+  loadingOutput: false,
 };
 
 export const ceasarSlice = createSlice({
@@ -36,10 +37,13 @@ export const ceasarSlice = createSlice({
     decreaseKey(state) {
       state.key -= 1;
     },
+    getLoading(state, action) {
+      state.loadingOutput = action.payload.loadingOutput;
+    },
   },
 });
 
-export const { getData, resetData, increaseKey, decreaseKey } =
+export const { getData, resetData, increaseKey, decreaseKey, getLoading } =
   ceasarSlice.actions;
 
 export const selectCeasar = (state) => state.ceasar;

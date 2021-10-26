@@ -9,6 +9,7 @@ const initialState = {
     { value: 'lower case', active: false },
   ],
   foreignChars: 'include',
+  loadingOutput: false,
 };
 
 export const reverseSlice = createSlice({
@@ -27,10 +28,13 @@ export const reverseSlice = createSlice({
       state.caseStrategy = initialState.caseStrategy;
       state.foreignChars = initialState.foreignChars;
     },
+    getLoading(state, action) {
+      state.loadingOutput = action.payload.loadingOutput;
+    },
   },
 });
 
-export const { getData, resetData } = reverseSlice.actions;
+export const { getData, resetData, getLoading } = reverseSlice.actions;
 
 export const selectReverse = (state) => state.reverse;
 

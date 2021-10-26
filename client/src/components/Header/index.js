@@ -1,4 +1,4 @@
-import { Nav, Logo, Wrapper, NavList, NavItem, NavLink } from './HeaderStyles';
+import { Logo, Nav, NavItem, NavLink, NavList, Wrapper } from './HeaderStyles';
 
 const Header = () => {
   return (

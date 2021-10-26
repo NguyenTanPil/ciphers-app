@@ -10,6 +10,7 @@ const initialState = {
   ],
   foreignChars: 'include',
   key: '12345',
+  loadingOutput: false,
 };
 
 export const transpositionSlice = createSlice({
@@ -30,10 +31,13 @@ export const transpositionSlice = createSlice({
       state.foreignChars = initialState.foreignChars;
       state.key = initialState.key;
     },
+    getLoading(state, action) {
+      state.loadingOutput = action.payload.loadingOutput;
+    },
   },
 });
 
-export const { getData, resetData } = transpositionSlice.actions;
+export const { getData, resetData, getLoading } = transpositionSlice.actions;
 
 export const selectTransposition = (state) => state.transposition;
 

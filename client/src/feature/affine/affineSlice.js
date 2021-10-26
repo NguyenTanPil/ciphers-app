@@ -10,6 +10,7 @@ const initialState = {
   ],
   foreignChars: 'include',
   key: { a: 7, b: 3 },
+  loadingOutput: false,
 };
 
 export const affineSlice = createSlice({
@@ -42,6 +43,9 @@ export const affineSlice = createSlice({
     decreaseIntercept(state) {
       state.key.b -= 1;
     },
+    getLoading(state, action) {
+      state.loadingOutput = action.payload.loadingOutput;
+    },
   },
 });
 
@@ -52,6 +56,7 @@ export const {
   decreaseSlope,
   increaseIntercept,
   decreaseIntercept,
+  getLoading,
 } = affineSlice.actions;
 
 export const selectAffine = (state) => state.affine;

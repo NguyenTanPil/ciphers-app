@@ -1,4 +1,5 @@
 import { Container, Content, OutputText, Title } from './CardStyles';
+import loadingIcon from './loading.gif';
 
 const CardOutput = ({
   title,
@@ -6,6 +7,7 @@ const CardOutput = ({
   currentCase,
   foreignChars,
   ciphertext,
+  loading,
 }) => {
   const formatOutput = () => {
     if (foreignChars === 'ignore' && currentCase === 'upper case') {
@@ -37,7 +39,13 @@ const CardOutput = ({
     <Container textarea={true}>
       <Title align={titleAlign}>{title}</Title>
       <Content>
-        <OutputText>{formatOutput()}</OutputText>
+        <OutputText>
+          {loading ? (
+            <img src={loadingIcon} alt="loading output" />
+          ) : (
+            formatOutput()
+          )}
+        </OutputText>
       </Content>
     </Container>
   );

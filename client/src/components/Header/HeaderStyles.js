@@ -3,6 +3,7 @@ import { NavLink as Link } from 'react-router-dom';
 
 export const Nav = styled.div`
   background-color: #4db6ac;
+  font-family: 'Zen Antique Soft', serif;
   height: 6.4rem;
 `;
 

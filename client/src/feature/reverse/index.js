@@ -4,8 +4,8 @@ import CardActions from '../../components/Card/CardActions';
 import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
-import { getCurrentCase, submit, Container, Wrap } from '../Utils';
-import { getData, resetData, selectReverse } from './reverseSlice';
+import { Container, getCurrentCase, submit, Wrap } from '../Utils';
+import { getData, resetData, selectReverse, getLoading } from './reverseSlice';
 
 const Reverse = () => {
   const data = useSelector(selectReverse);
@@ -40,13 +40,24 @@ const Reverse = () => {
   };
 
   const encode = async (text) => {
-    const { ciphertext } = await submit('/api/reverse/encode', text);
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit('/api/reverse/encode', text);
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   const decode = async (text) => {
-    const { ciphertext } = await submit('/api/reverse/decode', text);
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit('/api/reverse/decode', text);
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCaseStategy = (e) => {
@@ -100,6 +111,7 @@ const Reverse = () => {
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
+          loading={data.loadingOutput}
         />
       </Wrap>
       <CardDescription

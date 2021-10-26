@@ -5,7 +5,12 @@ import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
 import { getCurrentCase, submit, Container, Wrap } from '../Utils';
-import { getData, resetData, selectTransposition } from './transpositionSlice';
+import {
+  getData,
+  resetData,
+  selectTransposition,
+  getLoading,
+} from './transpositionSlice';
 import ExtraInput from './ExtraInput';
 
 const Transposition = () => {
@@ -50,13 +55,33 @@ const Transposition = () => {
   };
 
   const encode = async (text, key) => {
-    const { ciphertext } = await submit('/api/transposition/encode', text, key);
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit(
+        '/api/transposition/encode',
+        text,
+        key,
+      );
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const decode = async (text, key) => {
-    const { ciphertext } = await submit('/api/transposition/decode', text, key);
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit(
+        '/api/transposition/decode',
+        text,
+        key,
+      );
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCaseStategy = (e) => {
@@ -112,6 +137,7 @@ const Transposition = () => {
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
+          loading={data.loadingOutput}
         />
       </Wrap>
       <CardDescription

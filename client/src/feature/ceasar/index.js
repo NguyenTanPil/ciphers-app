@@ -5,7 +5,7 @@ import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
 import { getCurrentCase, submit, Container, Wrap } from '../Utils';
-import { getData, resetData, selectCeasar } from './ceasarSlice';
+import { getData, resetData, selectCeasar, getLoading } from './ceasarSlice';
 import ExtraInput from './ExtraInput';
 
 const Ceasar = () => {
@@ -50,21 +50,33 @@ const Ceasar = () => {
   };
 
   const encode = async (text, key) => {
-    const { ciphertext } = await submit(
-      '/api/ceasar/encode',
-      text,
-      parseInt(key),
-    );
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit(
+        '/api/ceasar/encode',
+        text,
+        parseInt(key),
+      );
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const decode = async (text, key) => {
-    const { ciphertext } = await submit(
-      '/api/ceasar/decode',
-      text,
-      parseInt(key),
-    );
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit(
+        '/api/ceasar/decode',
+        text,
+        parseInt(key),
+      );
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCaseStategy = (e) => {
@@ -120,6 +132,7 @@ const Ceasar = () => {
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
+          loading={data.loadingOutput}
         />
       </Wrap>
       <CardDescription

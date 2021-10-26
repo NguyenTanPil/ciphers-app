@@ -4,7 +4,7 @@ import CardActions from '../../components/Card/CardActions';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
 import CardDescription from '../../components/Card/CardDescription';
-import { getData, resetData, selectAffine } from './affineSlice';
+import { getData, resetData, selectAffine, getLoading } from './affineSlice';
 import ExtraInput from './ExtraInput';
 import { getCurrentCase, submit, Container, Wrap } from '../Utils';
 
@@ -50,13 +50,25 @@ const Affine = () => {
   };
 
   const encode = async (text, key) => {
-    const { ciphertext } = await submit('/api/affine/encode', text, key);
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit('/api/affine/encode', text, key);
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const decode = async (text, key) => {
-    const { ciphertext } = await submit('/api/affine/decode', text, key);
-    getCiphertext(ciphertext);
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext } = await submit('/api/affine/decode', text, key);
+      getCiphertext(ciphertext);
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCaseStategy = (e) => {
@@ -112,6 +124,7 @@ const Affine = () => {
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
+          loading={data.loadingOutput}
         />
       </Wrap>
       <CardDescription

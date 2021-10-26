@@ -62,7 +62,7 @@ export const TextareaInput = styled.textarea`
 
 export const OutputText = styled.span`
   color: #797f86;
-  display: block;
+  display: flex;
   font-family: 'Source Code Pro', monospace;
   font-weight: 400;
   font-size: 1.6rem;
@@ -73,6 +73,10 @@ export const OutputText = styled.span`
   overflow: hidden;
   padding: 2rem;
   width: 100%;
+
+  img {
+    margin: auto;
+  }
 `;
 
 export const Btns = styled.div`
