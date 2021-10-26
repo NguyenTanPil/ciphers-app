@@ -9,7 +9,11 @@ const CardInput = ({ title, titleAlign, plaintext, getPlaintext }) => {
     <Container textarea={true}>
       <Title align={titleAlign}>{title}</Title>
       <Content>
-        <TextareaInput value={plaintext} onChange={handleChange} />
+        <TextareaInput
+          placeholder="Enter your message..."
+          value={plaintext}
+          onChange={handleChange}
+        />
       </Content>
     </Container>
   );

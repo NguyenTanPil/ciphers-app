@@ -13,7 +13,7 @@ const Header = () => {
             <NavLink to="/affine">affine</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/">Vigenere</NavLink>
+            <NavLink to="/reverse">reverse</NavLink>
           </NavItem>
         </NavList>
       </Wrapper>
