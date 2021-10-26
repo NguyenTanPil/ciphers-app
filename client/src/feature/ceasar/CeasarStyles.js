@@ -10,9 +10,13 @@ export const Wrap = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
-  padding-bottom: 48px;
-  padding-top: 48px;
-  width: 80%;
+  padding-bottom: 1.6rem;
+  padding-top: 4.8rem;
+  width: 90%;
+
+  @media only screen and (min-width: 576px) {
+    width: 80%;
+  }
 
   @media only screen and (min-width: 1200px) {
     justify-content: space-between;

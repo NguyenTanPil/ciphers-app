@@ -12,7 +12,11 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   line-height: 6.4rem;
-  width: 80%;
+  width: 90%;
+
+  @media only screen and (min-width: 576px) {
+    width: 80%;
+  }
 `;
 
 export const Logo = styled(Link)`
@@ -21,7 +25,11 @@ export const Logo = styled(Link)`
 `;
 
 export const NavList = styled.ul`
-  display: flex;
+  display: none;
+
+  @media only screen and (min-width: 576px) {
+    display: flex;
+  }
 `;
 
 export const NavItem = styled.li`

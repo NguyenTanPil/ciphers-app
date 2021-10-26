@@ -8,12 +8,13 @@ export const Container = styled.div`
   box-sizing: border-box;
   height: ${(props) => (props.textarea ? '30rem' : 'auto')};
   max-width: 50rem;
-  margin-top: 1rem;
+  margin-bottom: 4rem;
   padding: 0 0.75rem;
   position: relative;
   width: 100%;
 
   @media only screen and (min-width: 1200px) {
+    margin-bottom: 1rem;
     width: 31.5%;
   }
 `;
@@ -80,7 +81,11 @@ export const Btns = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 2rem 1rem;
+
+  @media only screen and (min-width: 576px) {
+    padding: 2rem;
+  }
 
   @media only screen and (min-width: 1400px) {
     & {
@@ -98,6 +103,7 @@ export const Btn = styled.button`
   height: 3.6rem;
   letter-spacing: 0.5px;
   line-height: 3.6rem;
+  margin-top: 1rem;
   max-width: 11.6rem;
   padding: 0 3.2rem;
   text-align: center;
@@ -110,18 +116,12 @@ export const Btn = styled.button`
   &:hover {
     background-color: rgb(34, 150, 138);
   }
-
-  @media only screen and (min-width: 1200px) {
-    &:last-child {
-      margin-top: 1rem;
-    }
-  }
 `;
 
 export const Counter = styled(Btns)`
   align-items: flex-start;
   flex-direction: column;
-  padding: 2rem 2rem 1rem 2rem;
+  padding: 1rem 0.2rem;
   div {
     margin: 0 auto;
     width: 100%;
@@ -136,6 +136,18 @@ export const Counter = styled(Btns)`
 
   ${Btn} {
     margin-top: 0;
+  }
+
+  @media only screen and (min-width: 576px) {
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    padding: 1rem 0.2rem;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    padding: 2rem 2rem 1rem 2rem;
   }
 `;
 
@@ -208,23 +220,55 @@ export const AlphabetWrap = styled(Counter)`
 
 export const TransformOutPut = styled(Counter)`
   flex-direction: row;
-  padding: 0 2rem;
+  padding: 0 0.2rem;
 
   & > div {
     height: 100%;
     padding: 2rem 0 2rem 1.8rem;
-    width: 50%;
+    width: 100%;
   }
 
   label {
     padding-left: 0;
   }
+
+  @media only screen and (min-width: 576px) {
+    padding: 0 2rem;
+
+    & > div {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    padding: 0 0.2rem;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    padding: 0 2rem;
+  }
 `;
 
 export const CaseStrategy = styled.div`
-  border-right: 1px solid #e3e8ec;
+  border-bottom: 1px solid #e3e8ec;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (min-width: 576px) {
+    border-right: 1px solid #e3e8ec;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    button {
+      padding-right: 0;
+    }
+  }
+
+  @media only screen and (min-width: 1400px) {
+    button {
+      padding-right: 3.2rem;
+    }
+  }
 `;
 
 export const WrapDropdown = styled.div`
@@ -241,6 +285,18 @@ export const WrapDropdown = styled.div`
 
   ul {
     width: calc(100% + 3.8rem);
+  }
+
+  @media only screen and (min-width: 1200px) {
+    svg {
+      right: 0.5rem;
+    }
+  }
+
+  @media only screen and (min-width: 1400px) {
+    svg {
+      right: 1.5rem;
+    }
   }
 `;
 
@@ -332,7 +388,7 @@ export const Brick = styled.div`
   color: #797f86;
   display: flex;
   align-items: center;
-  padding: 1.25rem 3.8rem;
+  padding: 1.25rem 1.8rem;
 
   svg {
     font-size: 1.6rem;
@@ -345,6 +401,18 @@ export const Brick = styled.div`
     font-size: 1.4rem;
     line-height: 1.4;
     letter-spacing: 1px;
+  }
+
+  @media only screen and (min-width: 576px) {
+    padding: 1.25rem 3.8rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    padding: 1.25rem 1.8rem;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    padding: 1.25rem 3.8rem;
   }
 `;
 
@@ -363,17 +431,17 @@ export const Description = styled.div`
   h1 {
     color: #272727;
     display: block;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    max-width: 60rem;
     padding-bottom: 1.4rem;
+    width: 100%;
   }
 
   p {
     color: #797f86;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 590;
-    max-width: 60rem;
+    width: 100%;
   }
 
   a {
@@ -381,9 +449,26 @@ export const Description = styled.div`
     font-weight: 600;
   }
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 576px) {
+    h1 {
+      font-size: 2.1rem;
+    }
+
+    p {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
     text-align: left;
 
+    h1,
+    p {
+      max-width: 70rem;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
     h1,
     p {
       max-width: 80rem;
