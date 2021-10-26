@@ -4,11 +4,10 @@ import CardActions from '../../components/Card/CardActions';
 import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
-import { getCurrentCase, submit } from '../Utils';
+import { getCurrentCase, submit, Container, Wrap } from '../Utils';
 import { getData, resetData, selectReverse } from './reverseSlice';
-import { Container, Wrap } from '../ceasar/CeasarStyles';
 
-const Ceasar = () => {
+const Reverse = () => {
   const data = useSelector(selectReverse);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
@@ -114,4 +113,4 @@ const Ceasar = () => {
   );
 };
 
-export default Ceasar;
+export default Reverse;

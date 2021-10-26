@@ -5,11 +5,11 @@ import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
 import { getCurrentCase, submit, Container, Wrap } from '../Utils';
-import { getData, resetData, selectCeasar } from './ceasarSlice';
+import { getData, resetData, selectTransposition } from './transpositionSlice';
 import ExtraInput from './ExtraInput';
 
-const Ceasar = () => {
-  const data = useSelector(selectCeasar);
+const Transposition = () => {
+  const data = useSelector(selectTransposition);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
 
@@ -50,20 +50,12 @@ const Ceasar = () => {
   };
 
   const encode = async (text, key) => {
-    const { ciphertext } = await submit(
-      '/api/ceasar/encode',
-      text,
-      parseInt(key),
-    );
+    const { ciphertext } = await submit('/api/transposition/encode', text, key);
     getCiphertext(ciphertext);
   };
 
   const decode = async (text, key) => {
-    const { ciphertext } = await submit(
-      '/api/ceasar/decode',
-      text,
-      parseInt(key),
-    );
+    const { ciphertext } = await submit('/api/transposition/decode', text, key);
     getCiphertext(ciphertext);
   };
 
@@ -99,7 +91,7 @@ const Ceasar = () => {
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title="Ceasar Cipher"
+          title="Transposition Cipher"
           titleAlign="center"
           keys={data.key}
           getKey={getKey}
@@ -123,14 +115,14 @@ const Ceasar = () => {
         />
       </Wrap>
       <CardDescription
-        cipher="Ceasar"
+        cipher="Transposition"
         desc={
-          ' is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.'
+          ' is a method of encryption by which the positions held by units of plaintext (which are commonly characters or groups of characters) are shifted according to a regular system, so that the ciphertext constitutes a permutation of the plaintext.'
         }
-        link="https://en.wikipedia.org/wiki/Caesar_cipher"
+        link="https://en.wikipedia.org/wiki/Transposition_cipher"
       />
     </Container>
   );
 };
 
-export default Ceasar;
+export default Transposition;

@@ -15,6 +15,9 @@ const Header = () => {
           <NavItem>
             <NavLink to="/reverse">reverse</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink to="/transposition">transposition</NavLink>
+          </NavItem>
         </NavList>
       </Wrapper>
     </Nav>

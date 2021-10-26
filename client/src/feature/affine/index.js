@@ -4,10 +4,9 @@ import CardActions from '../../components/Card/CardActions';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
 import CardDescription from '../../components/Card/CardDescription';
-import { Container, Wrap } from '../ceasar/CeasarStyles';
 import { getData, resetData, selectAffine } from './affineSlice';
 import ExtraInput from './ExtraInput';
-import { getCurrentCase, submit } from '../Utils';
+import { getCurrentCase, submit, Container, Wrap } from '../Utils';
 
 const Affine = () => {
   const data = useSelector(selectAffine);

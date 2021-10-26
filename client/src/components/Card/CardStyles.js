@@ -175,6 +175,18 @@ export const InputGroup = styled.div`
     /* Firefox */
     -moz-appearance: textfield;
   }
+
+  input[type='text'] {
+    border-bottom: 1px solid transparent;
+    margin-left: 1.8rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    text-align: left;
+
+    &:focus {
+      border-color: #4db6ac;
+    }
+  }
 `;
 
 export const CountBtn = styled(Btn)`

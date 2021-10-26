@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 from ciphers.ceasar import Caesar
 from ciphers.affine import Affine
 from ciphers.simple_reverse import Reverse
+from ciphers.transposition import Transposition
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -55,7 +56,6 @@ def affine_decode():
 @cross_origin()
 def reverse_encode():
   data = json.loads(request.data)
-  print(data)
   reverse = Reverse()
   result = reverse.encode(data['text'])
   return {
@@ -68,6 +68,27 @@ def reverse_decode():
   data = json.loads(request.data)
   reverse = Reverse()
   result = reverse.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+# transposition
+@app.route('/api/transposition/encode', methods=['POST'])
+@cross_origin()
+def transposition_encode():
+  data = json.loads(request.data)
+  transposition = Transposition(data['key'])
+  result = transposition.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/transposition/decode', methods=['POST'])
+@cross_origin()
+def transposition_decode():
+  data = json.loads(request.data)
+  transposition = Transposition(data['key'])
+  result = transposition.decode(data['text'])
   return {
     'ciphertext': result
   }
