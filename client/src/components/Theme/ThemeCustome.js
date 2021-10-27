@@ -6,6 +6,8 @@ export const lightTheme = {
   active: '#e3e8ec',
   hover: '#e3e8ec66',
   border: '#e3e8ec',
+  shadow: `0 0.2rem 2.5rem 0 rgb(0 0 0 / 16%),
+    0 0.2rem 3rem 0 rgb(0 0 0 / 12%)`,
 };
 
 export const darkTheme = {
@@ -16,4 +18,5 @@ export const darkTheme = {
   active: '#25282a',
   hover: '#25282a66',
   border: '#373b3d',
+  shadow: ` rgba(100, 100, 111, 0.2) 0px 7px 29px 0px`,
 };

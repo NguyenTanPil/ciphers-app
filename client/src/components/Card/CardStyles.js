@@ -3,8 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
   border-radius: 0.2rem;
-  box-shadow: 0 0.2rem 0.5rem 0 rgb(0 0 0 / 16%),
-    0 0.2rem 1rem 0 rgb(0 0 0 / 12%);
+  box-shadow: ${({ theme }) => theme.shadow};
   box-sizing: border-box;
   height: ${(props) => (props.textarea ? '30rem' : 'auto')};
   max-width: 50rem;

@@ -13,14 +13,15 @@ export const Container = styled.div`
   transition: transform 600ms ease;
 
   &.active {
-    background-color: rgba(0, 0, 0, 0.2);
+    /* background-color: rgba(0, 0, 0, 0.2); */
     transform: translateX(0);
   }
 `;
 
 export const Wrap = styled.aside`
   background-color: ${({ theme }) => theme.background};
-  border-left: 2px solid ${({ theme }) => theme.boder};
+  border-left: 2px solid ${({ theme }) => theme.border};
+  box-shadow: ${({ theme }) => theme.shadow};
   height: 100vh;
   position: fixed;
   top: 0;
