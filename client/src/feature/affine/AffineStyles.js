@@ -7,7 +7,7 @@ export const CounterWrap = styled.div`
     width: 50%;
 
     &:first-child {
-      border-right: 1px solid #e3e8ec;
+      border-right: 1px solid ${({ theme }) => theme.border};
     }
   }
 `;

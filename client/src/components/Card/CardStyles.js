@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #fff;
-  border-radius: 2px;
+  background-color: ${({ theme }) => theme.background};
+  border-radius: 0.2rem;
   box-shadow: 0 0.2rem 0.5rem 0 rgb(0 0 0 / 16%),
     0 0.2rem 1rem 0 rgb(0 0 0 / 12%);
   box-sizing: border-box;
@@ -20,7 +20,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  border-bottom: 1px solid #e3e8ec;
+  border-bottom: 1px solid ${({ theme }) => theme.border};
   border-radius: 0 0 0.2rem 0.2rem;
   color: #4db6ac;
   font-size: 2.4rem;
@@ -37,8 +37,9 @@ export const Content = styled.div`
 `;
 
 export const TextareaInput = styled.textarea`
+  background-color: ${({ theme }) => theme.background};
   border: none;
-  color: #797f86;
+  color: ${({ theme }) => theme.text};
   display: block;
   font-family: 'Source Code Pro', monospace;
   font-weight: 400;
@@ -55,7 +56,7 @@ export const TextareaInput = styled.textarea`
   width: 100%;
 
   &:focus {
-    border-bottom: 1px solid #26a69a;
+    border-bottom: 1px solid ${({ theme }) => theme.border};
     box-shadow: 0 1px 0 0 #26a69a;
   }
 `;
@@ -80,7 +81,7 @@ export const OutputText = styled.span`
 `;
 
 export const Btns = styled.div`
-  border-bottom: 1px solid #e3e8ec;
+  border-bottom: 1px solid ${({ theme }) => theme.border};
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -161,8 +162,9 @@ export const InputGroup = styled.div`
   width: 100%;
 
   input {
+    background-color: ${({ theme }) => theme.background};
     border: none;
-    color: #797f86;
+    color: ${({ theme }) => theme.text};
     flex-grow: 1;
     font-size: 1.6rem;
     letter-spacing: 1px;
@@ -195,7 +197,7 @@ export const InputGroup = styled.div`
 
 export const CountBtn = styled(Btn)`
   background-color: transparent;
-  color: ${(props) => (props.disabled ? '#797f86' : '#000')};
+  color: ${(props) => (props.disabled ? '#797f86' : '#988f81')};
   cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
   font-size: 2.6rem;
   font-weight: 600;
@@ -218,7 +220,7 @@ export const AlphabetWrap = styled(Counter)`
   }
 
   span {
-    color: #797f86;
+    color: ${({ theme }) => theme.text};
     font-size: 1.4rem;
     height: 2.6rem;
     line-height: 2.6rem;
@@ -266,12 +268,13 @@ export const TransformOutPut = styled(Counter)`
 `;
 
 export const CaseStrategy = styled.div`
-  border-bottom: 1px solid #e3e8ec;
+  border-bottom: 1px solid ${({ theme }) => theme.border};
   display: flex;
   flex-direction: column;
 
   @media only screen and (min-width: 576px) {
-    border-right: 1px solid #e3e8ec;
+    border-bottom: none;
+    border-right: 1px solid ${({ theme }) => theme.border};
   }
 
   @media only screen and (min-width: 1200px) {
@@ -291,16 +294,12 @@ export const WrapDropdown = styled.div`
   position: relative;
 
   svg {
-    color: #797f86;
+    color: ${({ theme }) => theme.text};
     font-size: 1.8rem;
     position: absolute;
     top: 1.2rem;
     right: 2.5rem;
     pointer-events: none;
-  }
-
-  ul {
-    width: calc(100% + 3.8rem);
   }
 
   @media only screen and (min-width: 1200px) {
@@ -319,7 +318,7 @@ export const WrapDropdown = styled.div`
 export const DropdownButton = styled.button`
   background-color: transparent;
   border: none;
-  color: #797f86;
+  color: ${({ theme }) => theme.text};
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: 600;
@@ -334,18 +333,23 @@ export const DropdownButton = styled.button`
 `;
 
 export const DropdownList = styled.ul`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.background};
   box-shadow: 0 0.2rem 0.5rem 0 rgb(0 0 0 / 16%),
     0 0.2rem 1rem 0 rgb(0 0 0 / 12%);
   border-radius: 0.25rem;
-  color: #797f86;
+  color: ${({ theme }) => theme.text};
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: -3.8rem;
+  left: -1.8rem;
   top: 140%;
   z-index: 1008;
-  width: 100%;
+  width: calc(100% + 1.8rem);
+
+  @media only screen and (min-width: 576px) {
+    left: -3.8rem;
+    width: calc(100% + 3.8rem);
+  }
 
   li {
     cursor: pointer;
@@ -356,12 +360,12 @@ export const DropdownList = styled.ul`
     transition: all 0.2s linear 0s;
 
     &:hover {
-      background-color: rgba(227, 232, 236, 0.4);
+      background-color: ${({ theme }) => theme.hover};
       padding-left: 4.2rem;
     }
 
     &.active {
-      background-color: #e3e8ec;
+      background-color: ${({ theme }) => theme.active};
       color: #26a69a;
     }
 
@@ -378,7 +382,7 @@ export const ForeignChars = styled.div`
     button {
       background-color: transparent;
       border: none;
-      color: #797f86;
+      color: ${({ theme }) => theme.text};
       cursor: pointer;
       font-size: 1.5rem;
       font-weight: 600;
@@ -401,7 +405,7 @@ export const ForeignChars = styled.div`
 `;
 
 export const Brick = styled.div`
-  color: #797f86;
+  color: ${({ theme }) => theme.text};
   display: flex;
   align-items: center;
   padding: 1.25rem 1.8rem;
@@ -433,7 +437,7 @@ export const Brick = styled.div`
 `;
 
 export const Description = styled.div`
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.background};
   padding: 3.6rem 0;
   text-align: center;
 
@@ -445,7 +449,7 @@ export const Description = styled.div`
   }
 
   h1 {
-    color: #272727;
+    color: ${({ theme }) => theme.title};
     display: block;
     font-size: 1.8rem;
     font-weight: 600;
@@ -454,7 +458,7 @@ export const Description = styled.div`
   }
 
   p {
-    color: #797f86;
+    color: ${({ theme }) => theme.text};
     font-size: 1.4rem;
     font-weight: 590;
     width: 100%;
@@ -485,6 +489,8 @@ export const Description = styled.div`
   }
 
   @media only screen and (min-width: 1200px) {
+    margin-top: 2rem;
+
     h1,
     p {
       max-width: 80rem;

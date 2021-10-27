@@ -61,6 +61,7 @@ const ExtraInput = () => {
           <InputGroup>
             <CountBtn
               disabled={parseInt(data.key.a) === 0 ? true : false}
+              colorDisabled={(theme) => theme.color}
               onClick={decreaseSlopeCounter}
             >
               {' '}
@@ -75,6 +76,7 @@ const ExtraInput = () => {
             />
             <CountBtn
               disabled={parseInt(data.key.a) === 26 ? true : false}
+              colorDisabled={(theme) => theme.color}
               onClick={increaseSlopeCounter}
             >
               {' '}

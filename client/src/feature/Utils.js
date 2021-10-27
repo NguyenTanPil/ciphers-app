@@ -20,7 +20,7 @@ export const getCurrentCase = (cases) => {
 };
 
 export const Container = styled.div`
-  background-color: #f2f4f6;
+  background-color: ${({ theme }) => theme.body};
   width: 100%;
 `;
 
