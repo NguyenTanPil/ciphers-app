@@ -37,18 +37,6 @@ const Header = ({ theme, setTheme }) => {
       <Wrapper>
         <Logo to="/">CipherVip</Logo>
         <NavList>
-          {/* <NavItem>
-            <NavLink to="/">ceasar</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/affine">affine</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/reverse">reverse</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/transposition">transposition</NavLink>
-          </NavItem> */}
           <NavItem>
             <TrackMode onClick={themeToggle} theme={theme}>
               <span>🌜</span>

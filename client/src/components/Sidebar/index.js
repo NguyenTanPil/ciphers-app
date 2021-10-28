@@ -41,6 +41,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
           <NavItem>
             <NavLink to="/transposition">transposition</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink to="/modulo">modulo operator</NavLink>
+          </NavItem>
         </ListLinks>
       </Wrap>
     </Container>

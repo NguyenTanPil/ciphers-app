@@ -1,13 +1,14 @@
-import './index.css';
-import Header from './components/Header';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Ceasar from './feature/ceasar';
-import Affine from './feature/affine';
-import Reverse from './feature/reverse';
-import Transposition from './feature/transposition';
-import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from '../src/components/Theme/ThemeCustome';
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '../src/components/Theme/ThemeCustome';
+import Header from './components/Header';
+import Affine from './feature/affine';
+import Ceasar from './feature/ceasar';
+import Reverse from './feature/reverse';
+import Modulo from './feature/modulo';
+import Transposition from './feature/transposition';
+import './index.css';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -22,6 +23,7 @@ function App() {
             <Route path="/affine" component={Affine} />
             <Route path="/reverse" component={Reverse} />
             <Route path="/transposition" component={Transposition} />
+            <Route path="/modulo" component={Modulo} />
           </Switch>
         </Router>
       </div>

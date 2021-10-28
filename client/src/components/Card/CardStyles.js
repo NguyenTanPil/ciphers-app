@@ -460,6 +460,7 @@ export const Description = styled.div`
     color: ${({ theme }) => theme.text};
     font-size: 1.4rem;
     font-weight: 590;
+    margin-bottom: 1rem;
     width: 100%;
   }
 
