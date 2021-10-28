@@ -136,6 +136,7 @@ export const Counter = styled(Btns)`
     display: block;
     font-size: 1.4rem;
     padding-left: 1.8rem;
+    text-transform: uppercase;
   }
 
   ${Btn} {

@@ -29,7 +29,7 @@ const ReverseKey = () => {
   ]);
   const currentAction = getCurrentCase(actions);
   const [showActions, setShowActions] = useState(false);
-  const [output, setOutput] = useState('');
+  const [output, setOutput] = useState(5);
   const [input, setInput] = useState({
     base: 5,
     power: 1,
@@ -50,22 +50,34 @@ const ReverseKey = () => {
     });
   };
 
-  const getModulo = (number, mod) => {
-    for (let i = 1; i <= mod; i++) {
-      if ((i * number) % mod === 1) {
-        return i;
-      }
+  const getModulo = (base, power, mod) => {
+    let powerOfBin = 1;
+    let index = 1;
+    const values = [base];
+
+    while (powerOfBin < power) {
+      values.push((values[index - 1] * values[index - 1]) % mod);
+      powerOfBin *= 2;
+      index += 1;
     }
 
-    return 'Not found';
+    let result = 1;
+    const binOfPower = power.toString(2).split('').reverse().join('');
+
+    for (let i = 0; i < binOfPower.length; i++) {
+      if (binOfPower[i] === '1') {
+        result *= values[i];
+      }
+    }
+    return result % mod;
   };
 
   const calculate = () => {
     let result = 0;
     if (currentAction === 'number') {
-      result = getModulo(input.base, input.modulo);
+      result = input.base % input.modulo;
     } else {
-      result = getModulo(Math.pow(input.base, input.power), input.modulo);
+      result = getModulo(input.base, input.power, input.modulo);
     }
     setOutput(result);
   };
@@ -127,7 +139,7 @@ const ReverseKey = () => {
               {currentAction === 'power' && (
                 <Counter>
                   <div>
-                    <label htmlFor="key">POWER</label>
+                    <label htmlFor="key">exponent</label>
                     <InputGroup>
                       <CountBtn
                         colorDisabled={(theme) => theme.color}
@@ -160,7 +172,7 @@ const ReverseKey = () => {
               )}
               <Counter>
                 <div>
-                  <label htmlFor="key">MODULO</label>
+                  <label htmlFor="key">modulo</label>
                   <InputGroup>
                     <CountBtn
                       colorDisabled={(theme) => theme.color}
@@ -195,7 +207,7 @@ const ReverseKey = () => {
         </CardContainer>
 
         <CardContainer style={{ height: '29.5rem' }}>
-          <Title>Action</Title>
+          <Title>Actions</Title>
           <Content>
             <WrapBtns>
               <BtnLarge onClick={calculate}>calculate</BtnLarge>
