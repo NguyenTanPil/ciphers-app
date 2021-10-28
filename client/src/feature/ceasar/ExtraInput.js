@@ -28,7 +28,17 @@ const ExtraInput = () => {
   };
 
   const handleCountChange = (e) => {
-    getKey(e.target.value);
+    const value = parseInt(e.target.value);
+    if (value) {
+      if (value > 26) {
+        console.log(value);
+        getKey(26);
+      } else {
+        getKey(value);
+      }
+    } else {
+      getKey(0);
+    }
   };
 
   return (

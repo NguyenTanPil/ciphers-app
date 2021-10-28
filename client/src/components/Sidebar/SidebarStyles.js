@@ -11,6 +11,7 @@ export const Container = styled.div`
   z-index: 2000;
   transform: translateX(100%);
   transition: transform 600ms ease;
+  padding-right: 1.6rem;
 
   &.active {
     /* background-color: rgba(0, 0, 0, 0.2); */

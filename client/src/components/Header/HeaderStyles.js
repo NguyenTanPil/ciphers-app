@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 
 export const Nav = styled.div`
@@ -27,6 +27,7 @@ export const Logo = styled(Link)`
 
 export const NavList = styled.ul`
   display: flex;
+  align-items: center;
 `;
 
 export const NavItem = styled.li`
@@ -52,6 +53,18 @@ export const NavLink = styled(Link)`
   }
 `;
 
+const bounce = keyframes`
+  0 {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 export const Bar = styled.button`
   background-color: transparent;
   border: none;
@@ -62,10 +75,12 @@ export const Bar = styled.button`
   outline: none;
 
   svg {
+    animation: ${bounce} 2s ease infinite;
     display: block;
     color: #fff;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 600;
+    /* transition: transform 0.3s ease; */
   }
 `;
 
@@ -82,6 +97,7 @@ export const TrackMode = styled.div`
 
   span {
     font-size: 1.4rem;
+    line-height: 2.4rem;
     text-align: center;
     width: 2.4rem;
   }

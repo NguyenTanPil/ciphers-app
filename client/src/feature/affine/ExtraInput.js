@@ -29,12 +29,28 @@ const ExtraInput = () => {
 
   const handleFirstCountChange = (e) => {
     const value = parseInt(e.target.value);
-    getKey({ ...data.key, b: value });
+    if (value) {
+      if (value > 26) {
+        getKey({ ...data.key, a: 26 });
+      } else {
+        getKey({ ...data.key, a: value });
+      }
+    } else {
+      getKey({ ...data.key, a: 0 });
+    }
   };
 
   const handleSecondCountChange = (e) => {
     const value = parseInt(e.target.value);
-    getKey({ ...data.key, a: value });
+    if (value) {
+      if (value > 26) {
+        getKey({ ...data.key, b: 26 });
+      } else {
+        getKey({ ...data.key, b: value });
+      }
+    } else {
+      getKey({ ...data.key, b: 0 });
+    }
   };
 
   const increaseSlopeCounter = () => {

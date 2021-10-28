@@ -24,8 +24,11 @@ const Header = ({ theme, setTheme }) => {
   useEffect(() => {
     if (showSidebar) {
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = '0';
+      document.body.style.width = 'calc(100% - 1.7rem)';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.removeAttribute('style');
     }
   }, [showSidebar]);
 
