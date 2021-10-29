@@ -10,6 +10,7 @@ import Modulo from './feature/modulo';
 import ModularInverse from './feature/modularInverse';
 import Transposition from './feature/transposition';
 import './index.css';
+import SimpleSubstitution from './feature/simpleSubstitution';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -26,6 +27,7 @@ function App() {
             <Route path="/transposition" component={Transposition} />
             <Route path="/modulo" component={Modulo} />
             <Route path="/modular-inverse" component={ModularInverse} />
+            <Route path="/simple-substitution" component={SimpleSubstitution} />
           </Switch>
         </Router>
       </div>

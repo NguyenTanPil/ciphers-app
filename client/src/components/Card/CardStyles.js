@@ -136,7 +136,23 @@ export const Counter = styled(Btns)`
     display: block;
     font-size: 1.4rem;
     padding-left: 1.8rem;
+    position: relative;
     text-transform: uppercase;
+
+    button {
+      height: 3rem;
+      line-height: 3rem;
+      padding: 0;
+      position: absolute;
+      right: 0;
+      top: -50%;
+      width: 3rem;
+
+      svg {
+        font-size: 2.6rem;
+        margin-top: 0.2rem;
+      }
+    }
   }
 
   ${Btn} {

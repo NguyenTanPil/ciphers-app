@@ -20,7 +20,7 @@ const ModularInverse = () => {
 
   const getModularInverse = () => {
     for (let i = 0; i < input.modulo; i++) {
-      if ((input.number * i) % input.modulo === 1) {
+      if ((Math.abs(input.number) * i) % input.modulo === 1) {
         return i;
       }
     }

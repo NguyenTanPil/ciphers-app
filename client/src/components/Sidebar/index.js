@@ -42,6 +42,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             <NavLink to="/transposition">transposition</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/simple-substitution">simple substitution</NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/modulo">modulo operator</NavLink>
           </NavItem>
           <NavItem>

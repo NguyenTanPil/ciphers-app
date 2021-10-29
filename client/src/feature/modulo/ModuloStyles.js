@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Btn, TransformOutPut, Btns } from '../../components/Card/CardStyles';
+import { Btn, TransformOutPut } from '../../components/Card/CardStyles';
 
 export const CounterWrap = styled.div`
   padding-bottom: 2rem;

@@ -3,6 +3,7 @@ import ceasar from '../feature/ceasar/ceasarSlice';
 import affine from '../feature/affine/affineSlice';
 import reverse from '../feature/reverse/reverseSlice';
 import transposition from '../feature/transposition/transpositionSlice';
+import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitutionSlice';
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     affine: affine,
     reverse: reverse,
     transposition: transposition,
+    simpleSubstitution: simpleSubstitution,
   },
 });

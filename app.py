@@ -5,6 +5,7 @@ from ciphers.ceasar import Caesar
 from ciphers.affine import Affine
 from ciphers.simple_reverse import Reverse
 from ciphers.transposition import Transposition
+from ciphers.simple_substitution import Simple_Substitution
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -89,6 +90,27 @@ def transposition_decode():
   data = json.loads(request.data)
   transposition = Transposition(data['key'])
   result = transposition.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+# simple substitution
+@app.route('/api/simple-substitution/encode', methods=['POST'])
+@cross_origin()
+def simple_substitution_encode():
+  data = json.loads(request.data)
+  simple_substitution = Simple_Substitution(data['key'])
+  result = simple_substitution.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/simple-substitution/decode', methods=['POST'])
+@cross_origin()
+def simple_substitution_decode():
+  data = json.loads(request.data)
+  simple_substitution = Simple_Substitution(data['key'])
+  result = simple_substitution.decode(data['text'])
   return {
     'ciphertext': result
   }
