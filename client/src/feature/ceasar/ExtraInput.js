@@ -1,10 +1,6 @@
-import {
-  CountBtn,
-  Counter,
-  InputGroup,
-} from '../../components/Card/CardStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { getData, selectCeasar, decreaseKey, increaseKey } from './ceasarSlice';
+import CardCounter from '../../components/Card/CardCounter';
+import { decreaseKey, getData, increaseKey, selectCeasar } from './ceasarSlice';
 
 const ExtraInput = () => {
   const data = useSelector(selectCeasar);
@@ -28,8 +24,8 @@ const ExtraInput = () => {
   };
 
   const handleCountChange = (e) => {
-    const value = parseInt(e.target.value);
-    if (value) {
+    if (e.target.value) {
+      const value = parseInt(e.target.value);
       if (value > 26) {
         console.log(value);
         getKey(26);
@@ -37,41 +33,20 @@ const ExtraInput = () => {
         getKey(value);
       }
     } else {
-      getKey(0);
+      getKey('');
     }
   };
 
   return (
-    <>
-      <Counter>
-        <div>
-          <label htmlFor="key">KEY</label>
-          <InputGroup>
-            <CountBtn
-              disabled={parseInt(data.key) === 0 ? true : false}
-              onClick={decrease}
-            >
-              {' '}
-              -{' '}
-            </CountBtn>
-            <input
-              type="number"
-              min={0}
-              max={26}
-              value={data.key}
-              onChange={handleCountChange}
-            />
-            <CountBtn
-              disabled={parseInt(data.key) === 26 ? true : false}
-              onClick={increase}
-            >
-              {' '}
-              +{' '}
-            </CountBtn>
-          </InputGroup>
-        </div>
-      </Counter>
-    </>
+    <CardCounter
+      label="Key"
+      inputValue={data.key}
+      handleCountChange={handleCountChange}
+      increase={increase}
+      decrease={decrease}
+      min={0}
+      max={26}
+    />
   );
 };
 

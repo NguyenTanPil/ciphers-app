@@ -1,24 +1,22 @@
 import { useState } from 'react';
 import { RiArrowDownSFill } from 'react-icons/ri';
+import CardCounter from '../../components/Card/CardCounter';
+import CardDescription from '../../components/Card/CardDescription';
 import {
+  CaseStrategy,
   Container as CardContainer,
   Content,
-  CountBtn,
-  Counter,
   DropdownButton,
   DropdownList,
-  InputGroup,
   OutputText,
   Title,
   WrapDropdown,
-  CaseStrategy,
 } from '../../components/Card/CardStyles';
-import CardDescription from '../../components/Card/CardDescription';
 import { Container, getCurrentCase, Wrap } from '../Utils';
 import {
   BtnLarge,
-  TransformInput,
   CounterWrap,
+  TransformInput,
   WrapBtns,
 } from './ModuloStyles';
 
@@ -32,7 +30,7 @@ const ReverseKey = () => {
   const [output, setOutput] = useState(5);
   const [input, setInput] = useState({
     base: 5,
-    power: 1,
+    exponent: 1,
     modulo: 11,
   });
 
@@ -77,17 +75,63 @@ const ReverseKey = () => {
     if (currentAction === 'number') {
       result = input.base % input.modulo;
     } else {
-      result = getModulo(input.base, input.power, input.modulo);
+      result = getModulo(input.base, input.exponent, input.modulo);
     }
     setOutput(result);
   };
 
-  const handleCountChange = (field, value, num = 0) => {
+  const handleCountChange = (value, field) => {
     if (value) {
-      setInput({ ...input, [field]: parseInt(value) + num });
+      setInput({ ...input, [field]: parseInt(value) });
     } else {
       setInput({ ...input, [field]: value });
     }
+  };
+
+  const inOrDecrease = (value, field, number) => {
+    setInput({ ...input, [field]: value + number });
+  };
+
+  const handleNumberChange = (e) => {
+    handleCountChange(e.target.value, 'base');
+  };
+
+  const increaseNumber = () => {
+    const value = input.base;
+    inOrDecrease(value, 'base', 1);
+  };
+
+  const decreaseNumber = () => {
+    const value = input.base;
+    inOrDecrease(value, 'base', -1);
+  };
+
+  const handlePowerChange = (e) => {
+    handleCountChange(e.target.value, 'exponent');
+  };
+
+  const increasePower = () => {
+    const value = input.exponent;
+    inOrDecrease(value, 'exponent', 1);
+  };
+
+  const decreasePower = () => {
+    const value = input.exponent;
+    inOrDecrease(value, 'exponent', -1);
+  };
+
+  const handleModuloChange = (e) => {
+    handleCountChange(e.target.value, 'modulo');
+  };
+
+  const increaseModulo = () => {
+    const value = input.modulo;
+    inOrDecrease(value, 'modulo', 1);
+  };
+
+  const decreaseModulo = () => {
+    const value = input.modulo;
+    inOrDecrease(value, 'modulo', -1);
   };
 
   const reset = () => {
@@ -106,102 +150,30 @@ const ReverseKey = () => {
           <Title>Text Input</Title>
           <Content>
             <CounterWrap>
-              <Counter>
-                <div>
-                  <label htmlFor="key">
-                    {currentAction === 'number' ? 'NUMBER' : 'BASE'}
-                  </label>
-                  <InputGroup>
-                    <CountBtn
-                      colorDisabled={(theme) => theme.color}
-                      onClick={() => handleCountChange('base', input.base, -1)}
-                    >
-                      {' '}
-                      -{' '}
-                    </CountBtn>
-                    <input
-                      type="number"
-                      value={input.base}
-                      onChange={(e) =>
-                        handleCountChange('base', e.target.value)
-                      }
-                    />
-                    <CountBtn
-                      colorDisabled={(theme) => theme.color}
-                      onClick={() => handleCountChange('base', input.base, 1)}
-                    >
-                      {' '}
-                      +{' '}
-                    </CountBtn>
-                  </InputGroup>
-                </div>
-              </Counter>
+              <CardCounter
+                label={currentAction === 'number' ? 'NUMBER' : 'BASE'}
+                inputValue={input.base}
+                handleCountChange={handleNumberChange}
+                increase={increaseNumber}
+                decrease={decreaseNumber}
+              />
               {currentAction === 'power' && (
-                <Counter>
-                  <div>
-                    <label htmlFor="key">exponent</label>
-                    <InputGroup>
-                      <CountBtn
-                        colorDisabled={(theme) => theme.color}
-                        onClick={() =>
-                          handleCountChange('power', input.power, -1)
-                        }
-                      >
-                        {' '}
-                        -{' '}
-                      </CountBtn>
-                      <input
-                        type="number"
-                        value={input.power}
-                        onChange={(e) =>
-                          handleCountChange('power', e.target.value)
-                        }
-                      />
-                      <CountBtn
-                        colorDisabled={(theme) => theme.color}
-                        onClick={() =>
-                          handleCountChange('power', input.power, 1)
-                        }
-                      >
-                        {' '}
-                        +{' '}
-                      </CountBtn>
-                    </InputGroup>
-                  </div>
-                </Counter>
+                <CardCounter
+                  label="exponent"
+                  inputValue={input.exponent}
+                  handleCountChange={handlePowerChange}
+                  increase={increasePower}
+                  decrease={decreasePower}
+                  min={0}
+                />
               )}
-              <Counter>
-                <div>
-                  <label htmlFor="key">modulo</label>
-                  <InputGroup>
-                    <CountBtn
-                      colorDisabled={(theme) => theme.color}
-                      onClick={() =>
-                        handleCountChange('modulo', input.modulo, -1)
-                      }
-                    >
-                      {' '}
-                      -{' '}
-                    </CountBtn>
-                    <input
-                      type="number"
-                      value={input.modulo}
-                      onChange={(e) =>
-                        handleCountChange('modulo', e.target.value)
-                      }
-                    />
-                    <CountBtn
-                      colorDisabled={(theme) => theme.color}
-                      onClick={() =>
-                        handleCountChange('modulo', input.modulo, 1)
-                      }
-                    >
-                      {' '}
-                      +{' '}
-                    </CountBtn>
-                  </InputGroup>
-                </div>
-              </Counter>
+              <CardCounter
+                label="modulo"
+                inputValue={input.modulo}
+                handleCountChange={handleModuloChange}
+                increase={increaseModulo}
+                decrease={decreaseModulo}
+              />
             </CounterWrap>
           </Content>
         </CardContainer>
