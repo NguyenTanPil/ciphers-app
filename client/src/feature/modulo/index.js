@@ -11,16 +11,12 @@ import {
   OutputText,
   Title,
   WrapDropdown,
+  Btns,
 } from '../../components/Card/CardStyles';
 import { Container, getCurrentCase, Wrap } from '../Utils';
-import {
-  BtnLarge,
-  CounterWrap,
-  TransformInput,
-  WrapBtns,
-} from './ModuloStyles';
+import { BtnLarge, CounterWrap, TransformInput } from './ModuloStyles';
 
-const ReverseKey = () => {
+const Modulo = () => {
   const [actions, setActions] = useState([
     { value: 'number', active: true },
     { value: 'power', active: false },
@@ -89,7 +85,11 @@ const ReverseKey = () => {
   };
 
   const inOrDecrease = (value, field, number) => {
-    setInput({ ...input, [field]: value + number });
+    if (value) {
+      setInput({ ...input, [field]: value + number });
+    } else {
+      setInput({ ...input, [field]: value });
+    }
   };
 
   const handleNumberChange = (e) => {
@@ -137,17 +137,17 @@ const ReverseKey = () => {
   const reset = () => {
     setInput({
       base: 5,
-      power: 1,
+      exponent: 1,
       modulo: 11,
     });
-    setOutput('');
+    setOutput(5);
   };
 
   return (
     <Container>
       <Wrap>
         <CardContainer>
-          <Title>Text Input</Title>
+          <Title>Numbers Input</Title>
           <Content>
             <CounterWrap>
               <CardCounter
@@ -179,12 +179,12 @@ const ReverseKey = () => {
         </CardContainer>
 
         <CardContainer style={{ height: '29.5rem' }}>
-          <Title>Actions</Title>
+          <Title align="center">Calculate Modulo</Title>
           <Content>
-            <WrapBtns>
+            <Btns>
               <BtnLarge onClick={calculate}>calculate</BtnLarge>
               <BtnLarge onClick={reset}>Reset</BtnLarge>
-            </WrapBtns>
+            </Btns>
 
             <TransformInput>
               <CaseStrategy>
@@ -217,7 +217,7 @@ const ReverseKey = () => {
         </CardContainer>
 
         <CardContainer>
-          <Title>Text Output</Title>
+          <Title>Number Output</Title>
           <Content>
             <OutputText>{output}</OutputText>
           </Content>
@@ -231,11 +231,11 @@ const ReverseKey = () => {
         link="https://en.wikipedia.org/wiki/Modulo_operation"
         utils={true}
         more={
-          'Some calculators have a mod() function button, and many programming languages have a similar function, expressed as mod(a, n), for example. Some also support expressions that use "%", "mod", or "Mod" as a modulo or remainder operator, such as a % n or a mod n'
+          'Some calculators have a mod() function button, and many programming languages have a similar function, expressed as mod(a, n), for example. Some also support expressions that use "%", "mod", or "Mod" as a modulo or remainder operator, such as a % n or a mod n.'
         }
       />
     </Container>
   );
 };
 
-export default ReverseKey;
+export default Modulo;

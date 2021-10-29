@@ -7,6 +7,7 @@ import Affine from './feature/affine';
 import Ceasar from './feature/ceasar';
 import Reverse from './feature/reverse';
 import Modulo from './feature/modulo';
+import ModularInverse from './feature/modularInverse';
 import Transposition from './feature/transposition';
 import './index.css';
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/reverse" component={Reverse} />
             <Route path="/transposition" component={Transposition} />
             <Route path="/modulo" component={Modulo} />
+            <Route path="/modular-inverse" component={ModularInverse} />
           </Switch>
         </Router>
       </div>

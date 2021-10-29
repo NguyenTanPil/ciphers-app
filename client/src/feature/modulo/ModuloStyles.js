@@ -14,12 +14,6 @@ export const CounterWrap = styled.div`
   }
 `;
 
-export const WrapBtns = styled(Btns)`
-  @media only screen and (min-width: 1200px) {
-    padding: 2rem;
-  }
-`;
-
 export const BtnLarge = styled(Btn)`
   max-width: 12.6rem;
   padding: 0 2rem;
@@ -38,6 +32,11 @@ export const TransformInput = styled(TransformOutPut)`
     width: 100%;
   }
 
+  ul {
+    left: -1.8rem;
+    width: calc(100% + 3.6rem);
+  }
+
   @media only screen and (min-width: 576px) {
     & > div {
       padding: 2rem 0;
@@ -46,18 +45,18 @@ export const TransformInput = styled(TransformOutPut)`
 
   @media only screen and (min-width: 1200px) {
     & > div {
-      padding: 2rem 1.8rem;
+      padding: 2rem 3.8rem;
+    }
+
+    ul {
+      left: -3.8rem;
+      width: calc(100% + 7.6rem);
     }
   }
 
   @media only screen and (min-width: 1400px) {
     & > div {
-      padding: 2rem 0;
+      padding: 2rem 1.8rem;
     }
-  }
-
-  ul {
-    left: -2rem;
-    width: calc(100% + 4rem);
   }
 `;

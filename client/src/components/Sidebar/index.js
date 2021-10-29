@@ -44,6 +44,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
           <NavItem>
             <NavLink to="/modulo">modulo operator</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink to="/modular-inverse">modular inverse</NavLink>
+          </NavItem>
         </ListLinks>
       </Wrap>
     </Container>
