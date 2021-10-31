@@ -1,11 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Counter, InputGroup, Btn } from '../../components/Card/CardStyles';
-import { getData, selectSimpleSubstitution } from './simpleSubstitutionSlice';
+import { useTranslation } from 'react-i18next';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { useDispatch, useSelector } from 'react-redux';
+import { Btn, Counter, InputGroup } from '../../components/Card/CardStyles';
+import { getData, selectSimpleSubstitution } from './simpleSubstitutionSlice';
 
 const ExtraInput = () => {
   const data = useSelector(selectSimpleSubstitution);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const getKey = (value) => {
     dispatch(
       getData({
@@ -51,7 +54,7 @@ const ExtraInput = () => {
       <Counter>
         <div>
           <label htmlFor="key">
-            KEY{' '}
+            {t('key')}
             <Btn onClick={randomKey}>
               <GiPerspectiveDiceSixFacesRandom />
             </Btn>

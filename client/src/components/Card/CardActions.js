@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HiArrowNarrowDown } from 'react-icons/hi';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import Alphabet from './Alphabet';
@@ -24,7 +25,7 @@ const CardActions = ({
   plaintext,
   ciphertext,
   keys,
-  currentCase,
+  currentIndex,
   getCaseStategy,
   caseStrategy,
   foreignChars,
@@ -34,6 +35,7 @@ const CardActions = ({
   extraInput,
 }) => {
   const [showCase, setShowCase] = useState(false);
+  const { t } = useTranslation();
 
   const handleSelectCase = (e) => {
     getCaseStategy(e);
@@ -44,8 +46,8 @@ const CardActions = ({
       <Title align={titleAlign}>{title}</Title>
       <Content>
         <Btns>
-          <Btn onClick={() => encode(plaintext, keys)}>encode</Btn>
-          <Btn onClick={() => decode(plaintext, keys)}>decode</Btn>
+          <Btn onClick={() => encode(plaintext, keys)}>{t('encode')}</Btn>
+          <Btn onClick={() => decode(plaintext, keys)}>{t('decode')}</Btn>
           <Btn onClick={reset}>Reset</Btn>
         </Btns>
 
@@ -55,10 +57,10 @@ const CardActions = ({
 
         <TransformOutPut>
           <CaseStrategy>
-            <label>CASE STRATEGY</label>
+            <label>{t('case')}</label>
             <WrapDropdown>
               <DropdownButton onClick={() => setShowCase(!showCase)}>
-                {currentCase}
+                {t(`case_${currentIndex}`)}
               </DropdownButton>
               {showCase && (
                 <DropdownList>
@@ -70,7 +72,7 @@ const CardActions = ({
                         id={strategy.value}
                         onClick={handleSelectCase}
                       >
-                        {strategy.value}
+                        {t(`case_${key + 1}`)}
                       </li>
                     );
                   })}
@@ -81,21 +83,21 @@ const CardActions = ({
           </CaseStrategy>
 
           <ForeignChars>
-            <label>FOREIGN CHARS</label>
+            <label>{t('foreign')}</label>
             <WrapDropdown>
               <button
                 className={foreignChars === 'include' ? 'active' : ''}
                 id="include"
                 onClick={(e) => getForeignChars(e.target.id)}
               >
-                include
+                {t('include')}
               </button>
               <button
                 className={foreignChars === 'ignore' ? 'active' : ''}
                 id="ignore"
                 onClick={(e) => getForeignChars(e.target.id)}
               >
-                ignore
+                {t('ignore')}
               </button>
             </WrapDropdown>
           </ForeignChars>
@@ -103,7 +105,7 @@ const CardActions = ({
 
         <Brick>
           <HiArrowNarrowDown />
-          <span>Decoded {ciphertext.length} chars</span>
+          <span>{t('decoded', { length: ciphertext.length })}</span>
         </Brick>
       </Content>
     </Container>

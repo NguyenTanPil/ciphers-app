@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Counter, InputGroup } from '../../components/Card/CardStyles';
 import { getData, selectTransposition } from './transpositionSlice';
@@ -5,6 +6,7 @@ import { getData, selectTransposition } from './transpositionSlice';
 const ExtraInput = () => {
   const data = useSelector(selectTransposition);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const getKey = (value) => {
     dispatch(
@@ -23,7 +25,7 @@ const ExtraInput = () => {
     <>
       <Counter>
         <div>
-          <label htmlFor="key">KEY</label>
+          <label htmlFor="key">{t('key')}</label>
           <InputGroup>
             <input
               type="text"

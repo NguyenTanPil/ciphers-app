@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+import { CgPushChevronRight } from 'react-icons/cg';
 import {
   Container,
   Header,
@@ -6,9 +8,10 @@ import {
   NavLink,
   Wrap,
 } from './SidebarStyles';
-import { CgPushChevronRight } from 'react-icons/cg';
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
+  const { t } = useTranslation();
+
   const handleShow = (e) => {
     if (e.target.classList.contains('close') || e.target.nodeName === 'A') {
       setShowSidebar(false);
@@ -29,26 +32,28 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
         <ListLinks>
           <NavItem>
             <NavLink exact to="/">
-              ceasar
+              {t('ceasar')}
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/affine">affine</NavLink>
+            <NavLink to="/affine">{t('affine')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/reverse">reverse</NavLink>
+            <NavLink to="/reverse">{t('reverse')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/transposition">transposition</NavLink>
+            <NavLink to="/transposition">{t('transposition')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/simple-substitution">simple substitution</NavLink>
+            <NavLink to="/simple-substitution">
+              {t('simple_substitution')}
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/modulo">modulo operator</NavLink>
+            <NavLink to="/modulo">{t('cal_modulo')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/modular-inverse">modular inverse</NavLink>
+            <NavLink to="/modular-inverse">{t('mod_inverse')}</NavLink>
           </NavItem>
         </ListLinks>
       </Wrap>

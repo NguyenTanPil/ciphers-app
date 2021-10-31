@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import CardCounter from '../../components/Card/CardCounter';
 import CardDescription from '../../components/Card/CardDescription';
 import {
+  Btns,
   CaseStrategy,
   Container as CardContainer,
   Content,
@@ -11,9 +13,8 @@ import {
   OutputText,
   Title,
   WrapDropdown,
-  Btns,
 } from '../../components/Card/CardStyles';
-import { Container, getCurrentCase, Wrap } from '../Utils';
+import { Container, getCurrentCase, getCurrentIndex, Wrap } from '../Utils';
 import { BtnLarge, CounterWrap, TransformInput } from './ModuloStyles';
 
 const Modulo = () => {
@@ -22,6 +23,7 @@ const Modulo = () => {
     { value: 'power', active: false },
   ]);
   const currentAction = getCurrentCase(actions);
+  const currentIndex = getCurrentIndex(actions);
   const [showActions, setShowActions] = useState(false);
   const [output, setOutput] = useState(5);
   const [input, setInput] = useState({
@@ -29,6 +31,7 @@ const Modulo = () => {
     exponent: 1,
     modulo: 11,
   });
+  const { t } = useTranslation();
 
   const handleSelectAction = (e) => {
     setShowActions(false);
@@ -147,11 +150,11 @@ const Modulo = () => {
     <Container>
       <Wrap>
         <CardContainer>
-          <Title>Numbers Input</Title>
+          <Title>{t('input_number')}</Title>
           <Content>
             <CounterWrap>
               <CardCounter
-                label={currentAction === 'number' ? 'NUMBER' : 'BASE'}
+                label={currentAction === 'number' ? t('type_1') : t('type_3')}
                 inputValue={input.base}
                 handleCountChange={handleNumberChange}
                 increase={increaseNumber}
@@ -159,7 +162,7 @@ const Modulo = () => {
               />
               {currentAction === 'power' && (
                 <CardCounter
-                  label="exponent"
+                  label={t('type_4')}
                   inputValue={input.exponent}
                   handleCountChange={handlePowerChange}
                   increase={increasePower}
@@ -179,19 +182,19 @@ const Modulo = () => {
         </CardContainer>
 
         <CardContainer style={{ height: '29.5rem' }}>
-          <Title align="center">Calculate Modulo</Title>
+          <Title align="center">{t('cal_modulo')}</Title>
           <Content>
             <Btns>
-              <BtnLarge onClick={calculate}>calculate</BtnLarge>
+              <BtnLarge onClick={calculate}>{t('cal')}</BtnLarge>
               <BtnLarge onClick={reset}>Reset</BtnLarge>
             </Btns>
 
             <TransformInput>
               <CaseStrategy>
-                <label>TYPE INPUT</label>
+                <label>{t('type_input')}</label>
                 <WrapDropdown>
                   <DropdownButton onClick={() => setShowActions(!showActions)}>
-                    {currentAction}
+                    {t(`type_${currentIndex}`)}
                   </DropdownButton>
                   {showActions && (
                     <DropdownList>
@@ -203,7 +206,7 @@ const Modulo = () => {
                             id={strategy.value}
                             onClick={handleSelectAction}
                           >
-                            {strategy.value}
+                            {t(`type_${key + 1}`)}
                           </li>
                         );
                       })}
@@ -217,22 +220,17 @@ const Modulo = () => {
         </CardContainer>
 
         <CardContainer>
-          <Title>Number Output</Title>
+          <Title>{t('output_number')}</Title>
           <Content>
             <OutputText>{output}</OutputText>
           </Content>
         </CardContainer>
       </Wrap>
       <CardDescription
-        cipher="Modulo operation"
-        desc={
-          ' returns the remainder or signed remainder of a division, after one number is divided by another (called the modulus of the operation). Given two positive numbers a and n, a modulo n (abbreviated as a mod n) is the remainder of the Euclidean division of a by n, where a is the dividend and n is the divisor. The modulo operation is to be distinguished from the symbol mod, which refers to the modulus (or divisor) one is operating from.'
-        }
+        cipher={t('oper_modulo')}
+        desc={t('modulo_desc')}
         link="https://en.wikipedia.org/wiki/Modulo_operation"
-        utils={true}
-        more={
-          'Some calculators have a mod() function button, and many programming languages have a similar function, expressed as mod(a, n), for example. Some also support expressions that use "%", "mod", or "Mod" as a modulo or remainder operator, such as a % n or a mod n.'
-        }
+        utils={t('cal_modulo')}
       />
     </Container>
   );

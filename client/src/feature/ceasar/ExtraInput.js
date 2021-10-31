@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardCounter from '../../components/Card/CardCounter';
 import { decreaseKey, getData, increaseKey, selectCeasar } from './ceasarSlice';
@@ -5,6 +6,7 @@ import { decreaseKey, getData, increaseKey, selectCeasar } from './ceasarSlice';
 const ExtraInput = () => {
   const data = useSelector(selectCeasar);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const getKey = (value) => {
     dispatch(
@@ -39,7 +41,7 @@ const ExtraInput = () => {
 
   return (
     <CardCounter
-      label="Key"
+      label={t('key')}
       inputValue={data.key}
       handleCountChange={handleCountChange}
       increase={increase}

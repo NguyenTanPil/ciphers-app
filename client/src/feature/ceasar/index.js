@@ -1,17 +1,26 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardActions from '../../components/Card/CardActions';
 import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
-import { getCurrentCase, submit, Container, Wrap } from '../Utils';
-import { getData, resetData, selectCeasar, getLoading } from './ceasarSlice';
+import {
+  Container,
+  getCurrentCase,
+  getCurrentIndex,
+  submit,
+  Wrap,
+} from '../Utils';
+import { getData, getLoading, resetData, selectCeasar } from './ceasarSlice';
 import ExtraInput from './ExtraInput';
 
 const Ceasar = () => {
   const data = useSelector(selectCeasar);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
+  const currentIndex = getCurrentIndex(data.caseStrategy);
+  const { t } = useTranslation();
 
   const getPlaintext = (value) => {
     dispatch(
@@ -105,13 +114,13 @@ const Ceasar = () => {
     <Container>
       <Wrap>
         <CardInput
-          title="Text Input"
+          title={t('input')}
           titleAlign={false}
           plaintext={data.plaintext}
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title="Ceasar Cipher"
+          title={t('ceasar')}
           titleAlign="center"
           keys={data.key}
           getKey={getKey}
@@ -120,7 +129,7 @@ const Ceasar = () => {
           decode={decode}
           plaintext={data.plaintext}
           ciphertext={data.ciphertext}
-          currentCase={currentCase}
+          currentIndex={currentIndex}
           getCaseStategy={getCaseStategy}
           caseStrategy={data.caseStrategy}
           foreignChars={data.foreignChars}
@@ -128,7 +137,7 @@ const Ceasar = () => {
           extraInput={<ExtraInput />}
         />
         <CardOutput
-          title="Text Output"
+          title={t('output')}
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
@@ -136,10 +145,8 @@ const Ceasar = () => {
         />
       </Wrap>
       <CardDescription
-        cipher="Ceasar"
-        desc={
-          ' is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.'
-        }
+        cipher={t('ceasar')}
+        desc={t('ceasar_desc')}
         link="https://en.wikipedia.org/wiki/Caesar_cipher"
       />
     </Container>

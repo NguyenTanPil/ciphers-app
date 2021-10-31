@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CardCounter from '../../components/Card/CardCounter';
 import CardDescription from '../../components/Card/CardDescription';
 import {
+  Btns,
   Container as CardContainer,
   Content,
   OutputText,
   Title,
-  Btns,
 } from '../../components/Card/CardStyles';
+import { BtnLarge, CounterWrap } from '../modulo/ModuloStyles';
 import { Container, Wrap } from '../Utils';
-import { CounterWrap, BtnLarge } from '../modulo/ModuloStyles';
 
 const ModularInverse = () => {
   const [output, setOutput] = useState(9);
@@ -17,6 +18,7 @@ const ModularInverse = () => {
     number: 5,
     modulo: 11,
   });
+  const { t } = useTranslation();
 
   const getModularInverse = () => {
     for (let i = 0; i < input.modulo; i++) {
@@ -24,7 +26,7 @@ const ModularInverse = () => {
         return i;
       }
     }
-    return 'Not Found. Please Check Your Input!';
+    return t('not_found');
   };
 
   const calculate = () => {
@@ -87,11 +89,11 @@ const ModularInverse = () => {
     <Container>
       <Wrap>
         <CardContainer>
-          <Title>Numbers Input</Title>
+          <Title>{t('input_number')}</Title>
           <Content>
             <CounterWrap>
               <CardCounter
-                label={'NUMBER'}
+                label={t('type_1')}
                 inputValue={input.number}
                 handleCountChange={handleNumberChange}
                 increase={increaseNumber}
@@ -109,32 +111,27 @@ const ModularInverse = () => {
         </CardContainer>
 
         <CardContainer style={{ height: '29.5rem' }}>
-          <Title align="center">Modular Inverse</Title>
+          <Title align="center">{t('mod_inverse')}</Title>
           <Content>
             <Btns>
-              <BtnLarge onClick={calculate}>calculate</BtnLarge>
+              <BtnLarge onClick={calculate}>{t('cal')}</BtnLarge>
               <BtnLarge onClick={reset}>Reset</BtnLarge>
             </Btns>
           </Content>
         </CardContainer>
 
         <CardContainer>
-          <Title>Number Output</Title>
+          <Title>{t('output_number')}</Title>
           <Content>
             <OutputText>{output}</OutputText>
           </Content>
         </CardContainer>
       </Wrap>
       <CardDescription
-        cipher="Modular multiplicative inverse"
-        desc={
-          '  of an integer a is an integer x such that the product ax is congruent to 1 with respect to the modulus m. In the standard notation of modular arithmetic this congruence is written as ax ≡ 1 (mod m ), which is the shorthand way of writing the statement that m divides (evenly) the quantity ax − 1, or, put another way, the remainder after dividing ax by the integer m is 1.'
-        }
+        cipher={t('mod_inverse')}
+        desc={t('mod_inverse_desc')}
         link="https://en.wikipedia.org/wiki/Modular_multiplicative_inverse"
-        utils={true}
-        more={
-          'Finding modular multiplicative inverses also has practical applications in the field of cryptography, i.e. public-key cryptography and the RSA Algorithm. A benefit for the computer implementation of these applications is that there exists a very fast algorithm (the extended Euclidean algorithm) that can be used for the calculation of modular multiplicative inverses.'
-        }
+        utils={t('oper_mod_inverse')}
       />
     </Container>
   );

@@ -1,17 +1,26 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardActions from '../../components/Card/CardActions';
+import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
-import CardDescription from '../../components/Card/CardDescription';
-import { getData, resetData, selectAffine, getLoading } from './affineSlice';
+import {
+  Container,
+  getCurrentCase,
+  getCurrentIndex,
+  submit,
+  Wrap,
+} from '../Utils';
+import { getData, getLoading, resetData, selectAffine } from './affineSlice';
 import ExtraInput from './ExtraInput';
-import { getCurrentCase, submit, Container, Wrap } from '../Utils';
 
 const Affine = () => {
   const data = useSelector(selectAffine);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
+  const currentIndex = getCurrentIndex(data.caseStrategy);
+  const { t } = useTranslation();
 
   const getPlaintext = (value) => {
     dispatch(
@@ -97,13 +106,13 @@ const Affine = () => {
     <Container>
       <Wrap>
         <CardInput
-          title="Text Input"
+          title={t('input')}
           titleAlign={false}
           plaintext={data.plaintext}
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title="Affine Cipher"
+          title={t('affine')}
           titleAlign="center"
           getKey={getKey}
           getForeignChars={getForeignChars}
@@ -112,7 +121,7 @@ const Affine = () => {
           plaintext={data.plaintext}
           ciphertext={data.ciphertext}
           keys={data.key}
-          currentCase={currentCase}
+          currentIndex={currentIndex}
           getCaseStategy={getCaseStategy}
           caseStrategy={data.caseStrategy}
           foreignChars={data.foreignChars}
@@ -120,7 +129,7 @@ const Affine = () => {
           extraInput={<ExtraInput />}
         />
         <CardOutput
-          title="Text Output"
+          title={t('output')}
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
@@ -128,10 +137,8 @@ const Affine = () => {
         />
       </Wrap>
       <CardDescription
-        cipher="Affine"
-        desc={
-          'is a type of monoalphabetic substitution cipher, where each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter. Each letter is enciphered with the function (ax + b) mod 26, where b is the magnitude of the shift.'
-        }
+        cipher={t('affine')}
+        desc={t('affine_desc')}
         link="https://en.wikipedia.org/wiki/Affine_cipher"
       />
     </Container>

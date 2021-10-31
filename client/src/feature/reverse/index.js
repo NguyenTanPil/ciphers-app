@@ -1,16 +1,25 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardActions from '../../components/Card/CardActions';
 import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
-import { Container, getCurrentCase, submit, Wrap } from '../Utils';
-import { getData, resetData, selectReverse, getLoading } from './reverseSlice';
+import {
+  Container,
+  getCurrentCase,
+  getCurrentIndex,
+  submit,
+  Wrap,
+} from '../Utils';
+import { getData, getLoading, resetData, selectReverse } from './reverseSlice';
 
 const Reverse = () => {
   const data = useSelector(selectReverse);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
+  const currentIndex = getCurrentIndex(data.caseStrategy);
+  const { t } = useTranslation();
 
   const getPlaintext = (value) => {
     dispatch(
@@ -86,13 +95,13 @@ const Reverse = () => {
     <Container>
       <Wrap>
         <CardInput
-          title="Text Input"
+          title={t('input')}
           titleAlign={false}
           plaintext={data.plaintext}
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title="Reverse Cipher"
+          title={t('reverse')}
           titleAlign="center"
           keys={data.key}
           getForeignChars={getForeignChars}
@@ -100,14 +109,14 @@ const Reverse = () => {
           decode={decode}
           plaintext={data.plaintext}
           ciphertext={data.ciphertext}
-          currentCase={currentCase}
+          currentIndex={currentIndex}
           getCaseStategy={getCaseStategy}
           caseStrategy={data.caseStrategy}
           foreignChars={data.foreignChars}
           reset={reset}
         />
         <CardOutput
-          title="Text Output"
+          title={t('output')}
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
@@ -115,10 +124,8 @@ const Reverse = () => {
         />
       </Wrap>
       <CardDescription
-        cipher="Reverse"
-        desc={
-          ' uses a pattern of reversing the string of plain text to convert as cipher text. The process of encryption and decryption is same. To decrypt cipher text, the user simply needs to reverse the cipher text to get the plain text.'
-        }
+        cipher={t('reverse')}
+        desc={t('reverse_desc')}
         link="https://www.tutorialspoint.com/cryptography_with_python/cryptography_with_python_reverse_cipher.htm"
       />
     </Container>

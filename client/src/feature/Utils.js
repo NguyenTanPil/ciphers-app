@@ -15,8 +15,13 @@ export const submit = async (url, mess, k) => {
   return result;
 };
 
+export const getCurrentIndex = (cases) => {
+  const index = cases.findIndex((c) => c.active);
+  return index + 1;
+};
+
 export const getCurrentCase = (cases) => {
-  return cases.filter((item) => item.active)[0].value;
+  return cases.filter((c) => c.active)[0].value;
 };
 
 export const Container = styled.div`

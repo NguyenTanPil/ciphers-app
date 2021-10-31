@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../src/components/Theme/ThemeCustome';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Affine from './feature/affine';
 import Ceasar from './feature/ceasar';
 import Reverse from './feature/reverse';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/modular-inverse" component={ModularInverse} />
             <Route path="/simple-substitution" component={SimpleSubstitution} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     </ThemeProvider>

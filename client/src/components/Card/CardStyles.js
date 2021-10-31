@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
@@ -109,7 +109,6 @@ export const Btn = styled.button`
   line-height: 3.6rem;
   margin-top: 1rem;
   max-width: 11.6rem;
-  padding: 0 3.2rem;
   text-align: center;
   text-decoration-color: initial;
   text-transform: uppercase;
@@ -119,6 +118,13 @@ export const Btn = styled.button`
 
   &:hover {
     background-color: rgb(34, 150, 138);
+  }
+`;
+
+const rotate = keyframes`
+  100% {
+    transition: transform 0.25s;
+    transform: rotateZ(360deg)
   }
 `;
 
@@ -147,6 +153,12 @@ export const Counter = styled(Btns)`
       right: 0;
       top: -50%;
       width: 3rem;
+
+      &:hover {
+        svg {
+          animation: ${rotate} 1.25s ease 0.25s;
+        }
+      }
 
       svg {
         font-size: 2.6rem;
@@ -455,7 +467,7 @@ export const Brick = styled.div`
 export const Description = styled.div`
   background-color: ${({ theme }) => theme.background};
   padding: 3.6rem 0;
-  text-align: center;
+  text-align: justify;
 
   div {
     line-height: 1.5;
@@ -471,6 +483,10 @@ export const Description = styled.div`
     font-weight: 600;
     padding-bottom: 1.4rem;
     width: 100%;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
   }
 
   p {
@@ -483,7 +499,12 @@ export const Description = styled.div`
 
   a {
     color: #4db6ac;
+    display: inline-block;
     font-weight: 600;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   @media only screen and (min-width: 576px) {
@@ -497,8 +518,6 @@ export const Description = styled.div`
   }
 
   @media only screen and (min-width: 992px) {
-    text-align: left;
-
     h1,
     p {
       max-width: 70rem;

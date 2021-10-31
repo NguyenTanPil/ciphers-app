@@ -13,6 +13,7 @@ import {
 
 const Header = ({ theme, setTheme }) => {
   const [showSidebar, setShowSidebar] = useState(false);
+
   const themeToggle = () => {
     if (theme === 'light') {
       setTheme('dark');
@@ -37,6 +38,7 @@ const Header = ({ theme, setTheme }) => {
       <Wrapper>
         <Logo to="/">CipherVip</Logo>
         <NavList>
+          {/* <NavItem>{t('Welcome')}</NavItem> */}
           <NavItem>
             <TrackMode onClick={themeToggle} theme={theme}>
               <span>🌜</span>

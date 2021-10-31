@@ -1,21 +1,30 @@
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardActions from '../../components/Card/CardActions';
 import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
-import { getCurrentCase, submit, Container, Wrap } from '../Utils';
+import {
+  Container,
+  getCurrentCase,
+  getCurrentIndex,
+  submit,
+  Wrap,
+} from '../Utils';
+import ExtraInput from './ExtraInput';
 import {
   getData,
+  getLoading,
   resetData,
   selectSimpleSubstitution,
-  getLoading,
 } from './simpleSubstitutionSlice';
-import ExtraInput from './ExtraInput';
 
 const Transposition = () => {
   const data = useSelector(selectSimpleSubstitution);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
+  const currentIndex = getCurrentIndex(data.caseStrategy);
+  const { t } = useTranslation();
 
   const getPlaintext = (value) => {
     dispatch(
@@ -109,13 +118,13 @@ const Transposition = () => {
     <Container>
       <Wrap>
         <CardInput
-          title="Text Input"
+          title={t('input')}
           titleAlign={false}
           plaintext={data.plaintext}
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title="Simple Substitution Cipher"
+          title={t('simple_substitution')}
           titleAlign="center"
           keys={data.key}
           getKey={getKey}
@@ -124,7 +133,7 @@ const Transposition = () => {
           decode={decode}
           plaintext={data.plaintext}
           ciphertext={data.ciphertext}
-          currentCase={currentCase}
+          currentIndex={currentIndex}
           getCaseStategy={getCaseStategy}
           caseStrategy={data.caseStrategy}
           foreignChars={data.foreignChars}
@@ -132,7 +141,7 @@ const Transposition = () => {
           extraInput={<ExtraInput />}
         />
         <CardOutput
-          title="Text Output"
+          title={t('output')}
           currentCase={currentCase}
           foreignChars={data.foreignChars}
           ciphertext={data.ciphertext}
@@ -140,11 +149,8 @@ const Transposition = () => {
         />
       </Wrap>
       <CardDescription
-        cipher="Simple substitution"
-        desc={
-          ' can be demonstrated by writing out the alphabet in some order to represent the substitution. This is termed a substitution alphabet. The cipher alphabet may be shifted or reversed (creating the Caesar and Atbash ciphers, respectively) or scrambled in a more complex fashion, in which case it is called a mixed alphabet or deranged alphabet.'
-        }
-        more="Traditionally, mixed alphabets may be created by first writing out a keyword, removing repeated letters in it, then writing all the remaining letters in the alphabet in the usual order."
+        cipher={t('simple_substitution')}
+        desc={t('simple_substitution_desc')}
         link="https://en.wikipedia.org/wiki/Substitution_cipher#Simple_substitution"
       />
     </Container>
