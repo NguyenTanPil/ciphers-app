@@ -1,3 +1,4 @@
+import bigInt from 'big-integer';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RiArrowDownSFill } from 'react-icons/ri';
@@ -47,34 +48,12 @@ const Modulo = () => {
     });
   };
 
-  const getModulo = (base, power, mod) => {
-    let powerOfBin = 1;
-    let index = 1;
-    const values = [base];
-
-    while (powerOfBin < power) {
-      values.push((values[index - 1] * values[index - 1]) % mod);
-      powerOfBin *= 2;
-      index += 1;
-    }
-
-    let result = 1;
-    const binOfPower = power.toString(2).split('').reverse().join('');
-
-    for (let i = 0; i < binOfPower.length; i++) {
-      if (binOfPower[i] === '1') {
-        result *= values[i];
-      }
-    }
-    return result % mod;
-  };
-
   const calculate = () => {
     let result = 0;
     if (currentAction === 'number') {
-      result = input.base % input.modulo;
+      result = Number(bigInt(input.base).mod(input.modulo));
     } else {
-      result = getModulo(input.base, input.exponent, input.modulo);
+      result = Number(bigInt(input.base).pow(input.exponent).mod(input.modulo));
     }
     setOutput(result);
   };

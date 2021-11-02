@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import bigInt from 'big-integer';
 import { useTranslation } from 'react-i18next';
 import CardCounter from '../../components/Card/CardCounter';
 import CardDescription from '../../components/Card/CardDescription';
@@ -21,12 +22,11 @@ const ModularInverse = () => {
   const { t } = useTranslation();
 
   const getModularInverse = () => {
-    for (let i = 0; i < input.modulo; i++) {
-      if ((Math.abs(input.number) * i) % input.modulo === 1) {
-        return i;
-      }
+    try {
+      return Number(bigInt(input.number).modInv(input.modulo));
+    } catch (error) {
+      return t('not_found');
     }
-    return t('not_found');
   };
 
   const calculate = () => {
