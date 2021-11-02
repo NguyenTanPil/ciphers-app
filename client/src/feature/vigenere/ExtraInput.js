@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Counter, InputGroup } from '../../components/Card/CardStyles';
-import { getData, selectTransposition } from './transpositionSlice';
+import { getData, selectVigenere } from './vigenereSlice';
 
 const ExtraInput = () => {
-  const data = useSelector(selectTransposition);
+  const data = useSelector(selectVigenere);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -18,7 +18,7 @@ const ExtraInput = () => {
   };
 
   const handleCountChange = (e) => {
-    getKey(e.target.value.replace(/[^1-9]/gi, ''));
+    getKey(e.target.value.replace(/[^a-zA-Z]/gi, ''));
   };
 
   return (
@@ -31,7 +31,7 @@ const ExtraInput = () => {
               type="text"
               value={data.key}
               onChange={handleCountChange}
-              placeholder="Enter columns number..."
+              placeholder="Enter your keys..."
             />
           </InputGroup>
         </div>

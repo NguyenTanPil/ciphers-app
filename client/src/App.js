@@ -8,6 +8,7 @@ import Affine from './feature/affine';
 import Ceasar from './feature/ceasar';
 import Reverse from './feature/reverse';
 import Modulo from './feature/modulo';
+import Vigenere from './feature/vigenere';
 import ModularInverse from './feature/modularInverse';
 import Transposition from './feature/transposition';
 import './index.css';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/modulo" component={Modulo} />
             <Route path="/modular-inverse" component={ModularInverse} />
             <Route path="/simple-substitution" component={SimpleSubstitution} />
+            <Route path="/vigenere" component={Vigenere} />
           </Switch>
           <Footer />
         </Router>

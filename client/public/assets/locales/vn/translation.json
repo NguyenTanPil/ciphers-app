@@ -41,5 +41,7 @@
   "mod_inverse_desc": " của số nguyên a là số nguyên x sao cho tích ax đồng dư bằng 1 theo môđun m. Trong ký hiệu tiêu chuẩn của số học mô-đun, sự đồng dư này được viết là ax ≡ 1 (mod m), là cách viết tắt của câu lệnh mà m chia (đều) cho đại lượng ax - 1, hoặc nói một cách khác, phần dư sau chia ax cho số nguyên m được 1.",
   "oper_mod_inverse": "tính toán Modulo nghịch đảo",
   "not_found": "Không tìm thấy. Vui lòng kiểm tra đầu vào của bạn!",
+  "vigenere": "mật mã Vigenere",
+  "vigenere_desc": " là một phương pháp mã hóa chữ văn bản bằng cách sử dụng một loạt các đan xen mật mã Caesar , dựa trên các chữ cái của một từ khóa. Nó sử dụng một dạng thay thế đa pha.",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }

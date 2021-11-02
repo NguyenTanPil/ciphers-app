@@ -4,6 +4,7 @@ import affine from '../feature/affine/affineSlice';
 import reverse from '../feature/reverse/reverseSlice';
 import transposition from '../feature/transposition/transpositionSlice';
 import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitutionSlice';
+import vigenere from '../feature/vigenere/vigenereSlice';
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     reverse: reverse,
     transposition: transposition,
     simpleSubstitution: simpleSubstitution,
+    vigenere: vigenere,
   },
 });
