@@ -56,7 +56,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             <NavLink to="/hill">{t('hill')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/rot13">{t('rot13')}</NavLink>
+            <NavLink to="/rot">{t('rot13')}</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/modulo">{t('cal_modulo')}</NavLink>

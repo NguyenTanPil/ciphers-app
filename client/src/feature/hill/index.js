@@ -143,7 +143,7 @@ const Hill = () => {
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title={t('affine')}
+          title={t('hill')}
           titleAlign="center"
           getKey={getKey}
           getForeignChars={getForeignChars}

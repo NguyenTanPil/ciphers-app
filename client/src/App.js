@@ -34,7 +34,7 @@ function App() {
             <Route path="/simple-substitution" component={SimpleSubstitution} />
             <Route path="/vigenere" component={Vigenere} />
             <Route path="/hill" component={Hill} />
-            <Route path="/rot13" component={Rot13} />
+            <Route path="/rot" component={Rot13} />
           </Switch>
           <Footer />
         </Router>
