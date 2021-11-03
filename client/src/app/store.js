@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import ceasar from '../feature/ceasar/ceasarSlice';
 import affine from '../feature/affine/affineSlice';
+import ceasar from '../feature/ceasar/ceasarSlice';
+import hill from '../feature/hill/hillSlice';
 import reverse from '../feature/reverse/reverseSlice';
-import transposition from '../feature/transposition/transpositionSlice';
 import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitutionSlice';
+import transposition from '../feature/transposition/transpositionSlice';
 import vigenere from '../feature/vigenere/vigenereSlice';
 
 export default configureStore({
@@ -14,5 +15,6 @@ export default configureStore({
     transposition: transposition,
     simpleSubstitution: simpleSubstitution,
     vigenere: vigenere,
+    hill: hill,
   },
 });

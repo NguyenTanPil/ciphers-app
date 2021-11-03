@@ -42,6 +42,10 @@
   "oper_mod_inverse": "calculation Modulo inverse",
   "not_found": "Not Found. Please Check Your Input!",
   "vigenere": "Vigenere cipher",
-  "vigenere_desc": " is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution",
+  "vigenere_desc": " is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution.",
+  "hill": "Hill cipher",
+  "hill_desc": " is a polygraphic substitution cipher based on linear algebra. Invented by Lester S. Hill in 1929, it was the first polygraphic cipher in which it was practical (though barely) to operate on more than three symbols at once.",
+  "hill_err_1": "The matrix is not invertible MOD 26. Please check your matrix!",
+  "hill_err_2": "Only A-Za-z characters are accepted. Please check your text input!",
   "footer": " is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse."
 }

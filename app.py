@@ -7,6 +7,7 @@ from ciphers.simple_reverse import Reverse
 from ciphers.transposition import Transposition
 from ciphers.simple_substitution import Simple_Substitution
 from ciphers.vigenere import Vigenere
+from ciphers.hill import Hill
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -116,7 +117,7 @@ def simple_substitution_decode():
     'ciphertext': result
   }
 
-# vigenere substitution
+# vigenere
 @app.route('/api/vigenere/encode', methods=['POST'])
 @cross_origin()
 def vigenere_encode():
@@ -133,6 +134,27 @@ def vigenere_decode():
   data = json.loads(request.data)
   vigenere = Vigenere(data['key'])
   result = vigenere.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+# hill
+@app.route('/api/hill/encode', methods=['POST'])
+@cross_origin()
+def hill_encode():
+  data = json.loads(request.data)
+  hill = Hill(data['key'])
+  result = hill.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/hill/decode', methods=['POST'])
+@cross_origin()
+def hill_decode():
+  data = json.loads(request.data)
+  hill = Hill(data['key'])
+  result = hill.decode(data['text'])
   return {
     'ciphertext': result
   }

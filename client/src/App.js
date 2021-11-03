@@ -13,6 +13,7 @@ import ModularInverse from './feature/modularInverse';
 import Transposition from './feature/transposition';
 import './index.css';
 import SimpleSubstitution from './feature/simpleSubstitution';
+import Hill from './feature/hill';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -31,6 +32,7 @@ function App() {
             <Route path="/modular-inverse" component={ModularInverse} />
             <Route path="/simple-substitution" component={SimpleSubstitution} />
             <Route path="/vigenere" component={Vigenere} />
+            <Route path="/hill" component={Hill} />
           </Switch>
           <Footer />
         </Router>
