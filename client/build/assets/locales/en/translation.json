@@ -41,5 +41,14 @@
   "mod_inverse_desc": " of an integer a is an integer x such that the product ax is congruent to 1 with respect to the modulus m. In the standard notation of modular arithmetic this congruence is written as ax ≡ 1 (mod m ), which is the shorthand way of writing the statement that m divides (evenly) the quantity ax − 1, or, put another way, the remainder after dividing ax by the integer m is 1.",
   "oper_mod_inverse": "calculation Modulo inverse",
   "not_found": "Not Found. Please Check Your Input!",
+  "vigenere": "Vigenere cipher",
+  "vigenere_desc": " is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a keyword. It employs a form of polyalphabetic substitution.",
+  "hill": "Hill cipher",
+  "hill_desc": " is a polygraphic substitution cipher based on linear algebra. Invented by Lester S. Hill in 1929, it was the first polygraphic cipher in which it was practical (though barely) to operate on more than three symbols at once.",
+  "hill_err_1": "The matrix is not invertible MOD 26. Please check your matrix!",
+  "hill_err_2": "Only A-Za-z characters are accepted. Please check your text input!",
+  "rot13": "Rot13 cipher",
+  "rot13_desc": " is a simple letter substitution cipher that replaces a letter with the 13th letter after it in the alphabet. ROT13 is a special case of the Caesar cipher which was developed in ancient Rome.",
+  "variant": "variant",
   "footer": " is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse."
 }
