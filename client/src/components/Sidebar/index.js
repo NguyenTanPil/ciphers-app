@@ -53,7 +53,10 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             <NavLink to="/vigenere">{t('vigenere')}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/hill">hill</NavLink>
+            <NavLink to="/hill">{t('hill')}</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/rot13">{t('rot13')}</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/modulo">{t('cal_modulo')}</NavLink>

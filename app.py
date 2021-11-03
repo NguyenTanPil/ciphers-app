@@ -8,6 +8,7 @@ from ciphers.transposition import Transposition
 from ciphers.simple_substitution import Simple_Substitution
 from ciphers.vigenere import Vigenere
 from ciphers.hill import Hill
+from ciphers.rot13 import Rot13
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -155,6 +156,26 @@ def hill_decode():
   data = json.loads(request.data)
   hill = Hill(data['key'])
   result = hill.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
+# hill
+@app.route('/api/rot13/encode', methods=['POST'])
+@cross_origin()
+def rot13_encode():
+  data = json.loads(request.data)
+  rot13 = Rot13(data['key'])
+  result = rot13.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/rot13/decode', methods=['POST'])
+@cross_origin()
+def rot13_decode():
+  data = json.loads(request.data)
+  rot13 = Rot13(data['key'])
+  result = rot13.decode(data['text'])
   return {
     'ciphertext': result
   }

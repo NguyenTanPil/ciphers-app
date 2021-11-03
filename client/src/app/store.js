@@ -6,6 +6,7 @@ import reverse from '../feature/reverse/reverseSlice';
 import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitutionSlice';
 import transposition from '../feature/transposition/transpositionSlice';
 import vigenere from '../feature/vigenere/vigenereSlice';
+import rot13 from '../feature/rot13/rot13Slice';
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     simpleSubstitution: simpleSubstitution,
     vigenere: vigenere,
     hill: hill,
+    rot13: rot13,
   },
 });

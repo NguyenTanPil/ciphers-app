@@ -132,6 +132,7 @@ export const Counter = styled(Btns)`
   align-items: flex-start;
   flex-direction: column;
   padding: 1rem 0.2rem;
+
   div {
     margin: 0 auto;
     width: 100%;

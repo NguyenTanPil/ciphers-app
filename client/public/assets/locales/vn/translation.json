@@ -47,5 +47,8 @@
   "hill_desc": " là một mật mã thay thế đa phương dựa trên đại số tuyến tính . Được phát minh bởi Lester S. Hill vào năm 1929, nó là mật mã đa hình đầu tiên trong đó nó thực tế (mặc dù hầu như không) để hoạt động trên hơn ba ký hiệu cùng một lúc.",
   "hill_err_1": "Ma trận không khả nghịch MOD 26. Vui lòng kiểm tra ma trận của bạn!",
   "hill_err_2": "Chỉ chấp nhận các ký tự A-Za-z. Vui lòng kiểm tra đầu vào văn bản của bạn!",
+  "rot13": "mật mã Rot13",
+  "rot13_desc": " là một mật mã thay thế chữ cái đơn giản thay thế một chữ cái bằng chữ cái thứ 13 sau nó trong bảng chữ cái. ROT13 là một trường hợp đặc biệt của mật mã Caesar được phát triển ở La Mã cổ đại.",
+  "variant": "biến thể",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }
