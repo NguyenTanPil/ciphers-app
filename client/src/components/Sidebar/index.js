@@ -62,6 +62,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             <NavLink to="/base64">{t('base64')}</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/xor">{t('xor')}</NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/modulo">{t('cal_modulo')}</NavLink>
           </NavItem>
           <NavItem>

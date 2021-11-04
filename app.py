@@ -10,6 +10,7 @@ from ciphers.vigenere import Vigenere
 from ciphers.hill import Hill
 from ciphers.rot13 import Rot13
 from ciphers.base64_cipher import Base64
+from ciphers.xor import XOR
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -203,6 +204,27 @@ def base64_decode():
     'ciphertext': result
   }
 
+# xor
+@app.route('/api/xor/encode', methods=['POST'])
+@cross_origin()
+def xor_encode():
+  data = json.loads(request.data)
+  xor = XOR(data['key'])
+  result = xor.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/xor/decode', methods=['POST'])
+@cross_origin()
+def xor_decode():
+  data = json.loads(request.data)
+  xor = XOR(data['key'])
+  result = xor.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
 @app.route('/')
 @app.route('/affine')
 @app.route('/reverse')
@@ -214,6 +236,7 @@ def base64_decode():
 @app.route('/hill')
 @app.route('/rot13')
 @app.route('/base64')
+@app.route('/xor')
 @cross_origin()
 def serve():
   return send_from_directory(app.static_folder, 'index.html')

@@ -8,6 +8,7 @@ import transposition from '../feature/transposition/transpositionSlice';
 import vigenere from '../feature/vigenere/vigenereSlice';
 import rot13 from '../feature/rot13/rot13Slice';
 import base64 from '../feature/base64/base64Slice';
+import xor from '../feature/xor/xorSlice';
 
 export default configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export default configureStore({
     hill: hill,
     rot13: rot13,
     base64: base64,
+    xor: xor,
   },
 });

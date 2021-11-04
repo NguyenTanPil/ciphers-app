@@ -16,6 +16,7 @@ import SimpleSubstitution from './feature/simpleSubstitution';
 import Hill from './feature/hill';
 import Rot13 from './feature/rot13';
 import Base64 from './feature/base64';
+import XOR from './feature/xor';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -37,6 +38,7 @@ function App() {
             <Route path="/hill" component={Hill} />
             <Route path="/rot13" component={Rot13} />
             <Route path="/base64" component={Base64} />
+            <Route path="/xor" component={XOR} />
           </Switch>
           <Footer />
         </Router>
