@@ -105,7 +105,7 @@ const CardActions = ({
 
         <Brick>
           <HiArrowNarrowDown />
-          <span>{t('decoded', { length: ciphertext.length })}</span>
+          <span>{t('decoded', { length: plaintext.length })}</span>
         </Brick>
       </Content>
     </Container>
