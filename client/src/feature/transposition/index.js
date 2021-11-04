@@ -27,7 +27,8 @@ const Transposition = () => {
   const currentIndex = getCurrentIndex(data.caseStrategy);
   const { t } = useTranslation();
 
-  const getPlaintext = (value) => {
+  const getPlaintext = (e) => {
+    const value = e.target.value;
     dispatch(
       getData({
         ...data,

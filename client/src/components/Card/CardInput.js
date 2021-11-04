@@ -1,10 +1,6 @@
 import { Container, Title, Content, TextareaInput } from './CardStyles';
 
 const CardInput = ({ title, titleAlign, plaintext, getPlaintext }) => {
-  const handleChange = (e) => {
-    getPlaintext(e.target.value);
-  };
-
   return (
     <Container textarea={true}>
       <Title align={titleAlign}>{title}</Title>
@@ -12,7 +8,7 @@ const CardInput = ({ title, titleAlign, plaintext, getPlaintext }) => {
         <TextareaInput
           placeholder="Enter your message..."
           value={plaintext}
-          onChange={handleChange}
+          onChange={getPlaintext}
         />
       </Content>
     </Container>

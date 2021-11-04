@@ -68,6 +68,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             <NavLink to="/multiplicative">{t('multiplicative')}</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/des">{t('des')}</NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink to="/modulo">{t('cal_modulo')}</NavLink>
           </NavItem>
           <NavItem>

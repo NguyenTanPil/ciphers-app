@@ -56,5 +56,7 @@
   "xor_desc": " là một loại mật mã cộng , một thuật toán mã hóa hoạt động theo các nguyên tắc: toán tử XOR. Phép toán này đôi khi được gọi là phép cộng modulus 2 (hoặc phép trừ, giống hệt nhau). Với logic này, một chuỗi văn bản có thể được mã hóa bằng cách áp dụng toán tử XOR bitwise cho mọi ký tự bằng cách sử dụng một khóa nhất định. Để giải mã đầu ra, chỉ cần áp dụng lại hàm XOR bằng khóa sẽ xóa mật mã.",
   "multiplicative": "mật mã Multiplicative",
   "multiplicative_desc": " tương tự như mật mã cộng trừ thực tế là bit khóa được nhân với biểu tượng văn bản thuần túy trong quá trình mã hóa. Tương tự như vậy, văn bản mã được nhân với nghịch đảo nhân của khóa để giải mã để lấy lại văn bản thuần túy.",
+  "des": "mật mã DES",
+  "des_desc": " (Tiêu chuẩn Mã hóa Dữ liệu) là một thuật toán khóa đối xứng cho mã hóa dữ liệu kỹ thuật số. Mặc dù độ dài khóa ngắn 56 bit của nó khiến nó quá không an toàn cho các ứng dụng, nhưng nó đã có ảnh hưởng lớn đến sự tiến bộ của mật mã.",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }

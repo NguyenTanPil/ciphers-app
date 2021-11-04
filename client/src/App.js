@@ -17,6 +17,7 @@ import SimpleSubstitution from './feature/simpleSubstitution';
 import Transposition from './feature/transposition';
 import Vigenere from './feature/vigenere';
 import XOR from './feature/xor';
+import DES from './feature/des';
 import './index.css';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="/base64" component={Base64} />
             <Route path="/xor" component={XOR} />
             <Route path="/multiplicative" component={Multiplicative} />
+            <Route path="/des" component={DES} />
           </Switch>
           <Footer />
         </Router>

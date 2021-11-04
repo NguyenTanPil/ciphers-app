@@ -12,17 +12,18 @@ import {
   submit,
   Wrap,
 } from '../Utils';
-import { getData, getLoading, resetData, selectBase64 } from './base64Slice';
+import ExtraInput from './ExtraInput';
+import { getData, getLoading, resetData, selectDes } from './desSlice';
 
-const Base64 = () => {
-  const data = useSelector(selectBase64);
+const Des = () => {
+  const data = useSelector(selectDes);
   const dispatch = useDispatch();
   const currentCase = getCurrentCase(data.caseStrategy);
   const currentIndex = getCurrentIndex(data.caseStrategy);
   const { t } = useTranslation();
 
   const getPlaintext = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.replace(/[^a-fA-F0-9]/gi, '');
     dispatch(
       getData({
         ...data,
@@ -40,6 +41,15 @@ const Base64 = () => {
     );
   };
 
+  const getKey = (value) => {
+    dispatch(
+      getData({
+        ...data,
+        key: value,
+      }),
+    );
+  };
+
   const getForeignChars = (value) => {
     dispatch(
       getData({
@@ -49,20 +59,21 @@ const Base64 = () => {
     );
   };
 
-  const encode = async (text) => {
+  const encode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit('/api/base64/encode', text);
+      const { ciphertext } = await submit('/api/des/encode', text, key);
       getCiphertext(ciphertext);
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
     }
   };
-  const decode = async (text) => {
+
+  const decode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit('/api/base64/decode', text);
+      const { ciphertext } = await submit('/api/des/decode', text, key);
       getCiphertext(ciphertext);
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
@@ -102,9 +113,10 @@ const Base64 = () => {
           getPlaintext={getPlaintext}
         />
         <CardActions
-          title={t('base64')}
+          title={t('des')}
           titleAlign="center"
           keys={data.key}
+          getKey={getKey}
           getForeignChars={getForeignChars}
           encode={encode}
           decode={decode}
@@ -115,6 +127,7 @@ const Base64 = () => {
           caseStrategy={data.caseStrategy}
           foreignChars={data.foreignChars}
           reset={reset}
+          extraInput={<ExtraInput />}
         />
         <CardOutput
           title={t('output')}
@@ -125,12 +138,12 @@ const Base64 = () => {
         />
       </Wrap>
       <CardDescription
-        cipher={t('base64')}
-        desc={t('base64_desc')}
-        link="https://en.wikipedia.org/wiki/Base64"
+        cipher={t('des')}
+        desc={t('des_desc')}
+        link="https://en.wikipedia.org/wiki/Data_Encryption_Standard"
       />
     </Container>
   );
 };
 
-export default Base64;
+export default Des;

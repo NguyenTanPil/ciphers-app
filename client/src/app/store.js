@@ -10,6 +10,7 @@ import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitution
 import transposition from '../feature/transposition/transpositionSlice';
 import vigenere from '../feature/vigenere/vigenereSlice';
 import xor from '../feature/xor/xorSlice';
+import des from '../feature/des/desSlice';
 
 export default configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export default configureStore({
     base64: base64,
     xor: xor,
     multiplicative: multiplicative,
+    des: des,
   },
 });

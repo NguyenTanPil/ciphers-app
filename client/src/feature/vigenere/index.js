@@ -27,7 +27,8 @@ const Vigenere = () => {
   const currentIndex = getCurrentIndex(data.caseStrategy);
   const { t } = useTranslation();
 
-  const getPlaintext = (value) => {
+  const getPlaintext = (e) => {
+    const value = e.target.value;
     dispatch(
       getData({
         ...data,
@@ -144,7 +145,7 @@ const Vigenere = () => {
       <CardDescription
         cipher={t('vigenere')}
         desc={t('vigenere_desc')}
-        link="https://en.wikipedia.org/wiki/Transposition_cipher"
+        link="https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher"
       />
     </Container>
   );
