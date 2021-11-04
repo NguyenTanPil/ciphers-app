@@ -181,8 +181,16 @@ def rot13_decode():
   }
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/')
+@app.route('/affine')
+@app.route('/reverse')
+@app.route('/transposition')
+@app.route('/modulo')
+@app.route('/modular-inverse')
+@app.route('/simple-substitution')
+@app.route('/vigenere')
+@app.route('/hill')
+@app.route('/rot')
 @cross_origin()
 def serve():
   return send_from_directory(app.static_folder, 'index.html')
