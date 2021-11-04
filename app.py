@@ -9,6 +9,7 @@ from ciphers.simple_substitution import Simple_Substitution
 from ciphers.vigenere import Vigenere
 from ciphers.hill import Hill
 from ciphers.rot13 import Rot13
+from ciphers.base64_cipher import Base64
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -159,7 +160,8 @@ def hill_decode():
   return {
     'ciphertext': result
   }
-# hill
+
+# rot13
 @app.route('/api/rot13/encode', methods=['POST'])
 @cross_origin()
 def rot13_encode():
@@ -180,6 +182,26 @@ def rot13_decode():
     'ciphertext': result
   }
 
+# base64
+@app.route('/api/base64/encode', methods=['POST'])
+@cross_origin()
+def base64_encode():
+  data = json.loads(request.data)
+  base64 = Base64()
+  result = base64.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/base64/decode', methods=['POST'])
+@cross_origin()
+def base64_decode():
+  data = json.loads(request.data)
+  base64 = Base64()
+  result = base64.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
 
 @app.route('/')
 @app.route('/affine')
@@ -190,10 +212,11 @@ def rot13_decode():
 @app.route('/simple-substitution')
 @app.route('/vigenere')
 @app.route('/hill')
-@app.route('/rot')
+@app.route('/rot13')
+@app.route('/base64')
 @cross_origin()
 def serve():
   return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-  app.run()
+  app.run(debug=True)

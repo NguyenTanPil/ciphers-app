@@ -2,19 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   plaintext: 'CipherVip',
-  ciphertext: 'PvcureIvc',
+  ciphertext: 'Q2lwaGVyVmlw',
   caseStrategy: [
     { value: 'maintain case', active: true },
     { value: 'upper case', active: false },
     { value: 'lower case', active: false },
   ],
   foreignChars: 'include',
-  key: '13',
   loadingOutput: false,
 };
 
-export const rot13Slice = createSlice({
-  name: 'rot13',
+export const base64Slice = createSlice({
+  name: 'base64',
   initialState,
   reducers: {
     getData(state, action) {
@@ -22,14 +21,12 @@ export const rot13Slice = createSlice({
       state.ciphertext = action.payload.ciphertext;
       state.caseStrategy = action.payload.caseStrategy;
       state.foreignChars = action.payload.foreignChars;
-      state.key = action.payload.key;
     },
     resetData(state) {
       state.plaintext = '';
       state.ciphertext = '';
       state.caseStrategy = initialState.caseStrategy;
       state.foreignChars = initialState.foreignChars;
-      state.key = initialState.key;
     },
     getLoading(state, action) {
       state.loadingOutput = action.payload.loadingOutput;
@@ -37,8 +34,8 @@ export const rot13Slice = createSlice({
   },
 });
 
-export const { getData, resetData, getLoading } = rot13Slice.actions;
+export const { getData, resetData, getLoading } = base64Slice.actions;
 
-export const selectRot13 = (state) => state.rot13;
+export const selectBase64 = (state) => state.base64;
 
-export default rot13Slice.reducer;
+export default base64Slice.reducer;

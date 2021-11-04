@@ -50,5 +50,7 @@
   "rot13": "mật mã Rot13",
   "rot13_desc": " là một mật mã thay thế chữ cái đơn giản thay thế một chữ cái bằng chữ cái thứ 13 sau nó trong bảng chữ cái. ROT13 là một trường hợp đặc biệt của mật mã Caesar được phát triển ở La Mã cổ đại.",
   "variant": "biến thể",
+  "base64": "mật mã Base64",
+  "base64_desc": " là một nhóm các lược đồ mã hóa nhị phân thành văn bản đại diện cho dữ liệu nhị phân (cụ thể hơn là một chuỗi các byte 8-bit) ở định dạng chuỗi ASCII bằng cách dịch dữ liệu thành biểu diễn cơ số -64. Thuật ngữ Base64 bắt nguồn từ một mã hóa truyền nội dung MIME cụ thể . Mỗi chữ số Base64 không phải cuối cùng đại diện cho chính xác 6 bit dữ liệu. Do đó, ba byte (tức là tổng cộng 24 bit) có thể được biểu diễn bằng bốn chữ số Base64 6 bit.",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }

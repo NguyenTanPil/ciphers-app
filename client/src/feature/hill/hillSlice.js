@@ -25,8 +25,8 @@ export const hillSlice = createSlice({
       state.key = action.payload.key;
     },
     resetData(state) {
-      state.plaintext = initialState.plaintext;
-      state.ciphertext = initialState.ciphertext;
+      state.plaintext = '';
+      state.ciphertext = '';
       state.caseStrategy = initialState.caseStrategy;
       state.foreignChars = initialState.foreignChars;
       state.key = initialState.key;

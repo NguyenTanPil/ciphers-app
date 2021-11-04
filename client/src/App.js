@@ -15,6 +15,7 @@ import './index.css';
 import SimpleSubstitution from './feature/simpleSubstitution';
 import Hill from './feature/hill';
 import Rot13 from './feature/rot13';
+import Base64 from './feature/base64';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -34,7 +35,8 @@ function App() {
             <Route path="/simple-substitution" component={SimpleSubstitution} />
             <Route path="/vigenere" component={Vigenere} />
             <Route path="/hill" component={Hill} />
-            <Route path="/rot" component={Rot13} />
+            <Route path="/rot13" component={Rot13} />
+            <Route path="/base64" component={Base64} />
           </Switch>
           <Footer />
         </Router>
