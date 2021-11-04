@@ -30,8 +30,8 @@ const ExtraInput = () => {
   const handleCountChange = (e, field) => {
     if (e.target.value) {
       const value = parseInt(e.target.value);
-      if (value > 26) {
-        getKey({ ...data.key, [field]: 26 });
+      if (value > 25) {
+        getKey({ ...data.key, [field]: 25 });
       } else {
         getKey({ ...data.key, [field]: value });
       }
@@ -97,7 +97,7 @@ const ExtraInput = () => {
         increase={increaseACounter}
         decrease={decreaseACounter}
         min={0}
-        max={26}
+        max={25}
       />
       <CardCounter
         label="INDEX / 1 - 2"
@@ -106,7 +106,7 @@ const ExtraInput = () => {
         increase={increaseBCounter}
         decrease={decreaseBCounter}
         min={0}
-        max={26}
+        max={25}
       />
       <CardCounter
         label="INDEX / 2 - 1"
@@ -115,7 +115,7 @@ const ExtraInput = () => {
         increase={increaseCCounter}
         decrease={decreaseCCounter}
         min={0}
-        max={26}
+        max={25}
       />
       <CardCounter
         label="INDEX / 2 - 2"
@@ -124,7 +124,7 @@ const ExtraInput = () => {
         increase={increaseDCounter}
         decrease={decreaseDCounter}
         min={0}
-        max={26}
+        max={25}
       />
     </CounterWrap>
   );

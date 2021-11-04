@@ -2,21 +2,22 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../src/components/Theme/ThemeCustome';
-import Header from './components/Header';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import Affine from './feature/affine';
-import Ceasar from './feature/ceasar';
-import Reverse from './feature/reverse';
-import Modulo from './feature/modulo';
-import Vigenere from './feature/vigenere';
-import ModularInverse from './feature/modularInverse';
-import Transposition from './feature/transposition';
-import './index.css';
-import SimpleSubstitution from './feature/simpleSubstitution';
-import Hill from './feature/hill';
-import Rot13 from './feature/rot13';
 import Base64 from './feature/base64';
+import Ceasar from './feature/ceasar';
+import Hill from './feature/hill';
+import ModularInverse from './feature/modularInverse';
+import Modulo from './feature/modulo';
+import Multiplicative from './feature/multiplicative';
+import Reverse from './feature/reverse';
+import Rot13 from './feature/rot13';
+import SimpleSubstitution from './feature/simpleSubstitution';
+import Transposition from './feature/transposition';
+import Vigenere from './feature/vigenere';
 import XOR from './feature/xor';
+import './index.css';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -39,6 +40,7 @@ function App() {
             <Route path="/rot13" component={Rot13} />
             <Route path="/base64" component={Base64} />
             <Route path="/xor" component={XOR} />
+            <Route path="/multiplicative" component={Multiplicative} />
           </Switch>
           <Footer />
         </Router>

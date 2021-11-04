@@ -11,6 +11,7 @@ from ciphers.hill import Hill
 from ciphers.rot13 import Rot13
 from ciphers.base64_cipher import Base64
 from ciphers.xor import XOR
+from ciphers.multiplicative import Multiplicative
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -225,6 +226,28 @@ def xor_decode():
     'ciphertext': result
   }
 
+# multiplicative
+@app.route('/api/multiplicative/encode', methods=['POST'])
+@cross_origin()
+def multiplicative_encode():
+  data = json.loads(request.data)
+  multiplicative = Multiplicative(data['key'])
+  result = multiplicative.encode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+@app.route('/api/multiplicative/decode', methods=['POST'])
+@cross_origin()
+def multiplicative_decode():
+  data = json.loads(request.data)
+  multiplicative = Multiplicative(data['key'])
+  result = multiplicative.decode(data['text'])
+  return {
+    'ciphertext': result
+  }
+
+
 @app.route('/')
 @app.route('/affine')
 @app.route('/reverse')
@@ -237,6 +260,7 @@ def xor_decode():
 @app.route('/rot13')
 @app.route('/base64')
 @app.route('/xor')
+@app.route('/multiplicative')
 @cross_origin()
 def serve():
   return send_from_directory(app.static_folder, 'index.html')

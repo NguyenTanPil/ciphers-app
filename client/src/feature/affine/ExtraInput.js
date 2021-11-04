@@ -26,8 +26,8 @@ const ExtraInput = () => {
   const handleSlopeCountChange = (e) => {
     if (e.target.value) {
       const value = parseInt(e.target.value);
-      if (value > 26) {
-        getKey({ ...data.key, a: 26 });
+      if (value > 25) {
+        getKey({ ...data.key, a: 25 });
       } else {
         getKey({ ...data.key, a: value });
       }
@@ -39,8 +39,8 @@ const ExtraInput = () => {
   const handleInterceptCountChange = (e) => {
     if (e.target.value) {
       const value = parseInt(e.target.value);
-      if (value > 26) {
-        getKey({ ...data.key, b: 26 });
+      if (value > 25) {
+        getKey({ ...data.key, b: 25 });
       } else {
         getKey({ ...data.key, b: value });
       }
@@ -74,7 +74,7 @@ const ExtraInput = () => {
         increase={increaseSlopeCounter}
         decrease={decreaseSlopeCounter}
         min={0}
-        max={26}
+        max={25}
       />
       <CardCounter
         label="INTERCEPT / B"
@@ -83,7 +83,7 @@ const ExtraInput = () => {
         increase={increaseInterceptCounter}
         decrease={decreaseInterceptCounter}
         min={0}
-        max={26}
+        max={25}
       />
     </CounterWrap>
   );

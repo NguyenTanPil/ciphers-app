@@ -54,5 +54,7 @@
   "base64_desc": " is a group of binary-to-text encoding schemes that represent binary data (more specifically, a sequence of 8-bit bytes) in an ASCII string format by translating the data into a radix-64 representation. The term Base64 originates from a specific MIME content transfer encoding. Each non-final Base64 digit represents exactly 6 bits of data. Three bytes (i.e., a total of 24 bits) can therefore be represented by four 6-bit Base64 digits.",
   "xor": "XOR cipher",
   "xor_desc": " is a type of additive cipher, an encryption algorithm that operates according to the principles: XOR operator. This operation is sometimes called modulus 2 addition (or subtraction, which is identical). With this logic, a string of text can be encrypted by applying the bitwise XOR operator to every character using a given key. To decrypt the output, merely reapplying the XOR function with the key will remove the cipher.",
+  "multiplicative": "Multiplicative cipher",
+  "multiplicative_desc": " is similar to additive cipher except the fact that the key bit is multiplied to the plain-text symbol during encryption. Likewise, the cipher-text is multiplied by the multiplicative inverse of key for decryption to obtain back the plain-text.",
   "footer": " is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse."
 }

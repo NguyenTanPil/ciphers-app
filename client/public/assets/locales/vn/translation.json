@@ -53,6 +53,8 @@
   "base64": "mật mã Base64",
   "base64_desc": " là một nhóm các lược đồ mã hóa nhị phân thành văn bản đại diện cho dữ liệu nhị phân (cụ thể hơn là một chuỗi các byte 8-bit) ở định dạng chuỗi ASCII bằng cách dịch dữ liệu thành biểu diễn cơ số -64. Thuật ngữ Base64 bắt nguồn từ một mã hóa truyền nội dung MIME cụ thể . Mỗi chữ số Base64 không phải cuối cùng đại diện cho chính xác 6 bit dữ liệu. Do đó, ba byte (tức là tổng cộng 24 bit) có thể được biểu diễn bằng bốn chữ số Base64 6 bit.",
   "xor": " mật mã XOR",
-  "xor_desc": " à một loại mật mã cộng , một thuật toán mã hóa hoạt động theo các nguyên tắc: toán tử XOR. Phép toán này đôi khi được gọi là phép cộng modulus 2 (hoặc phép trừ, giống hệt nhau). Với logic này, một chuỗi văn bản có thể được mã hóa bằng cách áp dụng toán tử XOR bitwise cho mọi ký tự bằng cách sử dụng một khóa nhất định. Để giải mã đầu ra, chỉ cần áp dụng lại hàm XOR bằng khóa sẽ xóa mật mã.",
+  "xor_desc": " là một loại mật mã cộng , một thuật toán mã hóa hoạt động theo các nguyên tắc: toán tử XOR. Phép toán này đôi khi được gọi là phép cộng modulus 2 (hoặc phép trừ, giống hệt nhau). Với logic này, một chuỗi văn bản có thể được mã hóa bằng cách áp dụng toán tử XOR bitwise cho mọi ký tự bằng cách sử dụng một khóa nhất định. Để giải mã đầu ra, chỉ cần áp dụng lại hàm XOR bằng khóa sẽ xóa mật mã.",
+  "multiplicative": "mật mã Multiplicative",
+  "multiplicative_desc": " tương tự như mật mã cộng trừ thực tế là bit khóa được nhân với biểu tượng văn bản thuần túy trong quá trình mã hóa. Tương tự như vậy, văn bản mã được nhân với nghịch đảo nhân của khóa để giải mã để lấy lại văn bản thuần túy.",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }

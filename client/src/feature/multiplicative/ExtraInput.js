@@ -1,10 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardCounter from '../../components/Card/CardCounter';
-import { decreaseKey, getData, increaseKey, selectCeasar } from './ceasarSlice';
+import {
+  decreaseKey,
+  getData,
+  increaseKey,
+  selectMultiplicative,
+} from './multiplicativeSlice';
 
 const ExtraInput = () => {
-  const data = useSelector(selectCeasar);
+  const data = useSelector(selectMultiplicative);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
