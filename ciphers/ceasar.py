@@ -8,19 +8,28 @@ class Caesar(object):
 
     def transition_code(self, message, key):
         result = ''
+        processes = []
 
         for char in message:
             # new_char = (char + k) mod 26
             if char.isupper():
                 # char => unicode => char
-                result += chr(((ord(char) - self.upper_unicode + key) % self.alphabet_length) + self.upper_unicode)
+                new_char = chr(((ord(char) - self.upper_unicode + key) % self.alphabet_length) + self.upper_unicode)
+                result += new_char
+
+                # display detail in client
+                processes.append({'char': char,'x': ord(char) - self.upper_unicode, 'k': key, 'mod': (ord(char) - self.upper_unicode + key) % self.alphabet_length, 'n': self.alphabet_length, 'result': new_char})
             elif char.islower():
-                result += chr(((ord(char) - self.lower_unicode + key) % self.alphabet_length) + self.lower_unicode)
+                new_char = chr(((ord(char) - self.lower_unicode + key) % self.alphabet_length) + self.lower_unicode)
+                result += new_char
+                
+                # display detail in client
+                processes.append({'char': char,'x': ord(char) - self.lower_unicode, 'k': key, 'mod': (ord(char) - self.upper_unicode + key) % self.alphabet_length, 'n': self.alphabet_length, 'result': new_char})
             else:
                 # special char
                 result += char
 
-        return result
+        return result, processes
 
 
     def encode(self, message, key):

@@ -4,6 +4,7 @@ import { NavLink as Link } from 'react-router-dom';
 export const Container = styled.div`
   background-color: transparent;
   height: 100vh;
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   right: 0;
@@ -23,7 +24,7 @@ export const Wrap = styled.aside`
   background-color: ${({ theme }) => theme.background};
   border-left: 2px solid ${({ theme }) => theme.border};
   box-shadow: ${({ theme }) => theme.shadow};
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   right: 0;
@@ -66,8 +67,10 @@ export const Header = styled.div`
 `;
 
 export const ListLinks = styled.ul`
+  background-color: ${({ theme }) => theme.background};
   display: flex;
   flex-direction: column;
+  padding-bottom: 1.6rem;
 `;
 
 export const NavItem = styled.li`

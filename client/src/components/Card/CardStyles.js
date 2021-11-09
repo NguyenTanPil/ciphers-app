@@ -193,6 +193,7 @@ export const InputGroup = styled.div`
   input {
     background-color: ${({ theme }) => theme.background};
     border: none;
+    box-shadow: border-box;
     color: ${({ theme }) => theme.text};
     flex-grow: 1;
     font-size: 1.6rem;
@@ -526,8 +527,6 @@ export const Description = styled.div`
   }
 
   @media only screen and (min-width: 1200px) {
-    margin-top: 2rem;
-
     h1,
     p {
       max-width: 80rem;

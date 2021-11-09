@@ -18,6 +18,7 @@ import Transposition from './feature/transposition';
 import Vigenere from './feature/vigenere';
 import XOR from './feature/xor';
 import DES from './feature/des';
+import ElGamal from './feature/elgamal';
 import './index.css';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/xor" component={XOR} />
             <Route path="/multiplicative" component={Multiplicative} />
             <Route path="/des" component={DES} />
+            <Route path="/elgamal" component={ElGamal} />
           </Switch>
           <Footer />
         </Router>

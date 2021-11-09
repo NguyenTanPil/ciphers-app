@@ -23,9 +23,10 @@ CORS(app)
 def ceasar_encode():
   data = json.loads(request.data)
   ceasar = Caesar()
-  result = ceasar.encode(data['text'], data['key'])
+  result, processes = ceasar.encode(data['text'], data['key'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 @app.route('/api/ceasar/decode', methods=['POST'])
@@ -33,9 +34,10 @@ def ceasar_encode():
 def ceasar_decode():
   data = json.loads(request.data)
   ceasar = Caesar()
-  result = ceasar.decode(data['text'], data['key'])
+  result, processes = ceasar.decode(data['text'], data['key'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 # affine

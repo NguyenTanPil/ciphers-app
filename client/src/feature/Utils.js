@@ -46,3 +46,49 @@ export const Wrap = styled.div`
     justify-content: space-between;
   }
 `;
+
+export const ContainerDetail = styled.div`
+  background-color: ${({ theme }) => theme.background};
+  border-bottom: 1px solid ${({ theme }) => theme.border};
+  padding: 3.6rem 0;
+  text-align: justify;
+
+  div {
+    height: 4.6rem;
+    line-height: 1.5;
+    letter-spacing: 0.1rem;
+    margin: 0 auto;
+    overflow: hidden;
+    transition: all 0.2s ease 0s;
+    width: 80%;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    margin-top: 2rem;
+  }
+`;
+
+export const ContentDetail = styled.ul`
+  margin-top: 2rem;
+  height: auto;
+  overflow: hidden;
+`;
+
+export const ItemDetail = styled.li`
+  color: ${({ theme }) => theme.text};
+  font-size: 1.4rem;
+  font-weight: 590;
+  margin-bottom: 1rem;
+  padding-left: ${(props) => (props.level === 'second' ? '2rem' : '0')};
+  width: 100%;
+
+  span:first-child {
+    display: inline-block;
+    min-width: 23rem;
+  }
+
+  span:last-child {
+    display: inline-block;
+    min-width: 29rem;
+  }
+`;

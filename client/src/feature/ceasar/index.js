@@ -1,10 +1,10 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardActions from '../../components/Card/CardActions';
 import CardDescription from '../../components/Card/CardDescription';
 import CardInput from '../../components/Card/CardInput';
 import CardOutput from '../../components/Card/CardOutput';
+import Detail from './Detail';
 import {
   Container,
   getCurrentCase,
@@ -32,11 +32,13 @@ const Ceasar = () => {
     );
   };
 
-  const getCiphertext = (value) => {
+  const getDataOnSubmit = (ciphertext, processes, actionType) => {
     dispatch(
       getData({
         ...data,
-        ciphertext: value,
+        ciphertext,
+        processes,
+        actionType,
       }),
     );
   };
@@ -62,12 +64,12 @@ const Ceasar = () => {
   const encode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit(
+      const { ciphertext, processes } = await submit(
         '/api/ceasar/encode',
         text,
         parseInt(key),
       );
-      getCiphertext(ciphertext);
+      getDataOnSubmit(ciphertext, processes, 'encode');
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
@@ -77,12 +79,12 @@ const Ceasar = () => {
   const decode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit(
+      const { ciphertext, processes } = await submit(
         '/api/ceasar/decode',
         text,
         parseInt(key),
       );
-      getCiphertext(ciphertext);
+      getDataOnSubmit(ciphertext, processes, 'decode');
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
@@ -145,6 +147,12 @@ const Ceasar = () => {
           loading={data.loadingOutput}
         />
       </Wrap>
+      <Detail
+        keys={data.key}
+        text={data.plaintext}
+        processes={data.processes}
+        actionType={data.actionType}
+      />
       <CardDescription
         cipher={t('ceasar')}
         desc={t('ceasar_desc')}

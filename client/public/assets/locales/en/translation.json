@@ -3,8 +3,8 @@
   "output": "Text Output",
   "input_number": "Numbers Input",
   "output_number": "Number Output",
-  "encode": "encode",
-  "decode": "decode",
+  "encode": "Encode",
+  "decode": "Decode",
   "decoded": "Decoded {{length}} chars",
   "case": "CASE STRATEGY",
   "foreign": "FOREIGN CHARS",
@@ -58,5 +58,12 @@
   "multiplicative_desc": " is similar to additive cipher except the fact that the key bit is multiplied to the plain-text symbol during encryption. Likewise, the cipher-text is multiplied by the multiplicative inverse of key for decryption to obtain back the plain-text.",
   "des": "DES cipher",
   "des_desc": " (Data Encryption Standard) is a symmetric-key algorithm for the encryption of digital data. Although its short key length of 56 bits makes it too insecure for applications, it has been highly influential in the advancement of cryptography.",
+  "encode_func": "Encode function",
+  "decode_func": "Decode function",
+  "encoding": "Encoding characters in string",
+  "decoding": "Decoding characters in string",
+  "ordinal": "has the ordinal number",
+  "detail": "detail",
+  "hide": "hide",
   "footer": " is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse."
 }
