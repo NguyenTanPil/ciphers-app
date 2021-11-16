@@ -132,9 +132,10 @@ def simple_substitution_decode():
 def vigenere_encode():
   data = json.loads(request.data)
   vigenere = Vigenere(data['key'])
-  result = vigenere.encode(data['text'])
+  result, processes= vigenere.encode(data['text'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 @app.route('/api/vigenere/decode', methods=['POST'])
@@ -142,9 +143,10 @@ def vigenere_encode():
 def vigenere_decode():
   data = json.loads(request.data)
   vigenere = Vigenere(data['key'])
-  result = vigenere.decode(data['text'])
+  result,processes = vigenere.decode(data['text'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 # hill

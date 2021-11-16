@@ -10,6 +10,8 @@ const initialState = {
   ],
   foreignChars: 'include',
   key: 'cipher',
+  processes: [],
+  actionType: '',
   loadingOutput: false,
 };
 
@@ -23,6 +25,8 @@ export const vigenereSlice = createSlice({
       state.caseStrategy = action.payload.caseStrategy;
       state.foreignChars = action.payload.foreignChars;
       state.key = action.payload.key;
+      state.processes = action.payload.processes;
+      state.actionType = action.payload.actionType;
     },
     resetData(state) {
       state.plaintext = '';
@@ -30,6 +34,8 @@ export const vigenereSlice = createSlice({
       state.caseStrategy = initialState.caseStrategy;
       state.foreignChars = initialState.foreignChars;
       state.key = initialState.key;
+      state.processes = initialState.processes;
+      state.actionType = initialState.actionType;
     },
     getLoading(state, action) {
       state.loadingOutput = action.payload.loadingOutput;

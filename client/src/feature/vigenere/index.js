@@ -12,6 +12,7 @@ import {
   submit,
   Wrap,
 } from '../Utils';
+import Detail from './Detail';
 import ExtraInput from './ExtraInput';
 import {
   getData,
@@ -37,11 +38,13 @@ const Vigenere = () => {
     );
   };
 
-  const getCiphertext = (value) => {
+  const getDataOnSubmit = (ciphertext, processes, actionType) => {
     dispatch(
       getData({
         ...data,
-        ciphertext: value,
+        ciphertext,
+        processes,
+        actionType,
       }),
     );
   };
@@ -67,8 +70,13 @@ const Vigenere = () => {
   const encode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit('/api/vigenere/encode', text, key);
-      getCiphertext(ciphertext);
+      const { ciphertext, processes } = await submit(
+        '/api/vigenere/encode',
+        text,
+        key,
+      );
+
+      getDataOnSubmit(ciphertext, processes, 'encode');
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
@@ -78,8 +86,13 @@ const Vigenere = () => {
   const decode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit('/api/vigenere/decode', text, key);
-      getCiphertext(ciphertext);
+      const { ciphertext, processes } = await submit(
+        '/api/vigenere/decode',
+        text,
+        key,
+      );
+
+      getDataOnSubmit(ciphertext, processes, 'decode');
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
@@ -142,6 +155,12 @@ const Vigenere = () => {
           loading={data.loadingOutput}
         />
       </Wrap>
+      <Detail
+        keys={data.key}
+        text={data.plaintext}
+        processes={data.processes}
+        actionType={data.actionType}
+      />
       <CardDescription
         cipher={t('vigenere')}
         desc={t('vigenere_desc')}
