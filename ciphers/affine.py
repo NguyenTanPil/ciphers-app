@@ -21,9 +21,6 @@ class Affine:
         k_a, k_b, _ = self.key
         processes = []
         result = ''
-        x = 0
-        mod = 0
-        new_char = ''
 
         for char in string:
             if char.islower():

@@ -14,17 +14,22 @@ class Caesar(object):
             # new_char = (char + k) mod 26
             if char.isupper():
                 # char => unicode => char
-                new_char = chr(((ord(char) - self.upper_unicode + key) % self.alphabet_length) + self.upper_unicode)
+                x = ord(char) - self.upper_unicode
+                mod = (x + key) % self.alphabet_length
+                new_char = chr(mod + self.upper_unicode)
                 result += new_char
 
                 # display detail in client
-                processes.append({'char': char,'x': ord(char) - self.upper_unicode, 'k': key, 'mod': (ord(char) - self.upper_unicode + key) % self.alphabet_length, 'n': self.alphabet_length, 'result': new_char})
+                processes.append({'char': char,'x': x, 'k': key, 'mod': mod, 'n': self.alphabet_length, 'result': new_char})
             elif char.islower():
-                new_char = chr(((ord(char) - self.lower_unicode + key) % self.alphabet_length) + self.lower_unicode)
+                # char => unicode => char
+                x = ord(char) - self.lower_unicode
+                mod = (x + key) % self.alphabet_length
+                new_char = chr(mod + self.lower_unicode)
                 result += new_char
-                
+
                 # display detail in client
-                processes.append({'char': char,'x': ord(char) - self.lower_unicode, 'k': key, 'mod': (ord(char) - self.upper_unicode + key) % self.alphabet_length, 'n': self.alphabet_length, 'result': new_char})
+                processes.append({'char': char,'x': x, 'k': key, 'mod': mod, 'n': self.alphabet_length, 'result': new_char})
             else:
                 # special char
                 result += char
