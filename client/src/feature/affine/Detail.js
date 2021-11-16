@@ -37,7 +37,8 @@ const Detail = ({ keys, text, processes, actionType }) => {
             {actionType === 'encode' ? (
               <>
                 <ItemDetail>
-                  {t('encode_func')}: E<sub>k</sub>( x ) = ( x + {keys} ) mod 26
+                  {t('encode_func')}: E<sub>k</sub>( x ) = ( {keys.a}x +{' '}
+                  {keys.b} ) mod 26
                 </ItemDetail>
                 <ItemDetail>
                   {t('encoding')}: "{text}"
@@ -46,7 +47,8 @@ const Detail = ({ keys, text, processes, actionType }) => {
             ) : (
               <>
                 <ItemDetail>
-                  {t('decode_func')}: D<sub>k</sub>( x ) = ( x - {keys} ) mod 26
+                  {t('decode_func')}: D<sub>k</sub>( x ) = {processes[0].i} * (
+                  x -{processes[0].b} ) mod 26
                 </ItemDetail>
                 <ItemDetail>
                   {t('decoding')}: "{text}"
@@ -61,10 +63,20 @@ const Detail = ({ keys, text, processes, actionType }) => {
                     "{process.char}" {t('ordinal')} {process.x}
                   </span>
                   <span>
-                    {actionType === 'encode' ? 'E' : 'D'}
-                    <sub>k</sub>( {process.x} ) = ( {process.x}{' '}
-                    {process.k < 0 ? '-' : '+'} {Math.abs(process.k)} ) ={' '}
-                    {process.x + process.k} ≡ {process.mod} mod {process.n}{' '}
+                    {actionType === 'encode' ? (
+                      <>
+                        E<sub>k</sub>( {process.x} ) = ( {keys.a} * {process.x}{' '}
+                        + {keys.b} ) ≡ {keys.a * process.x + keys.b} ≡{' '}
+                        {process.mod} mod {process.n}
+                      </>
+                    ) : (
+                      <>
+                        D<sub>k</sub>( {process.x} ) = {process.i} * ({' '}
+                        {process.x} - {keys.b} ) ≡{' '}
+                        {process.i * (process.x - keys.b)} ≡ {process.mod} mod{' '}
+                        {process.n}
+                      </>
+                    )}
                   </span>{' '}
                   {process.result}
                 </ItemDetail>

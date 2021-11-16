@@ -17,26 +17,62 @@ class Affine:
         self.upper_unicode = 65
         self.key = (key['a'], key['b'], mod_reverse(key['a'], self.die))
 
-    def affine_recipe(self, char, type_unicode, encrypt):
-        k_a, k_b, k_i = self.key
-        if encrypt:
-            # E(k) (a * x + b) mod 26
-            return (k_a * (ord(char, ) - type_unicode) + k_b) % self.die + type_unicode
-        else:
-            # D(k) (a * (x - b)) mod 26
-            return (k_i * ((ord(char, ) - type_unicode) - k_b)) % self.die + type_unicode
-
-    def transition_char(self, char, encrypt=True):
-        if char.islower():
-            return chr(self.affine_recipe(char, self.lower_unicode, encrypt))
-        elif char.isupper():
-            return chr(self.affine_recipe(char, self.upper_unicode, encrypt))
-        else:
-            return char
-
     def encode(self, string):
-        return ''.join([self.transition_char(char) for char in string])
+        k_a, k_b, _ = self.key
+        processes = []
+        result = ''
+        x = 0
+        mod = 0
+        new_char = ''
+
+        for char in string:
+            if char.islower():
+                x = ord(char) - self.lower_unicode
+                mod = (k_a * x + k_b) % self.die
+                new_char = chr(mod + self.lower_unicode)
+                result += new_char
+
+                # save processes
+                processes.append({'char': char,'x': x, 'a': k_a, 'b': k_b, 'mod': mod, 'n': self.die, 'result': new_char})
+            elif char.isupper():
+                x = ord(char) - self.upper_unicode
+                mod = (k_a * x + k_b) % self.die
+                new_char = chr(mod + self.upper_unicode)
+                result += new_char
+
+                # save processes
+                processes.append({'char': char,'x': x, 'a': k_a, 'b': k_b, 'mod': mod, 'n': self.die, 'result': new_char})
+            else:
+                result += char
+
+        return result, processes
 
     def decode(self, string):
-        return ''.join([self.transition_char(char, False) for char in string])
+        _, k_b, k_i = self.key
+        result = ''
+        x = 0
+        mod = 0
+        new_char = ''
+        processes = []
 
+        for char in string:
+            if char.islower():
+                x = ord(char) - self.lower_unicode
+                mod = (k_i * (x - k_b)) % self.die
+                new_char = chr(mod + self.lower_unicode)
+                result += new_char
+
+                # save processes
+                processes.append({'char': char,'x': x, 'i': k_i, 'b': k_b, 'mod': mod, 'n': self.die, 'result': new_char})
+            elif char.isupper():
+                x = ord(char) - self.upper_unicode
+                mod = (k_i * (x - k_b)) % self.die
+                new_char = chr(mod + self.upper_unicode)
+                result += new_char
+
+                # save processes
+                processes.append({'char': char,'x': x, 'i': k_i, 'b': k_b, 'mod': mod, 'n': self.die, 'result': new_char})
+            else:
+                result += char
+            
+        return result, processes

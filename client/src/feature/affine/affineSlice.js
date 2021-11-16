@@ -9,7 +9,9 @@ const initialState = {
     { value: 'lower case', active: false },
   ],
   foreignChars: 'include',
-  key: { a: 7, b: 3 },
+  processes: [],
+  keys: { a: 7, b: 3 },
+  actionType: '',
   loadingOutput: false,
 };
 
@@ -22,26 +24,30 @@ export const affineSlice = createSlice({
       state.ciphertext = action.payload.ciphertext;
       state.caseStrategy = action.payload.caseStrategy;
       state.foreignChars = action.payload.foreignChars;
-      state.key = action.payload.key;
+      state.processes = action.payload.processes;
+      state.actionType = action.payload.actionType;
+      state.keys = action.payload.keys;
     },
     resetData(state) {
       state.plaintext = '';
       state.ciphertext = '';
       state.caseStrategy = initialState.caseStrategy;
       state.foreignChars = initialState.foreignChars;
-      state.key = initialState.key;
+      state.keys = initialState.keys;
+      state.processes = initialState.processes;
+      state.actionType = initialState.actionType;
     },
     increaseSlope(state) {
-      state.key.a += 1;
+      state.keys.a += 1;
     },
     increaseIntercept(state) {
-      state.key.b += 1;
+      state.keys.b += 1;
     },
     decreaseSlope(state) {
-      state.key.a -= 1;
+      state.keys.a -= 1;
     },
     decreaseIntercept(state) {
-      state.key.b -= 1;
+      state.keys.b -= 1;
     },
     getLoading(state, action) {
       state.loadingOutput = action.payload.loadingOutput;

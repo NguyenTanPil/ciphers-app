@@ -18,7 +18,7 @@ const ExtraInput = () => {
     dispatch(
       getData({
         ...data,
-        key: value,
+        keys: value,
       }),
     );
   };
@@ -27,12 +27,12 @@ const ExtraInput = () => {
     if (e.target.value) {
       const value = parseInt(e.target.value);
       if (value > 25) {
-        getKey({ ...data.key, a: 25 });
+        getKey({ ...data.keys, a: 25 });
       } else {
-        getKey({ ...data.key, a: value });
+        getKey({ ...data.keys, a: value });
       }
     } else {
-      getKey({ ...data.key, a: '' });
+      getKey({ ...data.keys, a: '' });
     }
   };
 
@@ -40,12 +40,12 @@ const ExtraInput = () => {
     if (e.target.value) {
       const value = parseInt(e.target.value);
       if (value > 25) {
-        getKey({ ...data.key, b: 25 });
+        getKey({ ...data.keys, b: 25 });
       } else {
-        getKey({ ...data.key, b: value });
+        getKey({ ...data.keys, b: value });
       }
     } else {
-      getKey({ ...data.key, b: '' });
+      getKey({ ...data.keys, b: '' });
     }
   };
 
@@ -69,7 +69,7 @@ const ExtraInput = () => {
     <CounterWrap>
       <CardCounter
         label="SLOPE / A"
-        inputValue={data.key.a}
+        inputValue={data.keys.a}
         handleCountChange={handleSlopeCountChange}
         increase={increaseSlopeCounter}
         decrease={decreaseSlopeCounter}
@@ -78,7 +78,7 @@ const ExtraInput = () => {
       />
       <CardCounter
         label="INTERCEPT / B"
-        inputValue={data.key.b}
+        inputValue={data.keys.b}
         handleCountChange={handleInterceptCountChange}
         increase={increaseInterceptCounter}
         decrease={decreaseInterceptCounter}

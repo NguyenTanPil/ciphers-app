@@ -50,6 +50,7 @@ export const Wrap = styled.div`
 export const ContainerDetail = styled.div`
   background-color: ${({ theme }) => theme.background};
   border-bottom: 1px solid ${({ theme }) => theme.border};
+  display: none;
   padding: 3.6rem 0;
   text-align: justify;
 
@@ -61,6 +62,10 @@ export const ContainerDetail = styled.div`
     overflow: hidden;
     transition: all 0.2s ease 0s;
     width: 80%;
+  }
+
+  @media only screen and (min-width: 768px) {
+    display: block;
   }
 
   @media only screen and (min-width: 1200px) {
@@ -75,6 +80,10 @@ export const ContentDetail = styled.ul`
 `;
 
 export const ItemDetail = styled.li`
+  ${(props) =>
+    props.level === 'second'
+      ? 'display: flex; justify-content: space-between;'
+      : ''}
   color: ${({ theme }) => theme.text};
   font-size: 1.4rem;
   font-weight: 590;
@@ -84,11 +93,15 @@ export const ItemDetail = styled.li`
 
   span:first-child {
     display: inline-block;
-    min-width: 23rem;
+    min-width: 24rem;
   }
 
   span:last-child {
     display: inline-block;
-    min-width: 29rem;
+    min-width: 34rem;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    display: block;
   }
 `;

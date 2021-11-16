@@ -46,9 +46,10 @@ def ceasar_decode():
 def affine_encode():
   data = json.loads(request.data)
   affine = Affine(data['key'])
-  result = affine.encode(data['text'])
+  result, processes = affine.encode(data['text'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 @app.route('/api/affine/decode', methods=['POST'])
@@ -56,9 +57,10 @@ def affine_encode():
 def affine_decode():
   data = json.loads(request.data)
   affine = Affine(data['key'])
-  result = affine.decode(data['text'])
+  result, processes = affine.decode(data['text'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 # reverse

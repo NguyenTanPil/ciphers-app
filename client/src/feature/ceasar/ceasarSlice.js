@@ -35,7 +35,7 @@ export const ceasarSlice = createSlice({
       state.foreignChars = initialState.foreignChars;
       state.key = initialState.key;
       state.processes = initialState.processes;
-      state.actionType = initialState.actionType;
+      state.actionType = '';
     },
     increaseKey(state) {
       state.key += 1;

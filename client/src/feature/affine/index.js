@@ -14,6 +14,7 @@ import {
 } from '../Utils';
 import { getData, getLoading, resetData, selectAffine } from './affineSlice';
 import ExtraInput from './ExtraInput';
+import Detail from './Detail';
 
 const Affine = () => {
   const data = useSelector(selectAffine);
@@ -32,11 +33,13 @@ const Affine = () => {
     );
   };
 
-  const getCiphertext = (value) => {
+  const getDataOnSubmit = (ciphertext, processes, actionType) => {
     dispatch(
       getData({
         ...data,
-        ciphertext: value,
+        ciphertext,
+        processes,
+        actionType,
       }),
     );
   };
@@ -45,7 +48,7 @@ const Affine = () => {
     dispatch(
       getData({
         ...data,
-        key: value,
+        keys: value,
       }),
     );
   };
@@ -62,8 +65,12 @@ const Affine = () => {
   const encode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit('/api/affine/encode', text, key);
-      getCiphertext(ciphertext);
+      const { ciphertext, processes } = await submit(
+        '/api/affine/encode',
+        text,
+        key,
+      );
+      getDataOnSubmit(ciphertext, processes, 'encode');
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
@@ -73,8 +80,12 @@ const Affine = () => {
   const decode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit('/api/affine/decode', text, key);
-      getCiphertext(ciphertext);
+      const { ciphertext, processes } = await submit(
+        '/api/affine/decode',
+        text,
+        key,
+      );
+      getDataOnSubmit(ciphertext, processes, 'decode');
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);
@@ -121,7 +132,7 @@ const Affine = () => {
           decode={decode}
           plaintext={data.plaintext}
           ciphertext={data.ciphertext}
-          keys={data.key}
+          keys={data.keys}
           currentIndex={currentIndex}
           getCaseStategy={getCaseStategy}
           caseStrategy={data.caseStrategy}
@@ -137,6 +148,12 @@ const Affine = () => {
           loading={data.loadingOutput}
         />
       </Wrap>
+      <Detail
+        keys={data.keys}
+        text={data.plaintext}
+        processes={data.processes}
+        actionType={data.actionType}
+      />
       <CardDescription
         cipher={t('affine')}
         desc={t('affine_desc')}
