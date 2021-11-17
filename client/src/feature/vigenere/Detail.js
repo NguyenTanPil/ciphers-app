@@ -1,12 +1,8 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 import { Btn } from '../../components/Card/CardStyles';
-import {
-  ContainerDetail,
-  ContentDetail,
-  ItemDetail,
-  SmallBlock,
-} from '../Utils';
+import { ContainerDetail, ContentDetail } from '../Utils';
 
 const Detail = ({ keys, text, processes, actionType }) => {
   const container = useRef(null);
@@ -65,7 +61,7 @@ const Detail = ({ keys, text, processes, actionType }) => {
                 </ItemDetail>
               </>
             )}
-            <ItemDetail>
+            <ItemDetail level="second">
               K ={' '}
               {keysAsInt.map((item, index) => {
                 if (item < 10) {
@@ -74,7 +70,7 @@ const Detail = ({ keys, text, processes, actionType }) => {
                 return <SmallBlock key={index}>{item}</SmallBlock>;
               })}
             </ItemDetail>
-            <ItemDetail>
+            <ItemDetail level="second">
               P ={' '}
               {processes['string_as_int'].map((item, index) => {
                 if (item < 10) {
@@ -92,7 +88,7 @@ const Detail = ({ keys, text, processes, actionType }) => {
                 }
               })}
             </ItemDetail>
-            <ItemDetail>
+            <ItemDetail level="second">
               K ={' '}
               {processes['key_as_int'].map((item, index) => {
                 if (item < 10) {
@@ -110,7 +106,7 @@ const Detail = ({ keys, text, processes, actionType }) => {
                 }
               })}
             </ItemDetail>
-            <ItemDetail>
+            <ItemDetail level="second">
               C ={' '}
               {processes['result_as_int'].map((item, index) => {
                 if (item < 10) {
@@ -128,7 +124,7 @@ const Detail = ({ keys, text, processes, actionType }) => {
                 }
               })}
             </ItemDetail>
-            <ItemDetail>
+            <ItemDetail level="second">
               R ={'  '}
               {processes['result_as_char'].map((item, index) => {
                 if (item < 10) {
@@ -154,3 +150,27 @@ const Detail = ({ keys, text, processes, actionType }) => {
 };
 
 export default Detail;
+
+// Styled
+const SmallBlock = styled.span`
+  display: inline-block;
+  min-width: ${(props) =>
+    props.type === 'double' ? '4.8rem' : '2.4rem'} !important;
+  text-align: center;
+  width: ${(props) => (props.type === 'double' ? '4.8rem' : '2.4rem')};
+
+  & > span {
+    display: inline-block;
+    min-width: 2.4rem;
+    width: 2.4rem;
+  }
+`;
+
+export const ItemDetail = styled.li`
+  color: ${({ theme }) => theme.text};
+  font-size: 1.4rem;
+  font-weight: 590;
+  margin-bottom: 1rem;
+  padding-left: ${(props) => (props.level === 'second' ? '2rem' : '0')};
+  width: 100%;
+`;

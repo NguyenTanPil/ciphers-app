@@ -79,20 +79,6 @@ export const ContentDetail = styled.ul`
   overflow: hidden;
 `;
 
-export const SmallBlock = styled.span`
-  display: inline-block;
-  min-width: ${(props) =>
-    props.type === 'double' ? '4.8rem' : '2.4rem'} !important;
-  text-align: center;
-  width: ${(props) => (props.type === 'double' ? '4.8rem' : '2.4rem')};
-
-  & > span {
-    display: inline-block;
-    min-width: 2.4rem;
-    width: 2.4rem;
-  }
-`;
-
 export const ItemDetail = styled.li`
   ${(props) =>
     props.level === 'second'

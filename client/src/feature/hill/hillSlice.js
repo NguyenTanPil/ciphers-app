@@ -10,6 +10,8 @@ const initialState = {
   ],
   foreignChars: 'include',
   key: { a: 3, b: 3, c: 2, d: 5 },
+  processes: {},
+  actionType: '',
   loadingOutput: false,
 };
 
@@ -23,6 +25,8 @@ export const hillSlice = createSlice({
       state.caseStrategy = action.payload.caseStrategy;
       state.foreignChars = action.payload.foreignChars;
       state.key = action.payload.key;
+      state.processes = action.payload.processes;
+      state.actionType = action.payload.actionType;
     },
     resetData(state) {
       state.plaintext = '';
@@ -30,6 +34,8 @@ export const hillSlice = createSlice({
       state.caseStrategy = initialState.caseStrategy;
       state.foreignChars = initialState.foreignChars;
       state.key = initialState.key;
+      state.processes = initialState.processes;
+      state.actionType = initialState.actionType;
     },
     increaseA(state) {
       state.key.a += 1;

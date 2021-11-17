@@ -12,12 +12,15 @@ class Hill:
     def create_matrix_of_integers_from_string(self, string):
         integers = [ord(char) - (self.upper_unicode if char.isupper() else self.lower_unicode) for char in string]
         uppers = [True if char.isupper() else False for char in string]
-        matrix = np.array([integers]).reshape(-1, 2)
-        uppers_matrix = np.array([uppers]).reshape(-1, 2)
-        return matrix, uppers_matrix
+        chars = [x for x in string]
+
+        matrix = self.convert_matrix(integers)
+        chars = self.convert_matrix(chars)
+        uppers_matrix = self.convert_matrix(uppers)
+        return matrix, chars, uppers_matrix
 
     def find_multiplicative_inverse(self, det):
-        for number in range(2, det):
+        for number in range(1, det + 1):
             if (number * det) % self.die == 1:
                 return number
 
@@ -29,7 +32,7 @@ class Hill:
 
     def make_key(self):
         key = self.key
-        matrix_k, _ = self.create_matrix_of_integers_from_string(key)
+        matrix_k, _, _ = self.create_matrix_of_integers_from_string(key)
 
         det = (matrix_k[0][0] * matrix_k[1][1] - matrix_k[0][1] * matrix_k[1][0]) % self.die
         inverse_det = self.find_multiplicative_inverse(det)
@@ -37,12 +40,12 @@ class Hill:
         if not inverse_det:
             # error description in client code
             error_mess = 'error_1'
-            return np.array([0]), 0, error_mess
-        elif np.amax(matrix_k) > 26 and np.amin(matrix_k) < 0:
+            return [0], 0, error_mess
+        elif np.amax([matrix_k]) > 26 and np.amin([matrix_k]) < 0:
             # error description in client code
             error_mess = 'error_2'
-            print(np.amax(matrix_k), np.amin(matrix_k))
-            return np.array([0]), 0, error_mess
+            # print(np.amax([matrix_k]), np.amin([matrix_k]))
+            return [0], 0, error_mess
         else:
             return matrix_k, det, inverse_det
 
@@ -51,17 +54,30 @@ class Hill:
         first_item = (matrix_1[0] * matrix_2[0][0] + matrix_1[1] * matrix_2[1][0]) % self.die
         second_item = (matrix_1[0] * matrix_2[0][1] + matrix_1[1] * matrix_2[1][1]) % self.die
 
-        return np.array([first_item, second_item])
+        return [first_item, second_item]
+
+    def convert_matrix(self, matrix):
+        result = []
+        for i in range(0, len(matrix), 2):
+            result.append([matrix[i], matrix[i + 1]])
+        return result
 
     def reverse_matrix(self, matrix, reverse_det):
         # cof matrix
-        cof_matrix = np.array([matrix[1][1], -matrix[0][1], -matrix[1][0], matrix[0][0]])
-        # reverse matrix
-        rev_matrix = np.zeros(4, dtype=int)
-        for index, value in enumerate(cof_matrix):
-            rev_matrix[index] = (value * reverse_det) % self.die
+        cof_matrix = [matrix[1][1], -matrix[1][0] , -matrix[0][1], matrix[0][0]]
+        cof_matrix_mod = []
 
-        return rev_matrix.reshape(-1, 2)
+        for _, value in enumerate(cof_matrix):
+            cof_matrix_mod.append(value % self.die)
+
+        cof_matrix_T = [cof_matrix_mod[0], cof_matrix_mod[2], cof_matrix_mod[1], cof_matrix_mod[3]]
+
+        rev_matrix = []
+        for _, value in enumerate(cof_matrix_T):
+            rev_matrix.append((value * reverse_det) % self.die)
+        
+        processes_cof = [self.convert_matrix(cof_matrix), self.convert_matrix(cof_matrix_mod), self.convert_matrix(cof_matrix_T), self.convert_matrix(rev_matrix)]
+        return self.convert_matrix(rev_matrix), processes_cof
 
     def transition_code(self, message, encrypt=True):
         # remember index of space
@@ -70,30 +86,28 @@ class Hill:
         message = message.replace(' ', '')
         matrix_key = None
 
-        if encrypt:
-            matrix_k, _, inverse_det = self.make_key()
-            if matrix_k.all():
+        matrix_k, _, inverse_det = self.make_key()
+        
+        if len(matrix_k) > 1:
+            rev_matrix, processes_cof = self.reverse_matrix(matrix_k, inverse_det)
+            matrix_key = matrix_k
+            if encrypt:
                 matrix_key = matrix_k
             else:
-                # return message error
-                return inverse_det
-
-        else:
-            matrix_k, _, inverse_det = self.make_key()
-            if matrix_k.all():
-                rev_matrix = self.reverse_matrix(matrix_k, inverse_det)
                 matrix_key = rev_matrix
-            else:
-                # return message error
-                return inverse_det
-                
+        else:
+            # return message error
+            return inverse_det,  0
+                        
         # check and add 0 char
         len_check = len(message) % 2 == 0
         if not len_check:
-            message += '0'
+            message += 'a'
 
-        matrix_b, uppers_matrix = self.create_matrix_of_integers_from_string(message)
+        matrix_b, matrix_chars, uppers_matrix = self.create_matrix_of_integers_from_string(message)
         result = ''
+        
+        processes = {'matrix_chars': matrix_chars, 'matrix_chars_as_int': matrix_b,'inverse_det': inverse_det, 'reverse_key': processes_cof, 'steps': []}
 
         for index, row in enumerate(matrix_b):
             div_matrix = self.division_matrix(row, matrix_key)
@@ -104,13 +118,14 @@ class Hill:
             second_char = chr(div_matrix[1] + second_unicode)
             result += first_char + second_char
 
+            processes['steps'].append({'p': row, 'k': matrix_key, 'result_as_int': div_matrix, 'result_as_char': [first_char, second_char]})
 
         # add space in new string
         for i in range(len(indexs_remember)):
             result = result[:indexs_remember[i]] + ' ' +  result[indexs_remember[i]:]
         
         # remove redundant char
-        return result[:len_init_mess]
+        return result[:len_init_mess], processes
 
     def encode(self, message):
         return self.transition_code(message)

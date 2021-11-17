@@ -11,6 +11,7 @@ import {
   submit,
   Wrap,
 } from '../Utils';
+import Detail from './Detail';
 import ExtraInput from './ExtraInput';
 import { getData, getLoading, resetData, selectHill } from './hillSlice';
 
@@ -27,6 +28,17 @@ const Hill = () => {
       getData({
         ...data,
         plaintext: value,
+      }),
+    );
+  };
+
+  const getDataOnSubmit = (ciphertext, processes, actionType) => {
+    dispatch(
+      getData({
+        ...data,
+        ciphertext,
+        processes,
+        actionType,
       }),
     );
   };
@@ -58,7 +70,7 @@ const Hill = () => {
     );
   };
 
-  const convertKeytoChar = (key) => {
+  const convertKeyToChar = (key) => {
     let chars = '';
 
     for (let k in key) {
@@ -70,10 +82,10 @@ const Hill = () => {
   const encode = async (text, key) => {
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit(
+      const { ciphertext, processes } = await submit(
         '/api/hill/encode',
         text,
-        convertKeytoChar(key),
+        convertKeyToChar(key),
       );
 
       // check error
@@ -82,7 +94,7 @@ const Hill = () => {
       } else if (ciphertext === 'error_2') {
         getCiphertext(t('hill_err_2'));
       } else {
-        getCiphertext(ciphertext);
+        getDataOnSubmit(ciphertext, processes, 'encode');
       }
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
@@ -91,20 +103,22 @@ const Hill = () => {
   };
 
   const decode = async (text, key) => {
+    console.log(convertKeyToChar(key));
     try {
       dispatch(getLoading({ loadingOutput: true }));
-      const { ciphertext } = await submit(
+      const { ciphertext, processes } = await submit(
         '/api/hill/decode',
         text,
-        convertKeytoChar(key),
+        convertKeyToChar(key),
       );
+
       // check error
       if (ciphertext === 'error_1') {
         getCiphertext(t('hill_err_1'));
       } else if (ciphertext === 'error_2') {
         getCiphertext(t('hill_err_2'));
       } else {
-        getCiphertext(ciphertext);
+        getDataOnSubmit(ciphertext, processes, 'decode');
       }
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
@@ -168,6 +182,12 @@ const Hill = () => {
           loading={data.loadingOutput}
         />
       </Wrap>
+      <Detail
+        keys={data.key}
+        text={data.plaintext}
+        processes={data.processes}
+        actionType={data.actionType}
+      />
       <CardDescription
         cipher={t('hill')}
         desc={t('hill_desc')}

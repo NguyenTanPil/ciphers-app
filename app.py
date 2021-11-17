@@ -155,9 +155,10 @@ def vigenere_decode():
 def hill_encode():
   data = json.loads(request.data)
   hill = Hill(data['key'])
-  result = hill.encode(data['text'])
+  result, processes = hill.encode(data['text'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 @app.route('/api/hill/decode', methods=['POST'])
@@ -165,9 +166,10 @@ def hill_encode():
 def hill_decode():
   data = json.loads(request.data)
   hill = Hill(data['key'])
-  result = hill.decode(data['text'])
+  result, processes = hill.decode(data['text'])
   return {
-    'ciphertext': result
+    'ciphertext': result,
+    'processes': processes
   }
 
 # rot13
