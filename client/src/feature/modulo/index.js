@@ -52,8 +52,14 @@ const Modulo = () => {
     let result = 0;
     if (currentAction === 'number') {
       result = Number(bigInt(input.base).mod(input.modulo));
+      if (result < 0) {
+        result += 26;
+      }
     } else {
       result = Number(bigInt(input.base).pow(input.exponent).mod(input.modulo));
+      if (result < 0) {
+        result += 26;
+      }
     }
     setOutput(result);
   };

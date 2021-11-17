@@ -23,7 +23,12 @@ const ModularInverse = () => {
 
   const getModularInverse = () => {
     try {
-      return Number(bigInt(input.number).modInv(input.modulo));
+      const result = Number(bigInt(input.number).modInv(input.modulo));
+      if (result < 0) {
+        return result + 26;
+      } else {
+        return result;
+      }
     } catch (error) {
       return t('not_found');
     }
