@@ -65,5 +65,8 @@
   "ordinal": "có số thứ tự",
   "detail": "chi tiết",
   "hide": "ẩn",
+  "elgamal": "hệ mã Elgamal",
+  "elgamal_desc": " là một thuật toán mã hóa khóa bất đối xứng cho mật mã khóa công khai dựa trên trao đổi khóa Diffie-Hellman. Nó được Taher Elgamal mô tả vào năm 1985. Mã hóa ElGamal được sử dụng trong phần mềm GNU Privacy Guard miễn phí, các phiên bản gần đây của PGP và các hệ thống mật mã khác.",
+  "params": "Tham số",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }

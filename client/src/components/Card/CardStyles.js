@@ -200,6 +200,7 @@ export const InputGroup = styled.div`
     letter-spacing: 1px;
     outline: none;
     text-align: center;
+    width: calc(100% - 9.2rem);
 
     /* Chrome, Safari, Edge, Opera */
     &::-webkit-outer-spin-button,

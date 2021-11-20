@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import affine from '../feature/affine/affineSlice';
 import base64 from '../feature/base64/base64Slice';
 import ceasar from '../feature/ceasar/ceasarSlice';
+import des from '../feature/des/desSlice';
+import elgamal from '../feature/elgamal/elgamalSlice';
 import hill from '../feature/hill/hillSlice';
 import multiplicative from '../feature/multiplicative/multiplicativeSlice';
 import reverse from '../feature/reverse/reverseSlice';
@@ -10,7 +12,6 @@ import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitution
 import transposition from '../feature/transposition/transpositionSlice';
 import vigenere from '../feature/vigenere/vigenereSlice';
 import xor from '../feature/xor/xorSlice';
-import des from '../feature/des/desSlice';
 
 export default configureStore({
   reducer: {
@@ -26,5 +27,6 @@ export default configureStore({
     xor: xor,
     multiplicative: multiplicative,
     des: des,
+    elgamal: elgamal,
   },
 });
