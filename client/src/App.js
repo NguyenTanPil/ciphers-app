@@ -7,18 +7,19 @@ import Header from './components/Header';
 import Affine from './feature/affine';
 import Base64 from './feature/base64';
 import Ceasar from './feature/ceasar';
+import DES from './feature/des';
+import ElGamal from './feature/elgamal';
 import Hill from './feature/hill';
 import ModularInverse from './feature/modularInverse';
 import Modulo from './feature/modulo';
 import Multiplicative from './feature/multiplicative';
 import Reverse from './feature/reverse';
 import Rot13 from './feature/rot13';
+import Rsa from './feature/rsa';
 import SimpleSubstitution from './feature/simpleSubstitution';
 import Transposition from './feature/transposition';
 import Vigenere from './feature/vigenere';
 import XOR from './feature/xor';
-import DES from './feature/des';
-import ElGamal from './feature/elgamal';
 import './index.css';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/multiplicative" component={Multiplicative} />
             <Route path="/des" component={DES} />
             <Route path="/elgamal" component={ElGamal} />
+            <Route path="/rsa" component={Rsa} />
           </Switch>
           <Footer />
         </Router>

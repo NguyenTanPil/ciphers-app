@@ -1,5 +1,4 @@
 import bigInt from 'big-integer';
-// import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardCounter from '../../components/Card/CardCounter';
@@ -17,24 +16,24 @@ import { BtnLarge } from '../modulo/ModuloStyles';
 import { Container, Wrap } from '../Utils';
 import Detail from './Detail';
 import {
-  decreaseA,
-  decreaseK,
+  decreaseQ,
+  decreaseD,
   decreaseP,
-  decreaseX,
+  decreaseE,
   getData,
-  increaseA,
-  increaseK,
+  increaseQ,
+  increaseD,
   increaseP,
-  increaseX,
+  increaseE,
   resetData,
   // getLoading,
-  selectElgamal,
-} from './elgamalSlice';
-import { BtnLargeActive } from './elgamalSlytes';
+  selectRsa,
+} from './rsaSlice';
+import { BtnLargeActive } from './rsaSlytes';
 
-const ElGamal = () => {
+const Rsa = () => {
   const { t } = useTranslation();
-  const data = useSelector(selectElgamal);
+  const data = useSelector(selectRsa);
   const dispatch = useDispatch();
 
   const getPlaintext = (e) => {
@@ -68,14 +67,45 @@ const ElGamal = () => {
 
   const encode = () => {
     // encode
-    const { p, k, a, x, plaintext } = data;
-    const intPlaintext = parseInt(plaintext);
-    const y = Number(bigInt(a).pow(x).mod(p));
-    const key = Number(bigInt(y).pow(k).mod(p));
-    const c1 = Number(bigInt(a).pow(k).mod(p));
-    const c2 = Number(bigInt(key).multiply(intPlaintext).mod(p));
-    const ciphertext = c1 + ' ' + c2;
-    const processes = { p, k, a, x, plaintext, y, key, c1, c2, ciphertext };
+    const { p, q, e, plaintext } = data;
+    const n = Number(bigInt(p).multiply(q));
+    const phi = Number(bigInt(p - 1).multiply(q - 1));
+    const d = Number(bigInt(e).modInv(phi));
+    const arrPlaintext = plaintext.split(' ');
+    const intPlaintext = [];
+
+    const c = arrPlaintext.map((char) => {
+      // 26 length of alphabet
+      let number = parseInt(char);
+
+      // char is letter
+      if (char.match(/[a-z]/i)) {
+        let charAscii = char.charCodeAt(0);
+        if (char === char.toUpperCase()) {
+          // A => unicode
+          charAscii -= 65;
+        } else {
+          // a => unicode
+          charAscii -= 97;
+        }
+        number = charAscii;
+      }
+      intPlaintext.push(number);
+      return Number(bigInt(number).pow(e).mod(n));
+    });
+
+    const ciphertext = c.join(' ');
+    const processes = {
+      p,
+      q,
+      e,
+      d,
+      n,
+      phi,
+      plaintext,
+      intPlaintext,
+      ciphertext,
+    };
     dispatch(
       getData({
         ...data,
@@ -87,12 +117,47 @@ const ElGamal = () => {
   };
 
   const decode = () => {
-    // a as c1, k as c2
-    const { p, x, a, k } = data;
-    const key = Number(bigInt(a).pow(x).mod(p));
-    const reverseKey = Number(bigInt(key).modInv(p));
-    const ciphertext = Number(bigInt(k).multiply(reverseKey).mod(p));
-    const processes = { p, x, c1: a, c2: k, key, reverseKey, ciphertext };
+    // e as c
+    const { p, q, e, plaintext } = data;
+    const arrPlaintext = plaintext.split(' ');
+    const n = Number(bigInt(p).multiply(q));
+    const phi = Number(bigInt(p - 1).multiply(q - 1));
+    const d = Number(bigInt(e).modInv(phi));
+    const intPlaintext = [];
+
+    const m = arrPlaintext.map((char) => {
+      // 26 length of alphabet
+      let number = parseInt(char);
+
+      // char is letter
+      if (char.match(/[a-z]/i)) {
+        let charAscii = char.charCodeAt(0);
+        if (char === char.toUpperCase()) {
+          // A => unicode
+          charAscii -= 65;
+        } else {
+          // a => unicode
+          charAscii -= 97;
+        }
+        number = charAscii;
+      }
+
+      intPlaintext.push(number);
+      return Number(bigInt(number).pow(d).mod(n));
+    });
+
+    const ciphertext = m.join(' ');
+    const processes = {
+      p,
+      q,
+      e,
+      d,
+      n,
+      phi,
+      plaintext,
+      intPlaintext,
+      ciphertext,
+    };
     dispatch(
       getData({
         ...data,
@@ -117,17 +182,15 @@ const ElGamal = () => {
   return (
     <Container>
       <Wrap>
-        {data.actionType !== 'decode' && (
-          <CardInput
-            title={t('input')}
-            titleAlign={false}
-            plaintext={data.plaintext}
-            getPlaintext={getPlaintext}
-          />
-        )}
+        <CardInput
+          title={t('input')}
+          titleAlign={false}
+          plaintext={data.plaintext}
+          getPlaintext={getPlaintext}
+        />
 
         <CardContainer>
-          <Title align="center">{t('elgamal')}</Title>
+          <Title align="center">{t('rsa')}</Title>
           <Content>
             <Btns>
               <BtnLargeActive
@@ -156,25 +219,26 @@ const ElGamal = () => {
                 decrease={() => dispatch(decreaseP())}
               />
               <CardCounter
-                label="x"
-                inputValue={data.x}
-                handleCountChange={(e) => getParams(e, 'x')}
-                increase={() => dispatch(increaseX())}
-                decrease={() => dispatch(decreaseX())}
+                label="q"
+                inputValue={data.q}
+                handleCountChange={(e) => getParams(e, 'q')}
+                increase={() => dispatch(increaseQ())}
+                decrease={() => dispatch(decreaseQ())}
               />
               <CardCounter
-                label={data.actionType === 'decode' ? 'c1' : 'a'}
-                inputValue={data.a}
-                handleCountChange={(e) => getParams(e, 'a')}
-                increase={() => dispatch(increaseA())}
-                decrease={() => dispatch(decreaseA())}
+                label={data.actionType === 'decode' ? 'c' : 'e'}
+                inputValue={data.e}
+                handleCountChange={(e) => getParams(e, 'e')}
+                increase={() => dispatch(increaseE())}
+                decrease={() => dispatch(decreaseE())}
               />
+
               <CardCounter
-                label={data.actionType === 'decode' ? 'c2' : 'k'}
-                inputValue={data.k}
-                handleCountChange={(e) => getParams(e, 'k')}
-                increase={() => dispatch(increaseK())}
-                decrease={() => dispatch(decreaseK())}
+                label="d"
+                inputValue={data.d}
+                handleCountChange={(e) => getParams(e, 'd')}
+                increase={() => dispatch(increaseD())}
+                decrease={() => dispatch(decreaseD())}
               />
             </CounterWrap>
           </Content>
@@ -189,12 +253,12 @@ const ElGamal = () => {
       </Wrap>
       <Detail processes={data.processes} actionType={data.actionType} />
       <CardDescription
-        cipher={t('elgamal')}
-        desc={t('elgamal_desc')}
+        cipher={t('rsa')}
+        desc={t('rsa_desc')}
         link="https://en.wikipedia.org/wiki/Modular_multiplicative_inverse"
       />
     </Container>
   );
 };
 
-export default ElGamal;
+export default Rsa;

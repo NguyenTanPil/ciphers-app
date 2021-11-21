@@ -12,6 +12,7 @@ import simpleSubstitution from '../feature/simpleSubstitution/simpleSubstitution
 import transposition from '../feature/transposition/transpositionSlice';
 import vigenere from '../feature/vigenere/vigenereSlice';
 import xor from '../feature/xor/xorSlice';
+import rsa from '../feature/rsa/rsaSlice';
 
 export default configureStore({
   reducer: {
@@ -28,5 +29,6 @@ export default configureStore({
     multiplicative: multiplicative,
     des: des,
     elgamal: elgamal,
+    rsa: rsa,
   },
 });
