@@ -49,8 +49,9 @@ const Detail = ({ processes, actionType }) => {
               </>
             )}
             <ItemDetail>
-              {t('params')}: p = {processes.p}; q = {processes.q}; e ={' '}
-              {processes.e}; d = {processes.d}
+              {t('params')}: p = {processes.p}; q = {processes.q};{' '}
+              {processes.d === 1 ? 'e' : 'd'} ={' '}
+              {processes.d === 1 ? processes.e : processes.d}
             </ItemDetail>
             <ItemDetail>
               {t('encoding')}: "{processes.plaintext}"
@@ -63,15 +64,17 @@ const Detail = ({ processes, actionType }) => {
               {processes.q - 1} = {(processes.p - 1) * (processes.q - 1)}
             </ItemDetail>
             <ItemDetail level="second">
-              ( {processes.e}, {processes.phi}) = 1 nên áp dụng thuật toán
-              Euclide mở rộng ta tìm được d = {processes.d}
+              ( {processes.d === 1 ? 'e' : 'd'}, φ(N) ) = ({' '}
+              {processes.d === 1 ? processes.e : processes.d}, {processes.phi})
+              = 1; {processes.d === 1 ? 'd' : 'e'} ={' '}
+              {processes.d === 1 ? processes.newD : processes.newE}
             </ItemDetail>
             <ItemDetail level="second">
-              K<sub>p</sub> = ( e, N ) = ( {processes.e}, {processes.n} )
+              K<sub>p</sub> = ( e, N ) = ( {processes.newE}, {processes.n} )
             </ItemDetail>
             <ItemDetail level="second">
               K<sub>s</sub> = K<sub>p</sub>
-              <sup>-1</sup> ( d, p, q ) = ( {processes.d}, {processes.p} ,{' '}
+              <sup>-1</sup> = ( d, p, q ) = ( {processes.newD}, {processes.p},{' '}
               {processes.q} )
             </ItemDetail>
             {processes.intPlaintext.map((num, index) => {
@@ -81,9 +84,10 @@ const Detail = ({ processes, actionType }) => {
                   {actionType === 'encode' ? 'M' : 'C'}
                   <sup>e</sup> mod N = {num}
                   <sup>
-                    {actionType === 'encode' ? processes.e : processes.d}
+                    {actionType === 'encode' ? processes.newE : processes.newD}
                   </sup>{' '}
-                  = {processes.ciphertext.split(' ')[index]}
+                  mod {processes.n} = {processes.ciphertext.split(' ')[index]} ={' '}
+                  {processes.chars[index]}
                 </ItemDetail>
               );
             })}

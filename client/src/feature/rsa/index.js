@@ -1,4 +1,5 @@
 import bigInt from 'big-integer';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardCounter from '../../components/Card/CardCounter';
@@ -15,18 +16,14 @@ import { CounterWrap } from '../affine/AffineStyles';
 import { BtnLarge } from '../modulo/ModuloStyles';
 import { Container, Wrap } from '../Utils';
 import Detail from './Detail';
+import ExtraInput from './ExtraInput';
 import {
-  decreaseQ,
-  decreaseD,
   decreaseP,
-  decreaseE,
+  decreaseQ,
   getData,
-  increaseQ,
-  increaseD,
   increaseP,
-  increaseE,
+  increaseQ,
   resetData,
-  // getLoading,
   selectRsa,
 } from './rsaSlice';
 import { BtnLargeActive } from './rsaSlytes';
@@ -35,6 +32,7 @@ const Rsa = () => {
   const { t } = useTranslation();
   const data = useSelector(selectRsa);
   const dispatch = useDispatch();
+  const [action, setAction] = useState('encode');
 
   const getPlaintext = (e) => {
     const value = e.target.value;
@@ -42,15 +40,6 @@ const Rsa = () => {
       getData({
         ...data,
         plaintext: value,
-      }),
-    );
-  };
-
-  const getActionType = (value) => {
-    dispatch(
-      getData({
-        ...data,
-        actionType: value,
       }),
     );
   };
@@ -65,14 +54,47 @@ const Rsa = () => {
     );
   };
 
-  const encode = () => {
-    // encode
-    const { p, q, e, plaintext } = data;
+  const calculate = () => {
+    const { p, q, e, d, plaintext } = data;
     const n = Number(bigInt(p).multiply(q));
     const phi = Number(bigInt(p - 1).multiply(q - 1));
-    const d = Number(bigInt(e).modInv(phi));
+    let newD = d;
+    let newE = e;
+
+    if (d === 1) {
+      try {
+        // encode
+        newD = Number(bigInt(e).modInv(phi));
+      } catch (error) {
+        const errorMess = t('error_prime', { a: e, b: phi });
+        dispatch(
+          getData({
+            ...data,
+            ciphertext: errorMess,
+            actionType: '',
+          }),
+        );
+        return;
+      }
+    } else {
+      // decode
+      try {
+        newE = Number(bigInt(d).modInv(phi));
+      } catch (error) {
+        const errorMess = t('error_prime', { a: d, b: phi });
+        dispatch(
+          getData({
+            ...data,
+            ciphertext: errorMess,
+            actionType: '',
+          }),
+        );
+        return;
+      }
+    }
     const arrPlaintext = plaintext.split(' ');
     const intPlaintext = [];
+    const chars = [];
 
     const c = arrPlaintext.map((char) => {
       // 26 length of alphabet
@@ -91,7 +113,16 @@ const Rsa = () => {
         number = charAscii;
       }
       intPlaintext.push(number);
-      return Number(bigInt(number).pow(e).mod(n));
+
+      if (action === 'encode') {
+        const result = Number(bigInt(number).pow(newE).mod(n));
+        chars.push(String.fromCharCode((result % 26) + 65));
+        return result;
+      } else {
+        const result = Number(bigInt(number).pow(newD).mod(n));
+        chars.push(String.fromCharCode((result % 26) + 65));
+        return result;
+      }
     });
 
     const ciphertext = c.join(' ');
@@ -100,79 +131,24 @@ const Rsa = () => {
       q,
       e,
       d,
+      newD,
+      newE,
+      chars,
       n,
       phi,
       plaintext,
       intPlaintext,
       ciphertext,
     };
+
     dispatch(
       getData({
         ...data,
         ciphertext,
         processes,
-        actionType: 'encode',
+        actionType: action,
       }),
     );
-  };
-
-  const decode = () => {
-    // e as c
-    const { p, q, e, plaintext } = data;
-    const arrPlaintext = plaintext.split(' ');
-    const n = Number(bigInt(p).multiply(q));
-    const phi = Number(bigInt(p - 1).multiply(q - 1));
-    const d = Number(bigInt(e).modInv(phi));
-    const intPlaintext = [];
-
-    const m = arrPlaintext.map((char) => {
-      // 26 length of alphabet
-      let number = parseInt(char);
-
-      // char is letter
-      if (char.match(/[a-z]/i)) {
-        let charAscii = char.charCodeAt(0);
-        if (char === char.toUpperCase()) {
-          // A => unicode
-          charAscii -= 65;
-        } else {
-          // a => unicode
-          charAscii -= 97;
-        }
-        number = charAscii;
-      }
-
-      intPlaintext.push(number);
-      return Number(bigInt(number).pow(d).mod(n));
-    });
-
-    const ciphertext = m.join(' ');
-    const processes = {
-      p,
-      q,
-      e,
-      d,
-      n,
-      phi,
-      plaintext,
-      intPlaintext,
-      ciphertext,
-    };
-    dispatch(
-      getData({
-        ...data,
-        ciphertext,
-        processes,
-      }),
-    );
-  };
-
-  const calculate = () => {
-    if (data.actionType === 'decode') {
-      return decode();
-    } else {
-      return encode();
-    }
   };
 
   const reset = () => {
@@ -194,14 +170,14 @@ const Rsa = () => {
           <Content>
             <Btns>
               <BtnLargeActive
-                current={data.actionType === 'decode' ? 0 : 1}
-                onClick={() => getActionType('encode')}
+                current={action === 'decode' ? 0 : 1}
+                onClick={() => setAction('encode')}
               >
                 {t('encode')}
               </BtnLargeActive>
               <BtnLargeActive
-                current={data.actionType === 'decode' ? 1 : 0}
-                onClick={() => getActionType('decode')}
+                current={action === 'decode' ? 1 : 0}
+                onClick={() => setAction('decode')}
               >
                 {t('decode')}
               </BtnLargeActive>
@@ -225,21 +201,7 @@ const Rsa = () => {
                 increase={() => dispatch(increaseQ())}
                 decrease={() => dispatch(decreaseQ())}
               />
-              <CardCounter
-                label={data.actionType === 'decode' ? 'c' : 'e'}
-                inputValue={data.e}
-                handleCountChange={(e) => getParams(e, 'e')}
-                increase={() => dispatch(increaseE())}
-                decrease={() => dispatch(decreaseE())}
-              />
-
-              <CardCounter
-                label="d"
-                inputValue={data.d}
-                handleCountChange={(e) => getParams(e, 'd')}
-                increase={() => dispatch(increaseD())}
-                decrease={() => dispatch(decreaseD())}
-              />
+              <ExtraInput getParams={getParams} />
             </CounterWrap>
           </Content>
         </CardContainer>

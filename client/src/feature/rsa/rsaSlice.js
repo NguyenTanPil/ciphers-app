@@ -6,10 +6,9 @@ const initialState = {
   p: 11,
   q: 47,
   e: 3,
-  d: 36,
+  d: 1,
   processes: [],
   actionType: '',
-  loadingOutput: false,
 };
 
 export const rsaSlice = createSlice({
@@ -60,9 +59,6 @@ export const rsaSlice = createSlice({
     decreaseD(state) {
       state.d -= 1;
     },
-    getLoading(state, action) {
-      state.loadingOutput = action.payload.loadingOutput;
-    },
   },
 });
 
@@ -77,7 +73,6 @@ export const {
   decreaseE,
   increaseD,
   decreaseD,
-  getLoading,
 } = rsaSlice.actions;
 
 export const selectRsa = (state) => state.rsa;
