@@ -293,6 +293,8 @@ def des_decode():
 @app.route('/xor')
 @app.route('/multiplicative')
 @app.route('/des')
+@app.route('/elgamal')
+@app.route('/rsa')
 @cross_origin()
 def serve():
   return send_from_directory(app.static_folder, 'index.html')
