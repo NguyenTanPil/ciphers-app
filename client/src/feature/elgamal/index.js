@@ -1,5 +1,4 @@
-import bigInt from 'big-integer';
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CardCounter from '../../components/Card/CardCounter';
@@ -12,9 +11,10 @@ import {
   OutputText,
   Title,
 } from '../../components/Card/CardStyles';
+import loadingIcon from '../../components/Card/loading.gif';
 import { CounterWrap } from '../affine/AffineStyles';
 import { BtnLarge } from '../modulo/ModuloStyles';
-import { Container, Wrap } from '../Utils';
+import { Container, submit, Wrap } from '../Utils';
 import Detail from './Detail';
 import {
   decreaseA,
@@ -22,12 +22,12 @@ import {
   decreaseP,
   decreaseX,
   getData,
+  getLoading,
   increaseA,
   increaseK,
   increaseP,
   increaseX,
   resetData,
-  // getLoading,
   selectElgamal,
 } from './elgamalSlice';
 import { BtnLargeActive } from './elgamalSlytes';
@@ -36,6 +36,7 @@ const ElGamal = () => {
   const { t } = useTranslation();
   const data = useSelector(selectElgamal);
   const dispatch = useDispatch();
+  const [action, setAction] = useState('encode');
 
   const getPlaintext = (e) => {
     const value = e.target.value;
@@ -43,15 +44,6 @@ const ElGamal = () => {
       getData({
         ...data,
         plaintext: value,
-      }),
-    );
-  };
-
-  const getActionType = (value) => {
-    dispatch(
-      getData({
-        ...data,
-        actionType: value,
       }),
     );
   };
@@ -66,44 +58,56 @@ const ElGamal = () => {
     );
   };
 
-  const encode = () => {
-    // encode
-    const { p, k, a, x, plaintext } = data;
-    const intPlaintext = parseInt(plaintext);
-    const y = Number(bigInt(a).pow(x).mod(p));
-    const key = Number(bigInt(y).pow(k).mod(p));
-    const c1 = Number(bigInt(a).pow(k).mod(p));
-    const c2 = Number(bigInt(key).multiply(intPlaintext).mod(p));
-    const ciphertext = c1 + ' ' + c2;
-    const processes = { p, k, a, x, plaintext, y, key, c1, c2, ciphertext };
+  const getDataOnSubmit = (ciphertext, processes, actionType) => {
     dispatch(
       getData({
         ...data,
         ciphertext,
         processes,
-        actionType: 'encode',
+        actionType,
       }),
     );
   };
 
-  const decode = () => {
+  const encode = async () => {
+    const { p, x, a, k, plaintext } = data;
+    const params = { p, x };
+    const input = { plaintext, a, k };
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext, processes } = await submit(
+        '/api/elgamal/encode',
+        input,
+        params,
+      );
+      getDataOnSubmit(ciphertext, processes, 'encode');
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const decode = async () => {
     // a as c1, k as c2
     const { p, x, a, k } = data;
-    const key = Number(bigInt(a).pow(x).mod(p));
-    const reverseKey = Number(bigInt(key).modInv(p));
-    const ciphertext = Number(bigInt(k).multiply(reverseKey).mod(p));
-    const processes = { p, x, c1: a, c2: k, key, reverseKey, ciphertext };
-    dispatch(
-      getData({
-        ...data,
-        ciphertext,
-        processes,
-      }),
-    );
+    const params = { p, x };
+    const input = { a, k };
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext, processes } = await submit(
+        '/api/elgamal/decode',
+        input,
+        params,
+      );
+      getDataOnSubmit(ciphertext, processes, 'decode');
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const calculate = () => {
-    if (data.actionType === 'decode') {
+    if (action === 'decode') {
       return decode();
     } else {
       return encode();
@@ -117,7 +121,7 @@ const ElGamal = () => {
   return (
     <Container>
       <Wrap>
-        {data.actionType !== 'decode' && (
+        {action === 'encode' && (
           <CardInput
             title={t('input')}
             titleAlign={false}
@@ -131,14 +135,14 @@ const ElGamal = () => {
           <Content>
             <Btns>
               <BtnLargeActive
-                current={data.actionType === 'decode' ? 0 : 1}
-                onClick={() => getActionType('encode')}
+                current={action === 'decode' ? 0 : 1}
+                onClick={() => setAction('encode')}
               >
                 {t('encode')}
               </BtnLargeActive>
               <BtnLargeActive
-                current={data.actionType === 'decode' ? 1 : 0}
-                onClick={() => getActionType('decode')}
+                current={action === 'decode' ? 1 : 0}
+                onClick={() => setAction('decode')}
               >
                 {t('decode')}
               </BtnLargeActive>
@@ -183,7 +187,13 @@ const ElGamal = () => {
         <CardContainer>
           <Title>{t('output')}</Title>
           <Content>
-            <OutputText>{data.ciphertext}</OutputText>
+            <OutputText>
+              {data.loadingOutput ? (
+                <img src={loadingIcon} alt="" />
+              ) : (
+                data.ciphertext
+              )}
+            </OutputText>
           </Content>
         </CardContainer>
       </Wrap>

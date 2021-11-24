@@ -3,6 +3,7 @@ from flask.helpers import send_from_directory
 from flask_cors import CORS, cross_origin
 from ciphers.ceasar import Caesar
 from ciphers.affine import Affine
+from ciphers.elgamal import Elgamal
 from ciphers.simple_reverse import Reverse
 from ciphers.transposition import Transposition
 from ciphers.simple_substitution import Simple_Substitution
@@ -280,7 +281,7 @@ def des_decode():
 
 # ------------------------------------
 
-# des
+# rsa
 @app.route('/api/rsa/encode', methods=['POST'])
 @cross_origin()
 def rsa_encode():
@@ -298,6 +299,31 @@ def rsa_decode():
   data = json.loads(request.data)
   rsa = Rsa(data['key']['p'], data['key']['q'], data['key']['e'], data['key']['d'])
   result, processes = rsa.decode(data['text'])
+  return {
+    'ciphertext': result,
+    'processes': processes
+  }
+
+# ------------------------------------
+
+# des
+@app.route('/api/elgamal/encode', methods=['POST'])
+@cross_origin()
+def elgamal_encode():
+  data = json.loads(request.data)
+  elgamal = Elgamal(data['key']['p'], data['key']['x'])
+  result, processes = elgamal.encode(data['text']['plaintext'] ,data['text']['a'], data['text']['k'])
+  return {
+    'ciphertext': result,
+    'processes': processes
+  }
+
+@app.route('/api/elgamal/decode', methods=['POST'])
+@cross_origin()
+def elgamal_decode():
+  data = json.loads(request.data)
+  elgamal = Elgamal(data['key']['p'], data['key']['x'])
+  result, processes = elgamal.decode(data['text']['a'], data['text']['k'])
   return {
     'ciphertext': result,
     'processes': processes

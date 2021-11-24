@@ -212,11 +212,13 @@ const Rsa = () => {
         <CardContainer>
           <Title>{t('output')}</Title>
           <Content>
-            {data.loadingOutput ? (
-              <img src={loadingIcon} alt="" />
-            ) : (
-              <OutputText>{data.ciphertext}</OutputText>
-            )}
+            <OutputText>
+              {data.loadingOutput ? (
+                <img src={loadingIcon} alt="" />
+              ) : (
+                data.ciphertext
+              )}
+            </OutputText>
           </Content>
         </CardContainer>
       </Wrap>
