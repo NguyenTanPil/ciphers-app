@@ -1,4 +1,3 @@
-import bigInt from 'big-integer';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,15 +11,17 @@ import {
   OutputText,
   Title,
 } from '../../components/Card/CardStyles';
+import loadingIcon from '../../components/Card/loading.gif';
 import { CounterWrap } from '../affine/AffineStyles';
 import { BtnLarge } from '../modulo/ModuloStyles';
-import { Container, Wrap } from '../Utils';
+import { Container, submit, Wrap } from '../Utils';
 import Detail from './Detail';
 import ExtraInput from './ExtraInput';
 import {
   decreaseP,
   decreaseQ,
   getData,
+  getLoading,
   increaseP,
   increaseQ,
   resetData,
@@ -54,101 +55,103 @@ const Rsa = () => {
     );
   };
 
-  const calculate = () => {
-    const { p, q, e, d, plaintext } = data;
-    const n = Number(bigInt(p).multiply(q));
-    const phi = Number(bigInt(p - 1).multiply(q - 1));
-    let newD = d;
-    let newE = e;
-
-    if (d === 1) {
-      try {
-        // encode
-        newD = Number(bigInt(e).modInv(phi));
-      } catch (error) {
-        const errorMess = t('error_prime', { a: e, b: phi });
-        dispatch(
-          getData({
-            ...data,
-            ciphertext: errorMess,
-            actionType: '',
-          }),
-        );
-        return;
-      }
-    } else {
-      // decode
-      try {
-        newE = Number(bigInt(d).modInv(phi));
-      } catch (error) {
-        const errorMess = t('error_prime', { a: d, b: phi });
-        dispatch(
-          getData({
-            ...data,
-            ciphertext: errorMess,
-            actionType: '',
-          }),
-        );
-        return;
-      }
-    }
-    const arrPlaintext = plaintext.split(' ');
-    const intPlaintext = [];
-    const chars = [];
-
-    const c = arrPlaintext.map((char) => {
-      // 26 length of alphabet
-      let number = parseInt(char);
-
-      // char is letter
-      if (char.match(/[a-z]/i)) {
-        let charAscii = char.charCodeAt(0);
-        if (char === char.toUpperCase()) {
-          // A => unicode
-          charAscii -= 65;
-        } else {
-          // a => unicode
-          charAscii -= 97;
-        }
-        number = charAscii;
-      }
-      intPlaintext.push(number);
-
-      if (action === 'encode') {
-        const result = Number(bigInt(number).pow(newE).mod(n));
-        chars.push(String.fromCharCode((result % 26) + 65));
-        return result;
-      } else {
-        const result = Number(bigInt(number).pow(newD).mod(n));
-        chars.push(String.fromCharCode((result % 26) + 65));
-        return result;
-      }
-    });
-
-    const ciphertext = c.join(' ');
-    const processes = {
-      p,
-      q,
-      e,
-      d,
-      newD,
-      newE,
-      chars,
-      n,
-      phi,
-      plaintext,
-      intPlaintext,
-      ciphertext,
-    };
-
+  const getDataOnSubmit = (ciphertext, processes, actionType) => {
     dispatch(
       getData({
         ...data,
         ciphertext,
         processes,
-        actionType: action,
+        actionType,
       }),
     );
+  };
+
+  const encode = async () => {
+    const { p, q, e, d, plaintext } = data;
+    const params = {
+      p,
+      q,
+      e,
+      d,
+    };
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext, processes } = await submit(
+        '/api/rsa/encode',
+        plaintext,
+        params,
+      );
+
+      if (ciphertext === 'error prime') {
+        let errorMess = '';
+        if (d === 1) {
+          errorMess = t('error_prime', { a: e, b: processes.phi });
+        } else {
+          errorMess = t('error_prime', { a: d, b: processes.phi });
+        }
+        dispatch(
+          getData({
+            ...data,
+            ciphertext: errorMess,
+            actionType: '',
+          }),
+        );
+        return;
+      } else {
+        getDataOnSubmit(ciphertext, processes, 'encode');
+      }
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const decode = async () => {
+    const { p, q, e, d, plaintext } = data;
+    const params = {
+      p,
+      q,
+      e,
+      d,
+    };
+    try {
+      dispatch(getLoading({ loadingOutput: true }));
+      const { ciphertext, processes } = await submit(
+        '/api/rsa/decode',
+        plaintext,
+        params,
+      );
+
+      if (ciphertext === 'error prime') {
+        let errorMess = '';
+        if (d === 1) {
+          errorMess = t('error_prime', { a: e, b: processes.phi });
+        } else {
+          errorMess = t('error_prime', { a: d, b: processes.phi });
+        }
+        dispatch(
+          getData({
+            ...data,
+            ciphertext: errorMess,
+            actionType: '',
+          }),
+        );
+        return;
+      } else {
+        getDataOnSubmit(ciphertext, processes, 'decode');
+      }
+      dispatch(getLoading({ loadingOutput: false }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const calculate = () => {
+    if (action === 'encode') {
+      encode();
+    } else {
+      decode();
+    }
   };
 
   const reset = () => {
@@ -209,7 +212,11 @@ const Rsa = () => {
         <CardContainer>
           <Title>{t('output')}</Title>
           <Content>
-            <OutputText>{data.ciphertext}</OutputText>
+            {data.loadingOutput ? (
+              <img src={loadingIcon} alt="" />
+            ) : (
+              <OutputText>{data.ciphertext}</OutputText>
+            )}
           </Content>
         </CardContainer>
       </Wrap>

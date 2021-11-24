@@ -13,6 +13,7 @@ from ciphers.base64_cipher import Base64
 from ciphers.xor import XOR
 from ciphers.multiplicative import Multiplicative
 from ciphers.des import DES
+from ciphers.rsa import Rsa
 
 app = Flask(__name__, static_folder='client/build', static_url_path='')
 CORS(app)
@@ -275,6 +276,31 @@ def des_decode():
   result = des.decode(data['text'])
   return {
     'ciphertext': result
+  }
+
+# ------------------------------------
+
+# des
+@app.route('/api/rsa/encode', methods=['POST'])
+@cross_origin()
+def rsa_encode():
+  data = json.loads(request.data)
+  rsa = Rsa(data['key']['p'], data['key']['q'], data['key']['e'], data['key']['d'])
+  result, processes = rsa.encode(data['text'])
+  return {
+    'ciphertext': result,
+    'processes': processes
+  }
+
+@app.route('/api/rsa/decode', methods=['POST'])
+@cross_origin()
+def rsa_decode():
+  data = json.loads(request.data)
+  rsa = Rsa(data['key']['p'], data['key']['q'], data['key']['e'], data['key']['d'])
+  result, processes = rsa.decode(data['text'])
+  return {
+    'ciphertext': result,
+    'processes': processes
   }
 
 # ------------------------------------
