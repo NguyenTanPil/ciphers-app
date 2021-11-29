@@ -1,5 +1,5 @@
 from flask import Flask, json, request, redirect
-from flask.helpers import send_from_directory
+from flask.helpers import send_from_directory, url_for
 from flask_cors import CORS, cross_origin
 from ciphers.ceasar import Caesar
 from ciphers.affine import Affine
@@ -331,6 +331,10 @@ def elgamal_decode():
 
 # ------------------------------------
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
+
 @app.route('/')
 @app.route('/affine')
 @app.route('/reverse')
@@ -347,11 +351,6 @@ def elgamal_decode():
 @app.route('/des')
 @app.route('/elgamal')
 @app.route('/rsa')
-@app.route('/error')
-
-@app.errorhandler(404)
-def page_not_found():
-    return redirect("https://ciphervip.herokuapp.com/error"), 404
 
 @cross_origin()
 def serve():

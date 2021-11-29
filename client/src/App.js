@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../src/components/Theme/ThemeCustome';
 import Footer from './components/Footer';
@@ -18,6 +13,7 @@ import Hill from './feature/hill';
 import ModularInverse from './feature/modularInverse';
 import Modulo from './feature/modulo';
 import Multiplicative from './feature/multiplicative';
+import NotFound from './feature/notFound';
 import Reverse from './feature/reverse';
 import Rot13 from './feature/rot13';
 import Rsa from './feature/rsa';
@@ -25,7 +21,6 @@ import SimpleSubstitution from './feature/simpleSubstitution';
 import Transposition from './feature/transposition';
 import Vigenere from './feature/vigenere';
 import XOR from './feature/xor';
-import NotFound from './feature/notFound';
 import './index.css';
 
 function App() {
@@ -53,8 +48,7 @@ function App() {
             <Route path="/des" component={DES} />
             <Route path="/elgamal" component={ElGamal} />
             <Route path="/rsa" component={Rsa} />
-            <Route path="/error" component={NotFound} />
-            <Redirect from="*" to="/error" />
+            <Route path="*" component={NotFound} />
           </Switch>
           <Footer />
         </Router>
