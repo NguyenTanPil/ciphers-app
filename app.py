@@ -331,7 +331,7 @@ def elgamal_decode():
 
 # ------------------------------------
 
-@app.route('/')
+@app.route('/', defaults={'path': ''})
 @app.route('/affine')
 @app.route('/reverse')
 @app.route('/transposition')
