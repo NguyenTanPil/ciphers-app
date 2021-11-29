@@ -20,6 +20,7 @@ import SimpleSubstitution from './feature/simpleSubstitution';
 import Transposition from './feature/transposition';
 import Vigenere from './feature/vigenere';
 import XOR from './feature/xor';
+import NotFound from './feature/notFound';
 import './index.css';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Route path="/des" component={DES} />
             <Route path="/elgamal" component={ElGamal} />
             <Route path="/rsa" component={Rsa} />
+            <Route component={NotFound} />
           </Switch>
           <Footer />
         </Router>

@@ -74,5 +74,6 @@
   "secret_cipher": "Mật mã bí mật",
   "public_cipher": "Mật mã công khai",
   "utils": "Tiện ích",
+  "back_to_home": "về trang chủ",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }

@@ -74,5 +74,6 @@
   "secret_cipher": "secret cryptography",
   "public_cipher": "public cryptography",
   "utils": "Utils",
+  "back_to_home": "back to home",
   "footer": " is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse."
 }
