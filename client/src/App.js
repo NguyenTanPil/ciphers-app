@@ -48,7 +48,7 @@ function App() {
             <Route path="/des" component={DES} />
             <Route path="/elgamal" component={ElGamal} />
             <Route path="/rsa" component={Rsa} />
-            <Route component={NotFound} />
+            <Route path="*" component={NotFound} />
           </Switch>
           <Footer />
         </Router>
