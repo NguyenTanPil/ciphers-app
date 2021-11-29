@@ -24,21 +24,29 @@ export const getCurrentCase = (cases) => {
   return cases.filter((c) => c.active)[0].value;
 };
 
-export const handlShowDetail = (container, content, show, setShow) => {
+export const handlShowDetail = (
+  container,
+  content,
+  show,
+  setShow,
+  height = 46,
+  paddingBottom = 20,
+) => {
   const contentEl = content.current;
   const containerEl = container.current;
   if (contentEl) {
     const heightContent = contentEl.getBoundingClientRect().height;
 
     if (show) {
-      containerEl.style.height = `46px`;
+      containerEl.style.height = `${height}px`;
       setShow(false);
     } else {
-      containerEl.style.height = `${heightContent + 46 + 20}px`;
+      const extraHeight = paddingBottom ? height + paddingBottom : 0;
+      containerEl.style.height = `${heightContent + extraHeight}px`;
       setShow(true);
     }
   } else {
-    containerEl.style.height = `46px`;
+    containerEl.style.height = `${height}px`;
     setShow(false);
   }
 };

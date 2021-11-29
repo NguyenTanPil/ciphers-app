@@ -70,11 +70,54 @@ export const ListLinks = styled.ul`
   background-color: ${({ theme }) => theme.background};
   display: flex;
   flex-direction: column;
-  padding-bottom: 1.6rem;
+  height: ${(props) => (props.initHeight ? 'auto' : '55.5px')};
+  overflow: hidden;
+  transition: all 0.4s;
 `;
 
 export const NavItem = styled.li`
   display: block;
+`;
+
+export const Line = styled.div`
+  background-color: #26a69a;
+  display: block;
+  height: 1.5rem;
+  width: 100%;
+`;
+
+export const TitleLink = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.border};
+  color: ${({ theme }) => theme.text};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 1.55rem 3rem;
+
+  span {
+    color: ${({ theme }) => theme.title};
+  }
+
+  svg {
+    font-size: 2rem;
+    transition: all 0.5s;
+  }
+
+  &:hover {
+    span {
+      transition: all 0.3s;
+      color: #26a69a;
+    }
+
+    svg {
+      color: #26a69a;
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 export const NavLink = styled(Link)`
@@ -84,12 +127,12 @@ export const NavLink = styled(Link)`
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: capitalize;
-  padding: 1.25rem 3rem;
+  padding: 1.25rem 3rem 1.25rem 4rem;
   transition: all 0.3s;
 
   &:hover {
     background-color: ${({ theme }) => theme.hover};
-    padding-left: 3.5rem;
+    padding-left: 4.5rem;
   }
 
   &.active {

@@ -71,7 +71,7 @@ const Detail = ({ keys, text, processes, actionType }) => {
               ] ]
             </ItemDetail>
             <ItemDetail level="second">
-              Cof(k)<sup>-1</sup> = [ [ {processes.reverse_key[2][0][0]}{' '}
+              Cof(k)<sup>T</sup> = [ [ {processes.reverse_key[2][0][0]}{' '}
               {processes.reverse_key[2][0][1]} ] [{' '}
               {processes.reverse_key[2][1][0]} {processes.reverse_key[2][1][1]}{' '}
               ] ]
