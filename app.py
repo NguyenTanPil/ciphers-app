@@ -331,23 +331,8 @@ def elgamal_decode():
 
 # ------------------------------------
 
-@app.route('/', defaults={'path': ''})
-@app.route('/affine')
-@app.route('/reverse')
-@app.route('/transposition')
-@app.route('/modulo')
-@app.route('/modular-inverse')
-@app.route('/simple-substitution')
-@app.route('/vigenere')
-@app.route('/hill')
-@app.route('/rot13')
-@app.route('/base64')
-@app.route('/xor')
-@app.route('/multiplicative')
-@app.route('/des')
-@app.route('/elgamal')
-@app.route('/rsa')
-@app.route('/<path:path>')
+@app.route('/', defaults={'u_path': ''})
+@app.route('/<path:u_path>')
 
 @cross_origin()
 def serve():
