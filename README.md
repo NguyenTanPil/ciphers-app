@@ -2,17 +2,23 @@
 
 ## About
 
-Ciphervip is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse.
+**Ciphervip** is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse.
 
 The API is built using Flask and deployed on Heroku. This Flask API is used to receive data from encryption and decryption. The input is sent as a POST request to the API to return the output.
 
 React JS is used to build the user interface part of the web application. Use UI builder JS packages like react-redux, react-i18next and react-router-dom.
 
-Link demo: https://ciphervip.herokuapp.com/
+**Link demo:** https://ciphervip.herokuapp.com/
 
 ![preview image](preview-app.png)
 
 ## Description
+
+### Clone project
+
+```
+$ git clone https://github.com/NguyenTanPil/ciphers-app.git
+```
 
 ### Install Back-End Requirements
 
