@@ -347,7 +347,7 @@ def elgamal_decode():
 @app.route('/des')
 @app.route('/elgamal')
 @app.route('/rsa')
-@app.route('*')
+@app.route('/*')
 @cross_origin()
 def serve():
   return send_from_directory(app.static_folder, 'index.html')
