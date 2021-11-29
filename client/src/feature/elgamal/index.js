@@ -184,7 +184,7 @@ const ElGamal = () => {
           </Content>
         </CardContainer>
 
-        <CardContainer>
+        <CardContainer textarea={true}>
           <Title>{t('output')}</Title>
           <Content>
             <OutputText>

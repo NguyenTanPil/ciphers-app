@@ -209,7 +209,7 @@ const Rsa = () => {
           </Content>
         </CardContainer>
 
-        <CardContainer>
+        <CardContainer textarea={true}>
           <Title>{t('output')}</Title>
           <Content>
             <OutputText>
