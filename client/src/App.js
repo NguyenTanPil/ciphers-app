@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../src/components/Theme/ThemeCustome';
 import Footer from './components/Footer';
@@ -48,7 +53,8 @@ function App() {
             <Route path="/des" component={DES} />
             <Route path="/elgamal" component={ElGamal} />
             <Route path="/rsa" component={Rsa} />
-            <Route path="*" component={NotFound} />
+            <Route path="/error" component={NotFound} />
+            <Redirect from="*" to="/error" />
           </Switch>
           <Footer />
         </Router>
