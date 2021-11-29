@@ -71,5 +71,8 @@
   "rsa": "RSA cipher",
   "rsa_desc": " is a public-key cryptosystem that is widely used for secure data transmission. It is also one of the oldest. The acronym RSA comes from the surnames of Ron Rivest, Adi Shamir and Leonard Adleman, who publicly described the algorithm in 1977.",
   "error_prime": "{{a}} and {{b}} are not co-prime",
+  "secret_cipher": "secret cryptography",
+  "public_cipher": "public cryptography",
+  "utils": "Utils",
   "footer": " is a web application that provides modules for encrypting and decrypting common ciphers. In addition, CipherVip has utilities such as calculate modulo and modular inverse."
 }

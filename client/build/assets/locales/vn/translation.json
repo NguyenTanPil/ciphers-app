@@ -71,5 +71,8 @@
   "rsa": "mật mã RSA",
   "rsa_desc": " là hệ thống mật mã khóa công khai được sử dụng rộng rãi để truyền dữ liệu an toàn. Nó cũng là một trong những lâu đời nhất. Từ viết tắt RSA xuất phát từ họ của Ron Rivest, Adi Shamir và Leonard Adleman, những người đã công khai mô tả thuật toán vào năm 1977.",
   "error_prime": "{{a}} và {{b}} không phải nguyên tố cùng nhau",
+  "secret_cipher": "Mật mã bí mật",
+  "public_cipher": "Mật mã công khai",
+  "utils": "Tiện ích",
   "footer": " là một ứng dụng web cung cấp các mô-đun để mã hóa và giải mã các mật mã phổ biến. Ngoài ra, CipherVip còn có các tiện ích như tính modulo và tìm mô-đun nghịch đảo."
 }
