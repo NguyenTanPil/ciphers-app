@@ -1,7 +1,12 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Btn } from '../../components/Card/CardStyles';
-import { ContainerDetail, ContentDetail, ItemDetail } from '../Utils';
+import {
+  ContainerDetail,
+  ContentDetail,
+  ItemDetail,
+  handlShowDetail,
+} from '../Utils';
 
 const Detail = ({ keys, text, processes, actionType }) => {
   const container = useRef(null);
@@ -9,29 +14,12 @@ const Detail = ({ keys, text, processes, actionType }) => {
   const [show, setShow] = useState(false);
   const { t } = useTranslation();
 
-  const handlShowDetail = () => {
-    const contentEl = content.current;
-    const containerEl = container.current;
-    if (contentEl) {
-      const heightContent = contentEl.getBoundingClientRect().height;
-
-      if (show) {
-        containerEl.style.height = `46px`;
-        setShow(false);
-      } else {
-        containerEl.style.height = `${heightContent + 46 + 20}px`;
-        setShow(true);
-      }
-    } else {
-      containerEl.style.height = `46px`;
-      setShow(false);
-    }
-  };
-
   return (
     <ContainerDetail>
       <div ref={container}>
-        <Btn onClick={handlShowDetail}>{show ? t('hide') : t('detail')}</Btn>
+        <Btn onClick={() => handlShowDetail(container, content, show, setShow)}>
+          {show ? t('hide') : t('detail')}
+        </Btn>
         {actionType && (
           <ContentDetail ref={content}>
             {actionType === 'encode' ? (

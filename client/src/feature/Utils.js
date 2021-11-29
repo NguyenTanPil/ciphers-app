@@ -24,6 +24,26 @@ export const getCurrentCase = (cases) => {
   return cases.filter((c) => c.active)[0].value;
 };
 
+export const handlShowDetail = (container, content, show, setShow) => {
+  const contentEl = content.current;
+  const containerEl = container.current;
+  if (contentEl) {
+    const heightContent = contentEl.getBoundingClientRect().height;
+
+    if (show) {
+      containerEl.style.height = `46px`;
+      setShow(false);
+    } else {
+      containerEl.style.height = `${heightContent + 46 + 20}px`;
+      setShow(true);
+    }
+  } else {
+    containerEl.style.height = `46px`;
+    setShow(false);
+  }
+};
+
+// Styles
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.body};
   width: 100%;
