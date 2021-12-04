@@ -11,17 +11,27 @@ class Simple_Substitution:
     def __init__(self, key):
         self.key = key
 
-    def transition_code(self, message):
+    def transition_code(self, message, encrypt=True):
         result = ''
-        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        letters = ''
+        key = ''
+        
+        if encrypt:
+            letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            key = self.key
+        else:
+            key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            letters = self.key.upper()
+
+
         for char in message:
             if char.upper() in letters:
                 charIndex = letters.find(char.upper())
 
                 if char.isupper():
-                    result += self.key[charIndex].upper()
+                    result += key[charIndex].upper()
                 else:
-                    result += self.key[charIndex].lower()
+                    result += key[charIndex].lower()
             else:
                 result += char
 
@@ -31,5 +41,5 @@ class Simple_Substitution:
         return self.transition_code(message)
 
     def decode(self, message):
-        return self.transition_code(message)
+        return self.transition_code(message, False)
 

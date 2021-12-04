@@ -167,14 +167,14 @@ const ElGamal = () => {
                 decrease={() => dispatch(decreaseX())}
               />
               <CardCounter
-                label={data.actionType === 'decode' ? 'c1' : 'a'}
+                label={action === 'decode' ? 'c1' : 'a'}
                 inputValue={data.a}
                 handleCountChange={(e) => getParams(e, 'a')}
                 increase={() => dispatch(increaseA())}
                 decrease={() => dispatch(decreaseA())}
               />
               <CardCounter
-                label={data.actionType === 'decode' ? 'c2' : 'k'}
+                label={action === 'decode' ? 'c2' : 'k'}
                 inputValue={data.k}
                 handleCountChange={(e) => getParams(e, 'k')}
                 increase={() => dispatch(increaseK())}
@@ -197,7 +197,7 @@ const ElGamal = () => {
           </Content>
         </CardContainer>
       </Wrap>
-      <Detail processes={data.processes} actionType={data.actionType} />
+      <Detail processes={data.processes} actionType={action} />
       <CardDescription
         cipher={t('elgamal')}
         desc={t('elgamal_desc')}
