@@ -1,4 +1,3 @@
-# Nguyen Tan Pil - B1812295
 
 
 class Multiplicative:
@@ -34,5 +33,9 @@ class Multiplicative:
         return self.transition_code(string, self.key)
 
     def decode(self, string):
-        return self.transition_code(string, self.mod_reverse(self.key, self.die))
+        reverse_key = self.mod_reverse(self.key, self.die)
+        if reverse_key:
+            return self.transition_code(string, reverse_key)
+        else:
+            return 'error prime'
 

@@ -1,4 +1,4 @@
-# Nguyen Tan Pil - B1812295
+
 
 import numpy as np
 
@@ -107,6 +107,7 @@ class Hill:
         matrix_b, matrix_chars, uppers_matrix = self.create_matrix_of_integers_from_string(message)
         result = ''
         
+        # show to client
         processes = {'matrix_chars': matrix_chars, 'matrix_chars_as_int': matrix_b,'inverse_det': inverse_det, 'reverse_key': processes_cof, 'steps': []}
 
         for index, row in enumerate(matrix_b):

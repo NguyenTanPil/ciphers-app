@@ -1,6 +1,4 @@
-# Nguyen Tan Pil - B1812295
 # import random
-
 
 # def getRandomKey(letters):
 #     listKey = list(letters)

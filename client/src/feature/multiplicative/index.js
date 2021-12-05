@@ -87,7 +87,11 @@ const Multiplicative = () => {
         text,
         parseInt(key),
       );
-      getCiphertext(ciphertext);
+      if (ciphertext === 'error prime') {
+        getCiphertext(t('error_prime', { a: key, b: 26 }));
+      } else {
+        getCiphertext(ciphertext);
+      }
       dispatch(getLoading({ loadingOutput: false }));
     } catch (error) {
       console.log(error);

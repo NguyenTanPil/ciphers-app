@@ -1,4 +1,3 @@
-# Nguyen Tan Pil - B1812295
 
 class Rot13:
     def __init__(self, rot_type):

@@ -1,4 +1,3 @@
-# Nguyen Tan Pil - B1812295
 
 class Transposition:
     def __init__(self, key):

@@ -1,4 +1,4 @@
-# Nguyen Tan Pil - B1812295
+
 
 def mod_reverse(a, b):
     for n in range(b):

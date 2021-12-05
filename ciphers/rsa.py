@@ -1,5 +1,36 @@
-# Nguyen Tan Pil - B1812295
 
+# # import 
+# from Crypto.PublicKey import RSA
+# from Crypto.Cipher import PKCS1_OAEP
+# import binascii
+
+# # make key
+# keyPair = RSA.generate(2048)
+# pubKey = keyPair.publickey()
+# print(f"Public key: ( n = {hex(pubKey.n)}, e = {hex(pubKey.e)})")
+
+# pubKeyPEM = pubKey.exportKey()
+# print(pubKeyPEM.decode('ascii'))
+# print(f"Private key: ( n = {hex(pubKey.n)}, d = {hex(keyPair.d)})")
+
+# privKeyPEM = keyPair.exportKey()
+# print(privKeyPEM.decode('ascii'))
+
+# # start
+# # input message
+# msg = bytes(str(input("Enter plain text: ")), 'utf-8')
+
+# # encode
+# encoder = PKCS1_OAEP.new(pubKey)
+# encoded = encoder.encrypt(msg)
+# print("Encoded:", binascii.hexlify(encoded))
+
+# # decode
+# decoder = PKCS1_OAEP.new(keyPair)
+# decoded = decoder.decrypt(encoded)
+# print('Decoded:', decoded.decode('utf-8'))
+
+# custom
 class Rsa:
   def __init__(self,p, q, e, d,):
     self.p = p
@@ -135,6 +166,3 @@ class Rsa:
 
     return ciphertext, processes
 
-r = Rsa(11, 47, 4, 1)
-print(r.encode('c f'))
-print(r.decode('8 125'))

@@ -1,4 +1,3 @@
-# Nguyen Tan Pil - B1812295
 import numpy as np
 
 class DES:
